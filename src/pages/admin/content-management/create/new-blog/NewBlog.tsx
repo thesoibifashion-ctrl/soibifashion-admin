@@ -873,7 +873,7 @@ export default function NewBlog() {
           onLinkTextChange={setLinkText}
           onLinkUrlChange={setLinkUrl}
           onInsert={insertLink}
-          trigger={<div />}
+          // trigger={<div />}
         />
       </Popover>
 
