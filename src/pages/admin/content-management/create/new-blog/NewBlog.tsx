@@ -457,6 +457,7 @@ import { Popover, PopoverTrigger } from "@/components/ui/popover";
 import { useDropzone } from "react-dropzone";
 import { Audio } from "./Audio";
 import { Video } from "./video";
+import { YoutubeEmbed, getYoutubeEmbedUrl } from "./YoutubeEmbed";
 import { LinkModal } from "./LinkModal";
 import { CoverImageUpload } from "./CoverImageUpload";
 import { BlogContent } from "./BlogContent";
@@ -475,6 +476,8 @@ export default function NewBlog() {
   const [showLinkModal, setShowLinkModal] = useState(false);
   const [linkText, setLinkText] = useState("");
   const [linkUrl, setLinkUrl] = useState("");
+  const [showYoutubeModal, setShowYoutubeModal] = useState(false);
+  const [youtubeUrl, setYoutubeUrl] = useState("");
   const [title, setTitle] = useState("");
   const [status, setStatus] = useState("");
   const [coverImage, setCoverImage] = useState<string | null>(null);
@@ -517,6 +520,7 @@ export default function NewBlog() {
       Audio,
       Strike,
       Video,
+      YoutubeEmbed,
       Link.configure({ openOnClick: false }),
       Image,
       Placeholder.configure({
@@ -594,6 +598,14 @@ export default function NewBlog() {
     setShowLinkModal(false);
     setLinkText("");
     setLinkUrl("");
+  };
+
+  const insertYoutube = () => {
+    const embedUrl = getYoutubeEmbedUrl(youtubeUrl);
+    if (!embedUrl) return;
+    editor?.chain().focus().insertContent({ type: "youtubeEmbed", attrs: { src: embedUrl } }).run();
+    setShowYoutubeModal(false);
+    setYoutubeUrl("");
   };
 
   // turns "tech, news,  ai" into ["tech", "news", "ai"] — trims
@@ -845,6 +857,7 @@ export default function NewBlog() {
           onImageClick={handleImageClick}
           onAudioClick={() => handleInsertMedia("audio")}
           onVideoClick={() => handleInsertMedia("video")}
+          onYoutubeClick={() => setShowYoutubeModal(true)}
         />
       </div>
 
@@ -863,6 +876,35 @@ export default function NewBlog() {
           trigger={<div />}
         />
       </Popover>
+
+      {showYoutubeModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
+          <div className="bg-white rounded-xl p-6 w-full max-w-md flex flex-col gap-4 shadow-xl">
+            <p className="font-semibold text-base">Embed YouTube Video</p>
+            <input
+              type="text"
+              value={youtubeUrl}
+              onChange={(e) => setYoutubeUrl(e.target.value)}
+              placeholder="Paste YouTube URL (e.g. https://youtu.be/abc123)"
+              className="border rounded-lg px-3 py-2 text-sm w-full outline-none focus:ring-2 focus:ring-[#186D0F]"
+            />
+            <div className="flex justify-end gap-2">
+              <button
+                onClick={() => { setShowYoutubeModal(false); setYoutubeUrl(""); }}
+                className="px-4 py-2 text-sm rounded-lg border"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={insertYoutube}
+                className="px-4 py-2 text-sm rounded-lg bg-[#186D0F] text-white"
+              >
+                Embed
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       <div className=" mt-[30px]">
         <input

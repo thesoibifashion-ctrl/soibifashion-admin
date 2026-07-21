@@ -8,7 +8,7 @@ import { Loader2 } from "lucide-react";
 import type { ResearchData } from "@/data/table-colums/research-column";
 import MessageInput from "@/components/shared/inputs/MessageInput";
 
-const ResearchDrawer = (props: ResearchData) => {
+const ResearchDrawer = (props: Partial<ResearchData>) => {
   const queryClient = useQueryClient();
   const [showModal, setShowModal] = useState(false);
 

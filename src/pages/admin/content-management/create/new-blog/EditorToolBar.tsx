@@ -26,6 +26,7 @@ interface EditorToolbarProps {
   onImageClick: () => void;
   onAudioClick: () => void;
   onVideoClick: () => void;
+  onYoutubeClick: () => void;
 }
 
 export function EditorToolbar({
@@ -34,6 +35,7 @@ export function EditorToolbar({
   onImageClick,
   onAudioClick,
   onVideoClick,
+  onYoutubeClick,
 }: EditorToolbarProps) {
   if (!editor) return null;
 
@@ -126,6 +128,16 @@ export function EditorToolbar({
         <div className="cursor-pointer" onClick={onVideoClick}>
           <img src={video} alt="video" />
         </div>
+
+        <Button
+          variant="ghost"
+          size="sm"
+          onClick={onYoutubeClick}
+          className="px-0 py-0"
+          title="Embed YouTube video"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17"/><path d="m10 15 5-3-5-3z"/></svg>
+        </Button>
       </div>
 
       <div className="flex items-center gap-[13px] px-4 py-[15.5px]">
