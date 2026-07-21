@@ -113,7 +113,7 @@ const TotalDonationsCard = ({ donations }: { donations: Donation[] }) => {
 };
 
 const TotalDonorsCard = ({ donations }: { donations: Donation[] }) => {
-  // unique donors by fullname — swap to a real donor id if the backend has one
+  // unique donors by fullname  swap to a real donor id if the backend has one
   const uniqueDonors = useMemo(() => {
     return new Set(donations.map((d) => d.fullname)).size;
   }, [donations]);
