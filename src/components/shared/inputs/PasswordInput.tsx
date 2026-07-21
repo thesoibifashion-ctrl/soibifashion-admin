@@ -6,6 +6,7 @@ interface InputProps {
   value?: string;
   name: string;
   placeholder: string;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 const PasswordInput = ({
@@ -13,14 +14,14 @@ const PasswordInput = ({
   value,
   name,
   placeholder,
+  onChange,
+
 }: InputProps) => {
   const [showPassword, setShowPassword] = useState(false);
 
   return (
     <div className="flex flex-col gap-2">
-      <label className="font-medium text-sm text-[#404944]">
-        {label}
-      </label>
+      <label className="font-medium text-sm text-[#404944]">{label}</label>
 
       <div className="relative">
         <input
@@ -28,6 +29,7 @@ const PasswordInput = ({
           defaultValue={value}
           name={name}
           placeholder={placeholder}
+          onChange={onChange}
           className="bg-[#3A3E3D0D] border border-[#E6E6E8] px-3 pr-10 h-10 w-full rounded-[10px] placeholder:text-base placeholder:text-[#6B7280] focus:outline-none"
         />
 

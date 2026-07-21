@@ -1,4 +1,4 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import {
   SidebarHeader,
   SidebarContent,
@@ -12,6 +12,8 @@ import {
   Sidebar,
 } from "../../ui/sidebar";
 import logo from "../../../assets/images/cephflogo.png";
+import { Toaster } from "sonner";
+import { LogOut } from "lucide-react";
 
 const navMain = [
   {
@@ -19,13 +21,21 @@ const navMain = [
     items: [
       { title: "Users", url: "/" },
       { title: "Content Management", url: "/content-management" },
+      { title: "Projects", url: "/projects" },
+      { title: "Research", url: "/research" },
+      { title: "Newsletter", url: "/newsletter" },
     ],
   },
-  
 ];
 
 export function AppSidebar() {
   const { pathname } = useLocation();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.removeItem("accessToken");
+    navigate("/auth/login");
+  };
 
   return (
     <Sidebar collapsible="icon" className="bg-white px-4 py-3">
@@ -74,9 +84,33 @@ export function AppSidebar() {
             </SidebarGroupContent>
           </SidebarGroup>
         ))}
+        <Toaster
+          position="top-right"
+          richColors
+          toastOptions={{
+            classNames: {
+              success:
+                "!bg-[#EAF7E9] !border !border-[#186D0F33] !text-[#186D0F]",
+              error:
+                "!bg-[#FDECEC] !border !border-[#DE0D0D33] !text-[#DE0D0D]",
+            },
+          }}
+        />
       </SidebarContent>
 
-      <SidebarFooter>{/* User menu / logout goes here */}</SidebarFooter>
+      <SidebarFooter>
+        <SidebarMenu>
+          <SidebarMenuItem>
+            <SidebarMenuButton
+              onClick={handleLogout}
+              className="py-2 px-3 rounded-[20px] text-[#DE0D0D] hover:text-[#DE0D0D] hover:bg-[#FDECEC]"
+            >
+              <LogOut size={16} />
+              <span className="text-sm font-medium">Log out</span>
+            </SidebarMenuButton>
+          </SidebarMenuItem>
+        </SidebarMenu>
+      </SidebarFooter>
 
       <SidebarRail />
     </Sidebar>

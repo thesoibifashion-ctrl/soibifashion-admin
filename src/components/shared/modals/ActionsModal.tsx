@@ -31,7 +31,7 @@ export default function ConfirmationModal({
   description,
   confirmText,
   cancelText = "Cancel",
-  confirmButtonClassName = "",
+  confirmButtonClassName = "bg-[green]",
   onConfirm,
 }: ConfirmationModalProps) {
   return (
@@ -50,14 +50,14 @@ export default function ConfirmationModal({
         <DialogFooter className="mt-11">
           <button
             onClick={() => onOpenChange(false)}
-            className="bg-white border border-[#F2F2F2] px-4 py-[10.5px] rounded-full font-medium text-base"
+            className="bg-white border border-[#F2F2F2] px-5 py-2 rounded-full font-medium text-base"
           >
             {cancelText}
           </button>
 
           <button
             onClick={onConfirm}
-            className={`px-4 py-[10.5px] rounded-full text-white font-medium text-base ${confirmButtonClassName}`}
+            className={`px-5 py-2  rounded-full text-white font-medium text-base ${confirmButtonClassName}`}
           >
             {confirmText}
           </button>

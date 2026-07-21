@@ -1,179 +1,117 @@
-import { AppDrawer } from "@/components/shared/drawer/DataDrawer";
+import { apiRequestWithParams } from "@/api/query";
 import { SearchInput } from "@/components/shared/inputs/SearchInput";
-import { SelectInput } from "@/components/shared/inputs/SelecctInput";
+import { SkeletonTable } from "@/components/shared/skeleton";
 import { DataTable } from "@/components/shared/table/DataTable";
-import { BlogColumn, type Data } from "@/data/table-colums/content-columns";
+import {  type Data } from "@/data/table-colums/project.column";
+import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
-import { useNavigate, useSearchParams } from "react-router-dom";
-export const data: Data[] = [
-  {
-    id: "1",
-    title: "Website Redesign",
-    fullName: "John Doe",
-    email: "john.doe@example.com",
-    message:
-      "I'd like to discuss redesigning our company website for better performance and accessibility.",
-    image: "/images/users/user-1.jpg",
-  },
-  {
-    id: "2",
-    title: "Research Collaboration",
-    fullName: "Jane Smith",
-    email: "jane.smith@example.com",
-    message:
-      "I'm interested in collaborating on your environmental research initiatives.",
-    image: "/images/users/user-2.jpg",
-  },
-  {
-    id: "3",
-    title: "Volunteer Application",
-    fullName: "Michael Johnson",
-    email: "michael.johnson@example.com",
-    message:
-      "I would love to volunteer for your upcoming community outreach program.",
-    image: "/images/users/user-3.jpg",
-  },
-  {
-    id: "4",
-    title: "Partnership Inquiry",
-    fullName: "Sarah Wilson",
-    email: "sarah.wilson@example.com",
-    message:
-      "Our organization is interested in exploring a partnership with your foundation.",
-    image: "/images/users/user-4.jpg",
-  },
-  {
-    id: "5",
-    title: "Donation Support",
-    fullName: "David Brown",
-    email: "david.brown@example.com",
-    message:
-      "I'd like more information on how to support your projects through donations.",
-    image: "/images/users/user-5.jpg",
-  },
-  {
-    id: "6",
-    title: "Training Request",
-    fullName: "Emily Davis",
-    email: "emily.davis@example.com",
-    message:
-      "Do you offer environmental awareness training for schools and organizations?",
-    image: "/images/users/user-6.jpg",
-  },
-  {
-    id: "7",
-    title: "Internship Opportunity",
-    fullName: "Daniel Lee",
-    email: "daniel.lee@example.com",
-    message:
-      "I'm a final-year student looking for internship opportunities with your team.",
-    image: "/images/users/user-7.jpg",
-  },
-  {
-    id: "8",
-    title: "General Inquiry",
-    fullName: "Olivia Martinez",
-    email: "olivia.martinez@example.com",
-    message:
-      "I'd like to know more about your ongoing projects and how I can get involved.",
-    image: "/images/users/user-8.jpg",
-  },
-];
+import {
+  Link,
+  useNavigate,
+  useSearchParams,
+} from "react-router-dom";
+import { PlusCircle } from "lucide-react";
+import {
+  ContentColumn,
+  type ContentData,
+} from "@/data/table-colums/content-column";
+import EmptyState from "@/components/shared/EmptyState";
+import ErrorState from "@/components/shared/ErrorState";
+import EmptySearch from "@/components/shared/EmptySearch";
+
 const BlogPage = () => {
-  const [selectedUser, setSelectedUser] = useState<Data | null>(null);
+  const [selectedUser, setSelectedUser] = useState<ContentData | null>(null);
   const [search, setSearch] = useState("");
-  const [status, setStatus] = useState("");
-  const [open, setOpen] = useState(false);
-  const [searchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
 
   const page = Number(searchParams.get("page") || 1);
-
   const handlePageChange = (newPage: number) => {
     const params = new URLSearchParams(searchParams);
     params.set("page", String(newPage));
-
-    navigate(`?${params.toString()}`);
+    setSearchParams(params);
   };
-  const handleRowClick = (user: Data) => {
+  const { data, isLoading, isError } = useQuery({
+    queryKey: ["posts", { search, type: "blog" }, page],
+    queryFn: () =>
+      apiRequestWithParams("/posts", {
+        page: page,
+        type: "blog",
+        ...(search.length > 0 ? { limit: 1000 } : { limit: 10 }),
+      }),
+    placeholderData:
+      search.length > 0 ? (previousData) => previousData : undefined,
+  });
+
+  // const handleRowClick = (user: Data) => {
+  //   setSelectedUser(user);
+  //   setOpen(true);
+  // };
+  const handleRowClick = (user: ContentData) => {
     setSelectedUser(user);
-    setOpen(true);
+    navigate(`/content-management/edit-content/blog/${user._id}`);
+    console.log(selectedUser)
   };
+
+  if (isLoading) {
+    return (
+      <div className="mt-10">
+        <SkeletonTable />
+      </div>
+    );
+  }
+  if (isError || !data) return <ErrorState/>;
+  const filteredData = data.data.filter((user: Data) =>
+    user.title.toLowerCase().includes(search.toLowerCase())
+  );
+
   return (
-    <div className="container mx-auto py-10">
-      <div className="flex justify-between items-center">
-        <SearchInput
-          placeholder="Filter by name"
-          value={search}
-          onChange={setSearch}
-        />
-        <div className="flex items-center gap-2">
-          <SelectInput
-            value={status}
-            onChange={setStatus}
-            placeholder="Date"
-            options={[
-              { label: "Pending", value: "pending" },
-              { label: "Published", value: "published" },
-              { label: "Highlighted", value: "highlighted" },
-            ]}
-          />
-          <SelectInput
-            value={status}
-            onChange={setStatus}
-            placeholder="status"
-            options={[
-              { label: "Pending", value: "pending" },
-              { label: "Published", value: "published" },
-              { label: "Highlighted", value: "highlighted" },
-            ]}
-          />
-          <SelectInput
-            value={status}
-            onChange={setStatus}
-            placeholder="tag"
-            options={[
-              { label: "Pending", value: "pending" },
-              { label: "Published", value: "published" },
-              { label: "Highlighted", value: "highlighted" },
-            ]}
-          />
-        </div>
-      </div>
-      <div className="mt-4">
-        <DataTable
-          columns={BlogColumn}
-          data={data}
-          page={page}
-          pageCount={10}
-          onPageChange={handlePageChange}
-          onRowClick={handleRowClick}
-        />
-        <AppDrawer
-          open={open}
-          onOpenChange={setOpen}
-          title={selectedUser?.title}
-        >
-          {selectedUser && (
-            <div className="space-y-4">
-              <div>
-                <p className="font-semibold">Name</p>
-                <p>{selectedUser.fullName}</p>
-              </div>
+    <div className="container mx-auto ">
+      {data.data.length === 0 ? (
+        <EmptyState text="You have no blog yet">
+          <Link
+            to="/content-management/edit-content/blog"
+            className="px-4 py-1 mt-2 bg-[#186D0F] rounded-[20px] text-white flex items-center gap-2"
+          >
+            <PlusCircle size={14} />
+            Create new blog
+          </Link>
+        </EmptyState>
+      ) : (
+        <div>
+          {" "}
+          
+          <div className="flex  mt-10 justify-between items-center">
+            <SearchInput
+              placeholder="Filter by name"
+              value={search}
+              onChange={setSearch}
+            />
+          </div>
+          {filteredData.length === 0 ? (
+            <EmptySearch text="You have no blog in this search" />
+          ) : (
+          <div className="mt-4">
+            <DataTable
+              columns={ContentColumn}
+              data={filteredData}
+              page={search.length > 0 ? 1 : page}
+              pageCount={data?.pagination?.totalPages}
+              onPageChange={handlePageChange}
+              onRowClick={handleRowClick}
+            />
 
-              <div>
-                <p className="font-semibold">Email</p>
-                <p>{selectedUser.email}</p>
-              </div>
-
-              <div>
-                <p className="font-semibold">Message</p>
-                <p>{selectedUser.message}</p>
-              </div>
-            </div>
+            {/* <AppDrawer
+        open={open}
+        onOpenChange={setOpen}
+        title={selectedUser?.title}
+      >
+        <ProjectDrawerContent {...selectedUser} />
+      </AppDrawer> */}
+          </div>
           )}
-        </AppDrawer>
-      </div>
+        </div>
+      )}
     </div>
   );
 };

@@ -24,14 +24,8 @@ interface ActionPopoverProps {
   status: string;
   highlighted: boolean;
   onEdit: (id: string) => void;
-  onArchive: (
-    id: string,
-    status:string
-  ) => Promise<void>;
-  onPublish: (
-    id: string,
-    status:string
-  ) => Promise<void>;
+  onArchive: (id: string, status: string) => Promise<void>;
+  onPublish: (id: string, status: string) => Promise<void>;
   onHighlight: (
     id: string,
     // highlighted: boolean,
@@ -39,8 +33,8 @@ interface ActionPopoverProps {
   ) => Promise<void>;
   onDelete: (id: string) => Promise<void>;
   route: string;
-  page:string
-  publishing:boolean
+  page: string;
+  publishing: boolean;
 }
 
 export function ActionPopover({
@@ -51,8 +45,7 @@ export function ActionPopover({
   onHighlight,
   onDelete,
   status,
-  publishing,
-  page
+  page,
 }: ActionPopoverProps) {
   const [openPopover, setOpenPopover] = useState(false);
   const [activeModal, setActiveModal] = useState<
@@ -64,8 +57,7 @@ export function ActionPopover({
     setLoading(true);
     try {
       if (activeModal === "archive") await onArchive(id, status);
-      if (activeModal === "highlight")
-        await onHighlight(id, status);
+      if (activeModal === "highlight") await onHighlight(id, status);
       if (activeModal === "delete") await onDelete(id);
       setActiveModal(null);
       // toast.success(`${page} updated successfully`);
@@ -81,17 +73,16 @@ export function ActionPopover({
   return (
     <>
       <Popover open={openPopover} onOpenChange={setOpenPopover}>
-      <PopoverTrigger asChild>
-  <button className="p-2 rounded-md">
-    <MoreHorizontal size={18} />
-  </button>
-</PopoverTrigger>
+        <PopoverTrigger asChild>
+          <button className="p-2 rounded-md">
+            <MoreHorizontal size={18} />
+          </button>
+        </PopoverTrigger>
 
-
-        <PopoverContent 
+        <PopoverContent
           onMouseDown={(e) => e.preventDefault()}
-
-        className="w-40 p-2 space-y-1">
+          className="w-40 p-2 space-y-1"
+        >
           <button
             // onClick={() => onEdit(id)}
             onClick={() => navigate(`${route}`)}
@@ -132,7 +123,7 @@ export function ActionPopover({
           <DialogHeader>
             <DialogTitle className="font-medium text-base text-[#121212]">
               {activeModal === "archive" && `Archive ${page}`}
-              {activeModal === "highlight" &&  `Highlight ${page}`}
+              {activeModal === "highlight" && `Highlight ${page}`}
               {activeModal === "delete" && `Delete ${page}`}
             </DialogTitle>
           </DialogHeader>
@@ -155,8 +146,9 @@ export function ActionPopover({
               onClick={handleConfirm}
               disabled={loading}
               className={`font-medium text-sm rounded-full  text-[white] ${
-                activeModal === "delete" ? "w-fit bg-gradient-to-b from-[#ff2828cb] via-[#FF2828] via-[#FF2828] via-[#FF2828] to-[#ff2828cb] text-white px-6 py-3 " :          "bg-gradient-to-b from-[#6c4fffb6] via-[#5C3DFF] to-[#6d4fffb6] text-white px-4 py-3 rounded-full flex items-center gap-2 hover:bg-indigo-700 transition"
-
+                activeModal === "delete"
+                  ? "w-fit bg-gradient-to-b from-[#ff2828cb] via-[#FF2828] via-[#FF2828] via-[#FF2828] to-[#ff2828cb] text-white px-6 py-3 "
+                  : "bg-gradient-to-b from-[#6c4fffb6] via-[#5C3DFF] to-[#6d4fffb6] text-white px-4 py-3 rounded-full flex items-center gap-2 hover:bg-indigo-700 transition"
               }`}
             >
               {loading ? (

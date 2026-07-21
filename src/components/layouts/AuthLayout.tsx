@@ -1,3 +1,4 @@
+import { Toaster } from "sonner";
 import authImage from "../../assets/images/auth.png";
 import logo from "../../assets/images/cephflogo.png";
 
@@ -44,8 +45,21 @@ const AuthLayout = ({ children, title }: AuthProps) => {
           backgroundImage: `url(${authImage})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
+          height:'100vh'
         }}
       ></div>
+      <Toaster
+          position="top-right"
+          richColors
+          toastOptions={{
+            classNames: {
+              success:
+                "!bg-[#EAF7E9] !border !border-[#186D0F33] !text-[#186D0F]",
+              error:
+                "!bg-[#FDECEC] !border !border-[#DE0D0D33] !text-[#DE0D0D]",
+            },
+          }}
+        />
     </div>
   );
 };

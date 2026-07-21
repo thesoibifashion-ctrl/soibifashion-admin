@@ -1,11 +1,10 @@
 "use client";
 
-import { Link, useParams } from "react-router-dom";
-import { ArrowLeft, Loader2 } from "lucide-react";
+import { Link } from "react-router-dom";
+import { ArrowLeft } from "lucide-react";
 import logo from "@/assets/images/logos/bloglogo.svg";
 import arrow from "@/assets/images/logos/arrow.svg";
 export default function PreviewBlog() {
-  const { id } = useParams<{ id: string }>();
 
  
 

@@ -5,7 +5,7 @@ import {
   TabsList,
   TabsTrigger,
 } from "../../../components/ui/tabs";
-import NewsPage from "./news/Index";
+import NewsPage from "./new/Index";
 import BlogPage from "./blog/Index";
 import { PlusCircle } from "lucide-react";
 
@@ -24,7 +24,7 @@ const ContentManagement = () => {
     <div>
      <div className="mt-6 flex justify-between items-center">
      <p className=" text-2xl font-semibold text-[#1A1B1D]">Content management</p>
-     <Link to="/content-management/edit-blog" className="px-4 py-1 bg-[#186D0F] rounded-[20px] text-white flex items-center gap-2"><PlusCircle size={14}/>New blog</Link>
+     <Link to={`/content-management/edit-content/${activeTab}`} className="px-4 py-1 bg-[#186D0F] rounded-[20px] text-white flex items-center gap-2"><PlusCircle size={14}/>New blog</Link>
      </div>
       <Tabs
         value={activeTab}

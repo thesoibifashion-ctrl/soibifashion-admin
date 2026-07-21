@@ -1,11 +1,15 @@
 import type { statusType } from "@/types/status";
 
+type StatusStyles = {
+  [key: string]: { label: string; bg: string; text: string; dot: string };
+};
+
 interface Status {
     status:statusType;
   }
   
   export function getStatus({ status }: Status) {
-    const styles = {
+    const styles: StatusStyles = {
       published: {
         label: "Published",
         bg: "bg-[#186D0F54]",
@@ -30,7 +34,7 @@ interface Status {
         text: "text-[#374151]",
         dot: "bg-[#374151]",
       },
-      archive: {
+      archived: {
         label: "Highlighted",
         bg: "bg-[#EEF2FF]",
         text: "text-[#4F46E5]",
@@ -40,7 +44,7 @@ interface Status {
   
 
     
-    const current = styles[status];
+    const current = styles[status] ?? { label: status, bg: "", text: "", dot: "" };
   
     return (
       <span

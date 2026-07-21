@@ -15,13 +15,13 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { MoreHorizontal, MoreVertical } from "lucide-react";
+import { MoreHorizontal } from "lucide-react";
 
 interface BlogActionsProps {
   blogId: string;
 }
 
-const BlogActions = ({ blogId }: BlogActionsProps) => {
+const BlogActions = ({ }: BlogActionsProps) => {
   const [archiveOpen, setArchiveOpen] = useState(false);
   const [deleteOpen, setDeleteOpen] = useState(false);
 

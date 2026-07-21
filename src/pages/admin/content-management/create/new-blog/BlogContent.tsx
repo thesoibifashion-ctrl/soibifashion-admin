@@ -11,7 +11,7 @@ interface BlogContentProps {
 export function BlogContent({ editor }: BlogContentProps) {
   return (
     <>
-      <div className="rounded-md p-4 min-h-[80vh] w-full lg:w-[730px] mx-auto prose prose-gray">
+      <div className="rounded-md p-4 min-h-[80vh] w-full lg:w-[70vw] mx-auto  prose prose-gray">
         <EditorContent editor={editor} />
       </div>
     </>

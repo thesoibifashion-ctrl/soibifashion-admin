@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { Heading1, Heading2, Heading3, Heading4, Heading5 } from "lucide-react";
+import { Heading1, Heading2, Heading3 } from "lucide-react";
 import video from "@/assets/images/blog/vid.svg";
 import audio from "@/assets/images/blog/audio.svg";
 import bold from "@/assets/images/blog/bold.svg";
@@ -54,8 +54,8 @@ export function EditorToolbar({
               { level: 1, icon: <Heading1 size={16} /> },
               { level: 2, icon: <Heading2 size={16} /> },
               { level: 3, icon: <Heading3 size={16} /> },
-              { level: 4, icon: <Heading4 size={16} /> },
-              { level: 5, icon: <Heading5 size={16} /> },
+              // { level: 4, icon: <Heading4 size={16} /> },
+              // { level: 5, icon: <Heading5 size={16} /> },
             ].map(({ level, icon }) => (
               <SelectItem
                 key={level}

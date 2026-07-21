@@ -47,13 +47,13 @@ import {
           </div>
           <div className="flex justify-end gap-2 mt-4">
             <button
-              className="py-3 rounded-full bg-[#005FAD] w-full font-medium text-base text-[#FFFFFF] hover-none"
+              className="py-2 rounded-full bg-[#186D0F] w-full font-medium text-base text-[#FFFFFF] hover-none"
               onClick={onInsert}
             >
               Insert
             </button>
           </div>
-        </PopoverContent>
+           </PopoverContent>
       </Popover>
     );
   }

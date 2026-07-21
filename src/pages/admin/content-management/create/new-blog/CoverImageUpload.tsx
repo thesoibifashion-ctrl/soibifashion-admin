@@ -19,8 +19,8 @@ export function CoverImageUpload({
 }: CoverImageUploadProps) {
   if (isLoading) {
     return (
-      <div className="mx-auto">
-        <Skeleton className="h-[462px] w-[100px] rounded-lg mt-6 lg:w-[80vw]" />
+      <div  className="mt-10">
+        <Skeleton />
       </div>
     );
   }

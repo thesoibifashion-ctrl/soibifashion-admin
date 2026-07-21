@@ -13,18 +13,21 @@ interface AppDrawerProps {
   onOpenChange: (open: boolean) => void;
   title?: string;
   children: React.ReactNode;
+  width?:string
 }
 
-export function AppDrawer({
+export function 
+AppDrawer({
   open,
   onOpenChange,
   title,
+  width = "max-w-[40%]!",
   children,
 }: AppDrawerProps) {
   return (
     <Drawer open={open} direction="right" onOpenChange={onOpenChange}>
-      <DrawerContent className="px-6 pb-6">
-        <div className="mx-auto w-full max-w-lg">
+      <DrawerContent className={`px-6  pb-6 ${width}`}>
+        <div className="mx-auto overflow-y-auto w-full max-w-full">
           {title && (
             <DrawerHeader className="px-0">
               <DrawerTitle className="text-xl">{title}</DrawerTitle>

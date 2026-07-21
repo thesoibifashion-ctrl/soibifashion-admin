@@ -1,14 +1,11 @@
 "use client";
 
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import MobileBlogPreview from "./MobileBlogPreview";
-import { Loader2, X } from "lucide-react";
-import BlogPreview from "./BlogPreview";
+import {  X } from "lucide-react";
 import Container from "@/components/shared/inputs/Container";
 
 const BlogPreviews = () => {
-  const { id } = useParams<{ id: string }>();
 
  
 

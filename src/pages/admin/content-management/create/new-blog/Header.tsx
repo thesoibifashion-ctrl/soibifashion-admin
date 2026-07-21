@@ -1,5 +1,5 @@
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { Loader2, X } from "lucide-react";
+import {  X } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuTrigger,
@@ -28,8 +28,6 @@ interface BlogHeaderProps {
 
 export default function BlogHeader({
   blogId,
-  setCurrentStatus,
-  status,
 }: BlogHeaderProps) {
   const { id } = useParams<{ id: string }>();
 

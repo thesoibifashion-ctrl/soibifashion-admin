@@ -133,3 +133,29 @@
   @apply shadow-none w-fit cursor-pointer font-normal text-base  data-active:font-medium  data-active:text-base text-[#404944]  data-active:shadow-none data-active:bg-transparent bg-transparent data-active:border-b-2 border-0  data-active:border-[#186D0F] data-active:text-[#186D0F] rounded-none px-0;
 
 }
+
+.ProseMirror{
+  border
+: 2px dotted gray;
+
+    border-radius: 20px;
+    padding: 12px;
+    min-height: 80vh;
+    /* background-color: white; */
+}
+
+.prose-editor h1 {
+  font-size: 2.5rem;
+  color: #1a202c;
+  line-height: 1.2;
+}
+
+.prose-editor h2 {
+  font-size: 2rem;
+  color: #2d3748;
+  margin-top: 1.5rem;
+}
+
+button{
+cursor: pointer;
+}
