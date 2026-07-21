@@ -111,7 +111,7 @@ const ProjectPage = () => {
         </div>
       )}
       <AppDrawer open={open} onOpenChange={setOpen} title={selectedUser?.title}>
-        {selectedUser && <ProjectDrawerContent {...selectedUser} />}
+       <ProjectDrawerContent {...selectedUser} />
       </AppDrawer>
     </div>
   );

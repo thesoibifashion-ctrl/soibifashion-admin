@@ -16,7 +16,7 @@ import SuccessModal from "@/components/shared/modals/SuccessModal";
 import { Loader2 } from "lucide-react";
 import MessageInput from "@/components/shared/inputs/MessageInput";
 
-const ProjectDrawerContent = (props: Data) => {
+const ProjectDrawerContent = (props: Partial<Data>) => {
   const queryClient = useQueryClient();
   const [showModal, setShowModal] = useState(false);
 

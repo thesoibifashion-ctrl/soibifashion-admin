@@ -1,9 +1,4 @@
-import {
-    Popover,
-    PopoverContent,
-    PopoverTrigger,
-  } from "@/components/ui/popover";
-  
+
   interface LinkModalProps {
     isOpen: boolean;
     onClose: (open: boolean) => void;
@@ -12,7 +7,6 @@ import {
     onLinkTextChange: (text: string) => void;
     onLinkUrlChange: (url: string) => void;
     onInsert: () => void;
-    trigger: React.ReactNode;
   }
   
   export function LinkModal({ 
@@ -23,12 +17,12 @@ import {
     onLinkTextChange,
     onLinkUrlChange,
     onInsert,
-    trigger 
   }: LinkModalProps) {
+    if (!isOpen) return null;
     return (
-      <Popover open={isOpen} onOpenChange={onClose}>
-        <PopoverTrigger asChild>{trigger}</PopoverTrigger>
-        <PopoverContent className="w-[270px]">
+      <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
+        <div className="bg-white rounded-xl p-6 w-full max-w-md flex flex-col gap-4 shadow-xl">
+          <p className="font-semibold text-base">Insert Link</p>
           <div className="space-y-3">
             <input
               type="text"
@@ -45,15 +39,21 @@ import {
               className="w-full border placeholder:text-[#0D0D0D66] placeholder:text-sm rounded-[12px] h-10 border-[#EBEBEB] px-3"
             />
           </div>
-          <div className="flex justify-end gap-2 mt-4">
+          <div className="flex justify-end gap-2">
             <button
-              className="py-2 rounded-full bg-[#186D0F] w-full font-medium text-base text-[#FFFFFF] hover-none"
+              className="px-4 py-2 text-sm rounded-lg border"
+              onClick={() => onClose(false)}
+            >
+              Cancel
+            </button>
+            <button
+              className="px-4 py-2 text-sm rounded-lg bg-[#186D0F] text-white"
               onClick={onInsert}
             >
               Insert
             </button>
           </div>
-           </PopoverContent>
-      </Popover>
+        </div>
+      </div>
     );
   }
