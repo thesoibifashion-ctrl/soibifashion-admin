@@ -21,7 +21,7 @@ AppDrawer({
   open,
   onOpenChange,
   title,
-  width = "max-w-[40%]!",
+  width = "w-[60%] lg:max-w-[40%]!",
   children,
 }: AppDrawerProps) {
   return (
