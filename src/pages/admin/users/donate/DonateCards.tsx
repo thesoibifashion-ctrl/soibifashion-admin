@@ -80,8 +80,10 @@ const TotalDonationsCard = ({ donations }: { donations: Donation[] }) => {
     return donations.filter((d) => d.currency === currency);
   }, [donations, currency]);
 
-  const total = filtered.reduce((sum, d) => sum + d.amount, 0);
-  const count = filtered.length;
+  const confirmed = filtered.filter((d) => d.isConfirmed);
+
+  const total = confirmed.reduce((sum, d) => sum + d.amount, 0);
+  const count = confirmed.length;
 
   return (
     <div className="p-6 rounded-[16px] border border-[#E2E2E2] flex flex-col gap-3 flex-1 bg-[linear-gradient(233.89deg,_#A0F88A_-3.62%,_#186D0F_47.04%)]">
@@ -106,7 +108,7 @@ const TotalDonationsCard = ({ donations }: { donations: Donation[] }) => {
         {currency} {total.toLocaleString()}
       </p>
       <p className="text-xs text-[#9AA09B]">
-        from {count} donation{count !== 1 ? "s" : ""}
+        from {count} confirmed donation{count !== 1 ? "s" : ""}
       </p>
     </div>
   );
@@ -133,9 +135,19 @@ const TotalDonorsCard = ({ donations }: { donations: Donation[] }) => {
 };
 
 const PendingVerificationsCard = ({ donations }: { donations: Donation[] }) => {
-  const pendingCount = useMemo(() => {
-    return donations.filter((d) => !d.isConfirmed).length;
+  const pending = useMemo(() => {
+    return donations.filter((d) => !d.isConfirmed);
   }, [donations]);
+
+  const pendingCount = pending.length;
+
+  const pendingByCurrency = useMemo(() => {
+    const totals: Record<string, number> = {};
+    pending.forEach((d) => {
+      totals[d.currency] = (totals[d.currency] ?? 0) + d.amount;
+    });
+    return totals;
+  }, [pending]);
 
   return (
     <div className="p-6 bg-white rounded-[16px] border border-[#E2E2E2] flex flex-col gap-3 flex-1">
@@ -148,7 +160,13 @@ const PendingVerificationsCard = ({ donations }: { donations: Donation[] }) => {
 
       <p className="font-semibold text-3xl text-[#002E21]">{pendingCount}</p>
 
-      <p className="text-xs text-[#9AA09B]">awaiting confirmation</p>
+      <p className="text-xs text-[#9AA09B]">
+        {pendingCount > 0
+          ? Object.entries(pendingByCurrency)
+              .map(([cur, amt]) => `${cur} ${amt.toLocaleString()}`)
+              .join(" · ")
+          : "awaiting confirmation"}
+      </p>
     </div>
   );
 };
