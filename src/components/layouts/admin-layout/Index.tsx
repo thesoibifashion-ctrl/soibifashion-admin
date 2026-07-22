@@ -1,21 +1,23 @@
-
 import Container from "@/components/shared/inputs/Container";
 import { SidebarInset, SidebarProvider } from "../../ui/sidebar";
-import { AppSidebar } from "./AppSidebar";
+import { AppSidebar, MobileSidebarTrigger } from "./AppSidebar";
 import { Outlet } from "react-router-dom";
 
 export default function DashboardLayout() {
   return (
-    <SidebarProvider  >
-      <AppSidebar />
+    <SidebarProvider>
+     <div className="hidden lg:flex">
+     <AppSidebar />
+     </div>
 
       <SidebarInset className="bg-[#F1F1F1]">
-        <header>
-          {/* <SidebarTrigger /> */}
-          {/* Breadcrumb / page title goes here */}
+        <header className="flex items-center px-4 py-3 lg:hidden">
+          <MobileSidebarTrigger />
         </header>
 
-        <Container> <Outlet /></Container>
+        <Container>
+          <Outlet />
+        </Container>
       </SidebarInset>
     </SidebarProvider>
   );

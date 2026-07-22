@@ -29,7 +29,6 @@ import { uploadToCloudinary } from "@/lib/uploadToCloudinary";
 import { Loader2, X } from "lucide-react";
 import { statusBadge } from "@/lib/utils/statusBadge";
 import { toast } from "sonner";
-import { Skeleton } from "@/components/ui/skeleton";
 import BlogSkeleton from "./BlogSkeleton";
 
 type BlogStatus = "draft" | "published";
