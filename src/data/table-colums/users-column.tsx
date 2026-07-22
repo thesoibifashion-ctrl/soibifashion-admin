@@ -21,8 +21,8 @@ export const userColumns: ColumnDef<Data>[] = [
   {
     accessorKey: "title",
     header: "Title",
-    cell: ({ getValue }) => (
-      <span className="text-[#1F2937] pl-2">{getValue<string>()}</span>
+    cell: ({ row }) => (
+      <span className="text-[#1F2937] pl-2">{truncateText(row.original.title, 13)}</span>
     ),
   },
   {

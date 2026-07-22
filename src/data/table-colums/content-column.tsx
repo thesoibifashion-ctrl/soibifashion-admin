@@ -1,5 +1,6 @@
 import { formatDate } from "@/lib/utils/formatDate";
 import { statusBadge } from "@/lib/utils/statusBadge";
+import { truncateText } from "@/lib/utils/truncateText";
 import ContentAction from "@/pages/admin/content-management/Actions";
 import type { statusType } from "@/types/status";
 import type { ColumnDef } from "@tanstack/react-table";
@@ -23,8 +24,8 @@ export const ContentColumn: ColumnDef<ContentData>[] = [
   {
     accessorKey: "title",
     header: "Title",
-    cell: ({ getValue }) => (
-      <span className="text-[#1F2937] pl-2">{getValue<string>()}</span>
+    cell: ({ row }) => (
+      <span className="text-[#1F2937] pl-2">{truncateText(row.original.title, 13)}</span>
     ),
   },
   {
