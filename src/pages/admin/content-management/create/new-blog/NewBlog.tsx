@@ -593,7 +593,7 @@ export default function NewBlog() {
 
   const insertLink = () => {
     if (!linkText || !linkUrl) return;
-    const linkHTML = `<a href="${linkUrl}" class="text-[blue] underline hover:text-blue-800">${linkText}</a>`;
+    const linkHTML = `<a href="${linkUrl}" class="text-[blue] underline hover:text-blue-800">${linkText}</a> `;
     editor?.chain().focus().insertContent(linkHTML).run();
     setShowLinkModal(false);
     setLinkText("");
