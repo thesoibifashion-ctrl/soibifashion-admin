@@ -20,15 +20,29 @@ import logo from "../../../assets/images/cephflogo.png";
 import { Toaster } from "sonner";
 import { LogOut, Menu } from "lucide-react";
 
+// Normal state icons
+import usersIcon from "../../../assets/images/users.svg";
+import contentIcon from "../../../assets/images/content.svg";
+import projectIcon from "../../../assets/images/project.svg";
+import researchIcon from "../../../assets/images/research.svg";
+import emailIcon from "../../../assets/images/email.svg";
+
+// Active state images — TODO: rearrange these to match the correct item once you confirm which is which
+import activeIcon1 from "../../../assets/images/1.svg";
+import activeIcon2 from "../../../assets/images/2.svg";
+import activeIcon3 from "../../../assets/images/3.svg";
+import activeIcon4 from "../../../assets/images/4.svg";
+import activeIcon5 from "../../../assets/images/5.svg";
+
 const navMain = [
   {
     title: "Overview",
     items: [
-      { title: "Users", url: "/" },
-      { title: "Content Management", url: "/content-management" },
-      { title: "Projects", url: "/projects" },
-      { title: "Research", url: "/research" },
-      { title: "Newsletter", url: "/newsletter" },
+      { title: "Users", url: "/", iconNormal: usersIcon, iconActive: activeIcon1 },
+      { title: "Content Management", url: "/content-management", iconNormal: contentIcon, iconActive: activeIcon2 },
+      { title: "Projects", url: "/projects", iconNormal: projectIcon, iconActive: activeIcon3 },
+      { title: "Research", url: "/research", iconNormal: researchIcon, iconActive: activeIcon4 },
+      { title: "Newsletter", url: "/newsletter", iconNormal: emailIcon, iconActive: activeIcon5 },
     ],
   },
 ];
@@ -66,12 +80,17 @@ function NavContent({ onNavigate }: { onNavigate?: () => void }) {
                     <Link
                       to={item.url}
                       onClick={onNavigate}
-                      className={`flex items-center py-2 mb-3 px-3 rounded-[20px] text-sm font-medium transition-colors ${
+                      className={`flex items-center gap-2 py-2 mb-3 px-3 rounded-[20px] text-sm font-medium transition-colors ${
                         isActive
                           ? "text-white [background:linear-gradient(233.89deg,#A0F88A_-3.62%,#186D0F_47.04%)]"
                           : "text-[#404944] hover:bg-gray-100"
                       }`}
                     >
+                      <img
+                        src={isActive ? item.iconActive : item.iconNormal}
+                        alt=""
+                        className="w-4 h-4"
+                      />
                       {item.title}
                     </Link>
                   </li>
@@ -146,9 +165,14 @@ export function AppSidebar() {
                       <SidebarMenuButton
                         asChild
                         isActive={isActive}
-                        className="data-[active=true]:[background:linear-gradient(233.89deg,#A0F88A_-3.62%,#186D0F_47.04%)] py-2 mb-3 px-3 rounded-[20px]"
+                        className="data-[active=true]:[background:linear-gradient(233.89deg,#A0F88A_-3.62%,#186D0F_47.04%)] py-2 mb-4 px-3 rounded-[20px]"
                       >
-                        <Link to={item.url}>
+                        <Link to={item.url} className="flex items-center gap-2">
+                          <img
+                            src={isActive ? item.iconActive : item.iconNormal}
+                            alt=""
+                            className="w-4 h-4"
+                          />
                           <span
                             className={`text-sm font-medium ${
                               isActive ? "text-[white]" : "text-[#404944]"
