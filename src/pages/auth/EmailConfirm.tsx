@@ -7,7 +7,7 @@ import { toast } from "sonner";
 import { useMutation } from "@tanstack/react-query";
 
 const EmailConfirm = () => {
-  const email = "pearlodi7@gmail.com";
+  const email = "cephf55@gmail.com";
   const navigate = useNavigate();
 
   const { mutate: requestPasswordMutation, isPending } = useMutation({

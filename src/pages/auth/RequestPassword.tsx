@@ -9,7 +9,7 @@ interface Props {
 }
 
 const RequestPassword = ({ text }: Props) => {
-  const email = "pearlodi7@gmail.com";
+  const email = "cephf55@gmail.com";
   const navigate = useNavigate();
 
   const { mutate: requestPasswordMutation, isPending } = useMutation({
