@@ -28,7 +28,7 @@ export const ResearchColumn: ColumnDef<ResearchData>[] = [
     accessorKey: "title",
     header: "Title",
     cell: ({ row }) => (
-      <span className="text-[#1F2937] pl-2">{truncateText(row.original.title, 13)}</span>
+      <span className="text-[#1F2937] pl-2">{truncateText(row.original.title ?? "", 13)}</span>
     ),
   },
   {
