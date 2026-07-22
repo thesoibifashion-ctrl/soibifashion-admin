@@ -173,7 +173,7 @@ const PendingVerificationsCard = ({ donations }: { donations: Donation[] }) => {
 
 const DonationStats = ({ donations }: DonationStatsProps) => {
   return (
-    <div className="flex flex-col md:flex-row gap-4">
+    <div className="flex flex-col lg:flex-row gap-4">
       {(donations?.length ?? 0) > 0 && (
         <>
           <TotalDonationsCard donations={donations!} />

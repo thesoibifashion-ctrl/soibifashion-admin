@@ -9,7 +9,7 @@ interface AuthProps {
 
 const AuthLayout = ({ children, title }: AuthProps) => {
   return (
-    <div className="grid grid-cols-2 h-screen ">
+    <div className="p-4 md:p-10 lg:p-0 grid lg:grid-cols-2 h-screen ">
       <div className="flex mt-40 justify-center">
         <div className="w-full max-w-full lg:w-112.5 flex flex-col justify-between">
           <div>
@@ -41,6 +41,7 @@ const AuthLayout = ({ children, title }: AuthProps) => {
         </div>
       </div>
       <div
+      className="hidden lg:block"
         style={{
           backgroundImage: `url(${authImage})`,
           backgroundSize: "cover",
