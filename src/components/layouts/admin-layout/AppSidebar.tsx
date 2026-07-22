@@ -93,8 +93,13 @@ export function AppSidebar() {
                 "!bg-[#EAF7E9] !border !border-[#186D0F33] !text-[#186D0F]",
               error:
                 "!bg-[#FDECEC] !border !border-[#DE0D0D33] !text-[#DE0D0D]",
+                
             },
+            style: { zIndex: 9999 },
+
           }}
+          style={{ zIndex: 9999 } as React.CSSProperties}
+
         />
       </SidebarContent>
 

@@ -187,3 +187,6 @@
 button{
 cursor: pointer;
 }
+[data-sonner-toaster] {
+  z-index: 999999 !important;
+}
