@@ -490,13 +490,13 @@ export default function NewBlog() {
       )}
 
       <div className=" mt-[30px]">
-        <input
-          type="text"
-          value={title}
-          onChange={(e) => setTitle(e.target.value || "")}
-          className="w-full text-4xl font-semibold text-gray-900 border-none focus:ring-0 outline-none placeholder-gray-400"
-          placeholder="Untitled"
-        />
+      <textarea
+  value={title}
+  onChange={(e) => setTitle(e.target.value)}
+  rows={2}
+  className="w-full resize-none overflow-hidden text-4xl font-semibold text-gray-900 border-none focus:ring-0 outline-none placeholder-gray-400"
+  placeholder="Untitled"
+/>
       </div>
 
       <div className="mx-auto mt-2 w-full ">
