@@ -261,7 +261,7 @@ export default function NewBlog() {
               },
         });
       }
-    }, 10000);
+    }, 1000);
 
     return () => clearInterval(interval);
   }, [title, coverImage, tagInput, blogId, isSaving, isLoadingPost, routeId]);
