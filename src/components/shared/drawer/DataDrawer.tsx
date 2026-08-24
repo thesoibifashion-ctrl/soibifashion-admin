@@ -21,7 +21,7 @@ AppDrawer({
   open,
   onOpenChange,
   title,
-  width = "w-[60%] lg:max-w-[40%]!",
+  width = "w-[60%] lg:max-w-[60%]!",
   children,
 }: AppDrawerProps) {
   return (
@@ -30,7 +30,7 @@ AppDrawer({
         <div className="mx-auto overflow-y-auto w-full max-w-full">
           {title && (
             <DrawerHeader className="px-0">
-              <DrawerTitle className="text-xl">{title}</DrawerTitle>
+              <DrawerTitle className="text-xl font-sans font-bold">{title}</DrawerTitle>
             </DrawerHeader>
           )}
 

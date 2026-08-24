@@ -12,15 +12,11 @@ import {
 interface ConfirmationModalProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
-
   title: string;
   description: string;
-
   confirmText: string;
   cancelText?: string;
-
   confirmButtonClassName?: string;
-
   onConfirm: () => void;
 }
 
@@ -31,33 +27,40 @@ export default function ConfirmationModal({
   description,
   confirmText,
   cancelText = "Cancel",
-  confirmButtonClassName = "bg-[green]",
+  confirmButtonClassName = "bg-[#8B5E3C] hover:bg-[#7A5235]",
   onConfirm,
 }: ConfirmationModalProps) {
+  const handleConfirm = () => {
+    onConfirm();
+    onOpenChange(false);
+  };
+
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="w-[390px] rounded-[32px] bg-[#FBFBFB]">
-        <DialogHeader className="mt-5">
-          <DialogTitle className="font-medium text-2xl text-[#1E1E1E]">
+      <DialogContent className="w-[calc(100%-32px)] max-w-[420px] rounded-[24px] border border-[#E7E2DC] bg-[#FBFAF8] p-7 shadow-xl">
+        <DialogHeader className="space-y-3 text-left">
+          <DialogTitle className="text-xl font-semibold text-[#1C1917]">
             {title}
           </DialogTitle>
 
-          <DialogDescription className="font-normal text-sm text-[#1E1E1EA6]">
+          <DialogDescription className="text-sm leading-6 text-[#78716C]">
             {description}
           </DialogDescription>
         </DialogHeader>
 
-        <DialogFooter className="mt-11">
+        <DialogFooter className="mt-7 flex-row justify-end gap-3">
           <button
+            type="button"
             onClick={() => onOpenChange(false)}
-            className="bg-white border border-[#F2F2F2] px-5 py-2 rounded-full font-medium text-base"
+            className="h-10 rounded-xl border border-[#E7E2DC] bg-white px-5 text-sm font-medium text-[#57534E] transition-colors hover:bg-[#F5F0EB] cursor-pointer"
           >
             {cancelText}
           </button>
 
           <button
-            onClick={onConfirm}
-            className={`px-5 py-2  rounded-full text-white font-medium text-base ${confirmButtonClassName}`}
+            type="button"
+            onClick={handleConfirm}
+            className={`h-10 rounded-xl px-5 text-sm font-medium text-white transition-colors cursor-pointer ${confirmButtonClassName}`}
           >
             {confirmText}
           </button>

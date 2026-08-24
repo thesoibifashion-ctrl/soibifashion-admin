@@ -1,10 +1,16 @@
+@import "@fontsource/playfair-display";
+@import "@fontsource/work-sans";
+
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 @import "@fontsource-variable/geist";
 
 @custom-variant dark (&:is(.dark *));
-
+@theme {
+  --font-display: "Playfair Display", serif;
+  --font-sans: "Work Sans", sans-serif;
+}
 @theme inline {
     --font-heading: var(--font-sans);
     --font-sans: 'Geist Variable', sans-serif;
@@ -130,8 +136,25 @@
 }
 
 .tab-trigger {
-  @apply shadow-none w-fit cursor-pointer font-normal text-base  data-active:font-medium  data-active:text-base text-[#404944]  data-active:shadow-none data-active:bg-transparent bg-transparent data-active:border-b-2 border-0  data-active:border-[#186D0F] data-active:text-[#186D0F] rounded-none px-0;
+  @apply shadow-none w-fit cursor-pointer font-normal text-base  data-active:font-medium  data-active:text-base text-[#404944]  data-active:shadow-none data-active:bg-transparent bg-transparent data-active:border-b-2 border-0  data-active:border-[#C9A227] data-active:text-[#C9A227] rounded-none px-0;
 
+}
+h1,h2,h3,h4,h5,h6{
+  font-family: var(--font-display);
+}
+p,a,span,li,button{
+  font-family: var(--font-display);
+}
+@theme {
+  --color-gold: #C9A227;
+  --color-gold-dim: #c9ae09;
+  --color-near-black: #0B0B0B;
+  --color-near-brown: #18120E;
+  --color-off-white: #F8F6F2;
+  --color-border: #EAE6DD;
+  --color-dark-text: #1E1E1E;
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-sans: 'Work Sans', system-ui, sans-serif;
 }
 
 .ProseMirror{

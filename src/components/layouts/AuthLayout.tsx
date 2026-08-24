@@ -15,11 +15,11 @@ const AuthLayout = ({ children, title }: AuthProps) => {
           <div>
             <div className="flex items-center gap-2">
               <img className="w-14 h-14" src={logo} alt="logo" />
-              <p className="font-semibold text-3xl lg:text-[38px] text-[#002E21]">
-                CEPHF
+              <p className="font-semibold font-display text-3xl lg:text-[38px] text-[#002E21]">
+                SBS
               </p>
             </div>
-            <p className="font-medium text-2xl lg:text-[32px] mt-4 text-[#1A1B1D]">
+            <p className="font-medium font-display text-2xl lg:text-[32px] mt-4 text-[#1A1B1D]">
               {title}
             </p>
             {children}
@@ -55,7 +55,7 @@ const AuthLayout = ({ children, title }: AuthProps) => {
           toastOptions={{
             classNames: {
               success:
-                "!bg-[#EAF7E9] !border !border-[#186D0F33] !text-[#186D0F]",
+                "!bg-[#EAF7E9] !border !border-[#C9A22733] !text-[black]",
               error:
                 "!bg-[#FDECEC] !border !border-[#DE0D0D33] !text-[#DE0D0D]",
             },

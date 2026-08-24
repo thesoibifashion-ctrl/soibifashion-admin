@@ -12,9 +12,9 @@ interface Status {
     const styles: StatusStyles = {
       published: {
         label: "Published",
-        bg: "bg-[#186D0F54]",
-        text: "text-[#186D0F]",
-        dot: "bg-[#186D0F]",
+        bg: "bg-[#C9A22754]",
+        text: "text-[#C9A227]",
+        dot: "bg-[#C9A227]",
       },
       pending: {
         label: "Pending",

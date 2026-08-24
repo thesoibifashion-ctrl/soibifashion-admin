@@ -34,7 +34,7 @@ const Countdown = ({ seconds, onResend, isResending }: CountdownProps) => {
   return (
     <span
       onClick={!isResending ? onResend : undefined}
-      className={`text-[#186D0F] ml-1 cursor-pointer ${
+      className={`text-[#C9A227] ml-1 cursor-pointer ${
         isResending ? "opacity-50 pointer-events-none" : ""
       }`}
     >

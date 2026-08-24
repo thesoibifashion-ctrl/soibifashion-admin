@@ -7,7 +7,7 @@ interface SkeletonTableProps {
 
 export function SkeletonTable({ rows = 10, columns = 4 }: SkeletonTableProps) {
   return (
-    <div className="w-full rounded-md  ">
+    <div className="w-full rounded-md  mt-10">
       <div
         className="grid border-b rounded-t-3xl bg-[#8b8b8b4a] p-4"
         style={{ gridTemplateColumns: `repeat(${columns}, 1fr)` }}

@@ -10,7 +10,7 @@ export default function DashboardLayout() {
      <AppSidebar />
      </div>
 
-      <SidebarInset className="bg-[#F1F1F1]">
+      <SidebarInset className="bg-[#FAFAF8]">
         <header className="flex items-center px-4 py-3 lg:hidden">
           <MobileSidebarTrigger />
         </header>

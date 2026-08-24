@@ -1,6 +1,5 @@
-const BASE_URL = import.meta.env.VITE_API_BASE_URL;
+import { supabase } from "@/lib/supabase";
 
-// for requests with no query params — just endpoint + options
 export async function apiRequest(endpoint: string, options?: RequestInit) {
   const res = await fetch(`${BASE_URL}${endpoint}`, {
     ...options,
@@ -22,29 +21,70 @@ export async function apiRequest(endpoint: string, options?: RequestInit) {
   return res.json();
 }
 
-// for requests with query params (filters, pagination, etc.)
-// export async function apiRequestWithParams(
-//   endpoint: string,
-//   params: Record<string, string | number | undefined>,
-//   options?: RequestInit
-// ) {
-//   const searchParams = new URLSearchParams();
 
-//   Object.entries(params).forEach(([key, value]) => {
-//     if (value !== undefined) searchParams.set(key, String(value));
-//   });
+const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
-//   const res = await fetch(`${BASE_URL}${endpoint}?${searchParams.toString()}`, {
-//     ...options,
-//     headers: {
-//       "Content-Type": "application/json",
-//       ...options?.headers,
-//     },
-//   });
+async function getAccessToken() {
+  const {
+    data: { session },
+  } = await supabase.auth.getSession();
 
-//   if (!res.ok) {
-//     throw new Error(`Request failed: ${res.status}`);
-//   }
+  return session?.access_token ?? null;
+}
 
-//   return res.json();
-// }
+async function apiFetch(endpoint: string, options: RequestInit = {}) {
+  const token = await getAccessToken();
+
+  const res = await fetch(`${BASE_URL}${endpoint}`, {
+    ...options,
+    headers: {
+      "Content-Type": "application/json",
+      ...(token && {
+        Authorization: `Bearer ${token}`,
+      }),
+      ...options.headers,
+    },
+  });
+
+  if (!res.ok) {
+    let errorMessage = `Request failed: ${res.status}`;
+
+    try {
+      const error = await res.json();
+      errorMessage = error.message || errorMessage;
+    } catch {}
+
+    throw new Error(errorMessage);
+  }
+
+  if (res.status === 204) return null;
+
+  const text = await res.text();
+  return text ? JSON.parse(text) : null;
+}
+
+export function apiGet(endpoint: string) {
+  return apiFetch(endpoint, {
+    method: "GET",
+  });
+}
+
+export function apiPost(endpoint: string, payload: unknown) {
+  return apiFetch(endpoint, {
+    method: "POST",
+    body: JSON.stringify(payload),
+  });
+}
+
+export function apiPatch(endpoint: string, payload: unknown) {
+  return apiFetch(endpoint, {
+    method: "PATCH",
+    body: JSON.stringify(payload),
+  });
+}
+
+export function apiDelete(endpoint: string) {
+  return apiFetch(endpoint, {
+    method: "DELETE",
+  });
+}

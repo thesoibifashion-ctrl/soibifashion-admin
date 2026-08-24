@@ -73,7 +73,7 @@ const BlogActions = ({ }: BlogActionsProps) => {
               Cancel
             </button>
 
-            <button className="rounded-full bg-[#186D0F] px-4 py-2 text-white">
+            <button className="rounded-full bg-[#C9A227] px-4 py-2 text-white">
               Archive
             </button>
           </DialogFooter>

@@ -17,8 +17,8 @@ const STATUS_MAP: Record<string, StatusConfig> = {
   },
   published: {
     label: "Published",
-    dot: "bg-[#186D0F]",
-    text: "text-[#186D0F]",
+    dot: "bg-[#A67C00]",
+    text: "text-[#A67C00]",
     bg: "bg-[#E6F4E4]",
   },
   pending: {

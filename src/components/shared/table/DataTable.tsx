@@ -47,126 +47,141 @@ export function DataTable<TData, TValue>({
   });
 
   return (
-    <div className="overflow-hidden rounded-md ">
-      <Table>
-        <TableHeader className="bg-[#DFDFDF4A] ">
-          {table.getHeaderGroups().map((headerGroup) => (
-            <TableRow className="" key={headerGroup.id}>
-              {headerGroup.headers.map((header) => {
-                return (
-                  <TableHead
-                    className="text-[#6B7280]  font-bold text-xs"
-                    key={header.id}
-                  >
-                    {header.isPlaceholder
-                      ? null
-                      : flexRender(
-                          header.column.columnDef.header,
-                          header.getContext()
-                        )}
-                  </TableHead>
-                );
-              })}
-            </TableRow>
-          ))}
-        </TableHeader>
-        <TableBody className="bg-[white] ">
-          {table.getRowModel().rows?.length ? (
-            table.getRowModel().rows.map((row) => (
+    <div>
+      <div className="bg-white rounded-2xl border border-[#E7E2DC] shadow-sm overflow-hidden">
+        <Table>
+          <TableHeader>
+            {table.getHeaderGroups().map((headerGroup) => (
               <TableRow
-                onClick={() => onRowClick?.(row.original)}
-                key={row.id}
-                data-state={row.getIsSelected() && "selected"}
-                className="cursor-pointer"
+                key={headerGroup.id}
+                className="border-b border-[#E7E2DC] bg-[#FAFAF8] hover:bg-[#FAFAF8]"
               >
-                {row.getVisibleCells().map((cell) => (
-                  <TableCell
-                    className="font-normal text-sm  py-4  text-[#4B5563]"
-                    key={cell.id}
-                  >
-                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                  </TableCell>
-                ))}
+                {headerGroup.headers.map((header) => {
+                  return (
+                    <TableHead
+                      key={header.id}
+                      className="px-6 py-3 text-left h-auto"
+                    >
+                      <span className="text-xs font-semibold uppercase tracking-wide text-[#78716C]">
+                        {header.isPlaceholder
+                          ? null
+                          : flexRender(
+                              header.column.columnDef.header,
+                              header.getContext()
+                            )}
+                      </span>
+                    </TableHead>
+                  );
+                })}
               </TableRow>
-            ))
-          ) : (
-            <TableRow>
-              <TableCell colSpan={columns.length} className="h-24 text-center">
-                No results.
-              </TableCell>
-            </TableRow>
-          )}
-        </TableBody>
-      </Table>
-     <div className="flex justify-between items-center pt-4">
-      <div>Page <strong>{page}</strong> of {pageCount}</div>
-     <div className="flex justify-end ">
-  <Pagination>
-    <PaginationContent>
-      <PaginationItem>
-        <PaginationPrevious
-          onClick={() => onPageChange(Math.max(page - 1, 1))}
-        />
-      </PaginationItem>
+            ))}
+          </TableHeader>
 
-      <PaginationItem>
-        <PaginationLink
-          isActive={page === 1}
-          onClick={() => onPageChange(1)}
-        >
-          1
-        </PaginationLink>
-      </PaginationItem>
+          <TableBody className="divide-y divide-[#F5F0EB]">
+            {table.getRowModel().rows?.length ? (
+              table.getRowModel().rows.map((row) => (
+                <TableRow
+                  onClick={() => onRowClick?.(row.original)}
+                  key={row.id}
+                  data-state={row.getIsSelected() && "selected"}
+                  className="cursor-pointer border-b border-[#F5F0EB] hover:bg-[#FAFAF8] transition-colors"
+                >
+                  {row.getVisibleCells().map((cell) => (
+                    <TableCell
+                      key={cell.id}
+                      className="px-6 py-4 text-sm"
+                    >
+                      {flexRender(
+                        cell.column.columnDef.cell,
+                        cell.getContext()
+                      )}
+                    </TableCell>
+                  ))}
+                </TableRow>
+              ))
+            ) : (
+              <TableRow className="hover:bg-transparent">
+                <TableCell
+                  colSpan={columns.length}
+                  className="py-16 text-center text-sm text-[#78716C]"
+                >
+                  No results.
+                </TableCell>
+              </TableRow>
+            )}
+          </TableBody>
+        </Table>
+      </div>
 
-      {page > 3 && (
-        <PaginationItem>
-          <PaginationEllipsis />
-        </PaginationItem>
-      )}
+      <div className="flex items-center w-full justify-between mt-5">
+        <span className="text-sm flex w-full text-[#78716C]">
+          Page {page} of {pageCount}
+        </span>
 
-      {Array.from({ length: pageCount }, (_, i) => i + 1)
-        .filter((p) => p !== 1 && p !== pageCount)
-        .filter((p) => Math.abs(p - page) <= 1)
-        .map((p) => (
-          <PaginationItem key={p}>
-            <PaginationLink
-              isActive={p === page}
-              onClick={() => onPageChange(p)}
-            >
-              {p}
-            </PaginationLink>
-          </PaginationItem>
-        ))}
+        <Pagination className="flex justify-end">
+          <PaginationContent>
+            <PaginationItem>
+              <PaginationPrevious
+                onClick={() => onPageChange(Math.max(page - 1, 1))}
+              />
+            </PaginationItem>
 
-      {page < pageCount - 2 && (
-        <PaginationItem>
-          <PaginationEllipsis />
-        </PaginationItem>
-      )}
+            <PaginationItem>
+              <PaginationLink
+                isActive={page === 1}
+                onClick={() => onPageChange(1)}
+              >
+                1
+              </PaginationLink>
+            </PaginationItem>
 
-      {pageCount > 1 && (
-        <PaginationItem>
-          <PaginationLink
-            isActive={page === pageCount}
-            onClick={() => onPageChange(pageCount)}
-          >
-            {pageCount}
-          </PaginationLink>
-        </PaginationItem>
-      )}
+            {page > 3 && (
+              <PaginationItem>
+                <PaginationEllipsis />
+              </PaginationItem>
+            )}
 
-      {/* Next */}
-      <PaginationItem>
-        <PaginationNext
-          onClick={() =>
-            onPageChange(Math.min(page + 1, pageCount))
-          }
-        />
-      </PaginationItem>
-    </PaginationContent>
-  </Pagination>
-</div>
-     </div>
+            {Array.from({ length: pageCount }, (_, i) => i + 1)
+              .filter((p) => p !== 1 && p !== pageCount)
+              .filter((p) => Math.abs(p - page) <= 1)
+              .map((p) => (
+                <PaginationItem key={p}>
+                  <PaginationLink
+                    isActive={p === page}
+                    onClick={() => onPageChange(p)}
+                  >
+                    {p}
+                  </PaginationLink>
+                </PaginationItem>
+              ))}
+
+            {page < pageCount - 2 && (
+              <PaginationItem>
+                <PaginationEllipsis />
+              </PaginationItem>
+            )}
+
+            {pageCount > 1 && (
+              <PaginationItem>
+                <PaginationLink
+                  isActive={page === pageCount}
+                  onClick={() => onPageChange(pageCount)}
+                >
+                  {pageCount}
+                </PaginationLink>
+              </PaginationItem>
+            )}
+
+            <PaginationItem>
+              <PaginationNext
+                onClick={() =>
+                  onPageChange(Math.min(page + 1, pageCount))
+                }
+              />
+            </PaginationItem>
+          </PaginationContent>
+        </Pagination>
+      </div>
     </div>
   );
 }

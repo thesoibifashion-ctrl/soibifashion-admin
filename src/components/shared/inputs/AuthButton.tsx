@@ -7,7 +7,7 @@ interface AuthButtonProps {
 const AuthButton = ({ text,loading }: AuthButtonProps) => {
   return (
     <button 
-    className="py-3 w-full text-[#FFFFFF] bg-[#186D0F] rounded-[16px]">
+    className="py-3 w-full text-[#FFFFFF] bg-[#C9A227] rounded-[16px]">
       {loading ? <Loader2 className="animate-spin mx-auto" /> : text}
     </button>
   );
