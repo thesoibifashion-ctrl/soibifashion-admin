@@ -6,7 +6,6 @@ import {
   ChevronDown,
   ImagePlus,
   Loader2,
-  MoreHorizontal,
   Plus,
   Search,
   Trash2,
@@ -14,21 +13,11 @@ import {
   X,
 } from "lucide-react";
 
-import { createGalleryImage, getAdminGallery, deleteGalleryImage} from "@/api/gallery";
 import { uploadToCloudinary } from "@/lib/uploadToCloudinary";
+import { createGalleryImage, deleteGalleryImage, getAdminGallery } from "@/api/requests/gallery";
+import type { GalleryCategory, GalleryImage } from "@/types";
 
-type GalleryCategory = "workshop" | "craftsmanship" | "completed_work";
 
-type GalleryImage = {
-  id: string;
-  title: string;
-  imageUrl: string;
-  imagePublicId: string;
-  category: GalleryCategory;
-  sortOrder: number;
-  isPublished: boolean;
-  createdAt?: string;
-};
 
 const CATEGORY_LABELS: Record<GalleryCategory, string> = {
   workshop: "Workshop",
@@ -83,7 +72,7 @@ const GalleryPage = () => {
 
       const response = await getAdminGallery();
 
-      setGallery(response?.data ?? []);
+      setGallery(response ?? []);
     } catch (error) {
       console.error("Failed to load gallery:", error);
     } finally {
@@ -138,7 +127,7 @@ const GalleryPage = () => {
       const imagePublicId = crypto.randomUUID();
       await createGalleryImage({
         title: title.trim(),
-        imageUrl,
+        imageUrl:imageUrl.secureUrl,
         imagePublicId: imagePublicId,
         category,
         sortOrder,

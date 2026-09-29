@@ -4,13 +4,13 @@ import { DataTable } from "@/components/shared/table/DataTable";
 import EmptyState from "@/components/shared/EmptyState";
 import ErrorState from "@/components/shared/ErrorState";
 import EmptySearch from "@/components/shared/EmptySearch";
-import { getAdminCartOrders, updateAdminCartOrderStatus } from "@/api/cart";
+import { getAdminCartOrders, updateAdminCartOrderStatus } from "@/api/requests/cart";
 import { useClientPagination } from "@/hooks/useClientPagination";
 
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 
-import OrderDrawer from "./Drawer";
+import OrderDrawer from "./Drawers";
 import { AppDrawer } from "@/components/shared/drawer/DataDrawer";
 
 import type { CartOrder } from "@/types";
@@ -42,7 +42,7 @@ const CartOrdersPage = () => {
       search.length > 0 ? (previousData) => previousData : undefined,
   });
 
-  const orders = data?.data ?? [];
+  const orders = data ?? [];
 
   const updateOrderMutation = useMutation({
     mutationFn: ({
@@ -52,25 +52,20 @@ const CartOrdersPage = () => {
       id: string;
       payload: Partial<CartOrder>;
     }) => updateAdminCartOrderStatus(id, payload),
-
+  
     onSuccess: (response) => {
-      const updatedOrder = response?.data;
-
-      if (!updatedOrder) return;
-
+      const updatedOrder = response as CartOrder;
+  
       setSelectedOrder(updatedOrder);
-
+  
       queryClient.setQueryData(
         ["admin-cart-orders"],
-        (oldData: any) => {
-          if (!oldData?.data) return oldData;
-
-          return {
-            ...oldData,
-            data: oldData.data.map((order: CartOrder) =>
-              order.id === updatedOrder.id ? updatedOrder : order
-            ),
-          };
+        (oldData: CartOrder[] | undefined) => {
+          if (!oldData) return oldData;
+  
+          return oldData.map((order) =>
+            order.id === updatedOrder.id ? updatedOrder : order
+          );
         }
       );
     },
@@ -163,7 +158,7 @@ const CartOrdersPage = () => {
         <EmptySearch text="No orders match your search or selected status." />
       ) : (
         <DataTable
-          columns={CartOrderColumns as any}
+          columns={CartOrderColumns}
           data={paginatedData}
           page={page}
           pageCount={pageCount}

@@ -6,9 +6,6 @@ import {
   Bar,
   BarChart,
   CartesianGrid,
-  Cell,
-  Pie,
-  PieChart,
   ResponsiveContainer,
   Tooltip,
   XAxis,
@@ -18,28 +15,24 @@ import {
   Activity,
   ArrowUpRight,
   Bell,
-  BookOpen,
   Box,
   CheckCircle2,
   Clock3,
   Eye,
-  FileText,
   MessageSquare,
-  Package,
   ShoppingBag,
   Sparkles,
   Users,
 } from "lucide-react";
 
-import { apiGet } from "@/api/client";
+import { apiGet } from "@/api/clients";
 
 const GOLD = "#C9A227";
-const BLACK = "#0E0E0E";
+// const BLACK = "#0E0E0E";
 
 type AnalyticsResponse = {
   success: boolean;
   message: string;
-  data: {
     products: {
       total: number;
       published: number;
@@ -95,15 +88,14 @@ type AnalyticsResponse = {
       byStatus: Record<string, number>;
       byExperienceLevel: Record<string, number>;
     };
-  };
 };
 
-const formatCurrency = (value: number) =>
-  new Intl.NumberFormat("en-NG", {
-    style: "currency",
-    currency: "NGN",
-    maximumFractionDigits: 0,
-  }).format(value);
+// const formatCurrency = (value: number) =>
+//   new Intl.NumberFormat("en-NG", {
+//     style: "currency",
+//     currency: "NGN",
+//     maximumFractionDigits: 0,
+//   }).format(value);
 
 const formatNumber = (value: number) =>
   new Intl.NumberFormat("en-NG").format(value);
@@ -115,32 +107,32 @@ const formatDate = (date: string) =>
     year: "numeric",
   }).format(new Date(date));
 
-const formatStatus = (status: string) =>
-  status.charAt(0).toUpperCase() + status.slice(1).replaceAll("_", " ");
+// const formatStatus = (status: string) =>
+//   status.charAt(0).toUpperCase() + status.slice(1).replaceAll("_", " ");
 
-const statusColor = (status: string) => {
-  switch (status) {
-    case "completed":
-    case "confirmed":
-      return "#166534";
+// const statusColor = (status: string) => {
+//   switch (status) {
+//     case "completed":
+//     case "confirmed":
+//       return "#166534";
 
-    case "processing":
-    case "reviewing":
-      return "#A16207";
+//     case "processing":
+//     case "reviewing":
+//       return "#A16207";
 
-    case "pending":
-      return "#6B7280";
+//     case "pending":
+//       return "#6B7280";
 
-    case "cancelled":
-      return "#B91C1C";
+//     case "cancelled":
+//       return "#B91C1C";
 
-    case "submitted":
-      return "#1D4ED8";
+//     case "submitted":
+//       return "#1D4ED8";
 
-    default:
-      return "#525252";
-  }
-};
+//     default:
+//       return "#525252";
+//   }
+// };
 
 const CustomTooltip = ({
   active,
@@ -255,54 +247,54 @@ function StatCard({
   );
 }
 
-function StatusList({
-  data,
-}: {
-  data: Record<string, number>;
-}) {
-  const total = Object.values(data).reduce((sum, value) => sum + value, 0);
+// function StatusList({
+//   data,
+// }: {
+//   data: Record<string, number>;
+// }) {
+//   const total = Object.values(data).reduce((sum, value) => sum + value, 0);
 
-  return (
-    <div className="space-y-4">
-      {Object.entries(data).map(([status, value]) => {
-        const percentage = total ? (value / total) * 100 : 0;
+//   return (
+//     <div className="space-y-4">
+//       {Object.entries(data).map(([status, value]) => {
+//         const percentage = total ? (value / total) * 100 : 0;
 
-        return (
-          <div key={status}>
-            <div className="mb-2 flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                <span
-                  className="h-2 w-2 rounded-full"
-                  style={{
-                    backgroundColor: statusColor(status),
-                  }}
-                />
+//         return (
+//           <div key={status}>
+//             <div className="mb-2 flex items-center justify-between">
+//               <div className="flex items-center gap-2">
+//                 <span
+//                   className="h-2 w-2 rounded-full"
+//                   style={{
+//                     backgroundColor: statusColor(status),
+//                   }}
+//                 />
 
-                <span className="text-sm text-[#444]">
-                  {formatStatus(status)}
-                </span>
-              </div>
+//                 <span className="text-sm text-[#444]">
+//                   {formatStatus(status)}
+//                 </span>
+//               </div>
 
-              <span className="text-sm font-semibold text-[#0E0E0E]">
-                {value}
-              </span>
-            </div>
+//               <span className="text-sm font-semibold text-[#0E0E0E]">
+//                 {value}
+//               </span>
+//             </div>
 
-            <div className="h-1.5 overflow-hidden rounded-full bg-[#F1F0ED]">
-              <div
-                className="h-full rounded-full transition-all"
-                style={{
-                  width: `${percentage}%`,
-                  backgroundColor: statusColor(status),
-                }}
-              />
-            </div>
-          </div>
-        );
-      })}
-    </div>
-  );
-}
+//             <div className="h-1.5 overflow-hidden rounded-full bg-[#F1F0ED]">
+//               <div
+//                 className="h-full rounded-full transition-all"
+//                 style={{
+//                   width: `${percentage}%`,
+//                   backgroundColor: statusColor(status),
+//                 }}
+//               />
+//             </div>
+//           </div>
+//         );
+//       })}
+//     </div>
+//   );
+// }
 
 export default function AnalyticsPage() {
   const [from, setFrom] = useState("");
@@ -326,34 +318,26 @@ export default function AnalyticsPage() {
     queryFn: () => apiGet(query),
   });
 
-  const analytics = data?.data;
+  const analytics = data;
 
-  const quoteChartData = analytics
-    ? Object.entries(analytics.quotes.byStatus).map(
-        ([name, value]) => ({
-          name: formatStatus(name),
-          value,
-        }),
-      )
-    : [];
 
-  const cartChartData = analytics
-    ? Object.entries(analytics.carts.byStatus).map(
-        ([name, value]) => ({
-          name: formatStatus(name),
-          value,
-        }),
-      )
-    : [];
+  // const cartChartData = analytics
+  //   ? Object.entries(analytics.carts.byStatus).map(
+  //       ([name, value]) => ({
+  //         name: formatStatus(name),
+  //         value,
+  //       }),
+  //     )
+  //   : [];
 
-  const academyChartData = analytics
-    ? Object.entries(analytics.academy.byExperienceLevel).map(
-        ([name, value]) => ({
-          name: formatStatus(name),
-          value,
-        }),
-      )
-    : [];
+  // const academyChartData = analytics
+  //   ? Object.entries(analytics.academy.byExperienceLevel).map(
+  //       ([name, value]) => ({
+  //         name: formatStatus(name),
+  //         value,
+  //       }),
+  //     )
+  //   : [];
 
   const productChartData =
     analytics?.products.topProducts
@@ -418,12 +402,12 @@ export default function AnalyticsPage() {
               <Sparkles className="h-4 w-4 text-[#C9A227]" />
 
               <span className="text-[11px] font-semibold uppercase tracking-[0.2em] text-[#C9A227]">
-                Signature By Sarah
+               Analytics
               </span>
             </div>
 
             <h1 className="text-3xl font-semibold tracking-tight text-[#0E0E0E]">
-              Analytics
+              Hello, Soibi
             </h1>
 
             <p className="mt-1 max-w-xl text-sm text-[#777]">
@@ -482,7 +466,7 @@ export default function AnalyticsPage() {
             title="Business at a glance"
           />
 
-          <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+          <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
             <StatCard
               title="Submitted Orders"
               value={formatNumber(analytics.carts.submitted)}
@@ -493,20 +477,14 @@ export default function AnalyticsPage() {
               accent
             />
 
-            <StatCard
+            {/* <StatCard
               title="Order Value"
               value={formatCurrency(analytics.carts.totalValue)}
               subtitle="Submitted cart value"
               icon={Package}
-            />
+            /> */}
 
-            <StatCard
-              title="Quote Requests"
-              value={formatNumber(analytics.quotes.total)}
-              subtitle={formatCurrency(analytics.quotes.totalValue)}
-              icon={FileText}
-            />
-
+        
             <StatCard
               title="Customers"
               value={formatNumber(analytics.users.total)}
@@ -517,7 +495,7 @@ export default function AnalyticsPage() {
         </section>
 
         {/* Secondary metrics */}
-        <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+        <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
           <StatCard
             title="Products"
             value={analytics.products.total}
@@ -539,89 +517,11 @@ export default function AnalyticsPage() {
             icon={MessageSquare}
           />
 
-          <StatCard
-            title="Academy Applications"
-            value={analytics.academy.total}
-            subtitle="Learning programme interest"
-            icon={BookOpen}
-          />
+    
         </div>
 
         {/* Charts */}
-        <section className="grid gap-6 lg:grid-cols-2">
-          {/* Quotes */}
-          <div className="rounded-2xl border border-[#EDEAE4] bg-white p-6">
-            <SectionHeader
-              eyebrow="Quote pipeline"
-              title="Quote requests"
-            />
-
-            <div className="h-[280px]">
-              <ResponsiveContainer width="100%" height="100%">
-                <PieChart>
-                  <Pie
-                    data={quoteChartData}
-                    dataKey="value"
-                    nameKey="name"
-                    cx="50%"
-                    cy="50%"
-                    innerRadius={70}
-                    outerRadius={100}
-                    paddingAngle={3}
-                  >
-                    {quoteChartData.map((entry) => (
-                      <Cell
-                        key={entry.name}
-                        fill={statusColor(entry.name.toLowerCase())}
-                      />
-                    ))}
-                  </Pie>
-
-                  <Tooltip content={<CustomTooltip />} />
-                </PieChart>
-              </ResponsiveContainer>
-            </div>
-
-            <StatusList data={analytics.quotes.byStatus} />
-          </div>
-
-          {/* Cart orders */}
-          <div className="rounded-2xl border border-[#EDEAE4] bg-white p-6">
-            <SectionHeader
-              eyebrow="Order pipeline"
-              title="Cart orders"
-            />
-
-            <div className="h-[280px]">
-              <ResponsiveContainer width="100%" height="100%">
-                <PieChart>
-                  <Pie
-                    data={cartChartData}
-                    dataKey="value"
-                    nameKey="name"
-                    cx="50%"
-                    cy="50%"
-                    innerRadius={70}
-                    outerRadius={100}
-                    paddingAngle={3}
-                  >
-                    {cartChartData.map((entry) => (
-                      <Cell
-                        key={entry.name}
-                        fill={statusColor(entry.name.toLowerCase())}
-                      />
-                    ))}
-                  </Pie>
-
-                  <Tooltip content={<CustomTooltip />} />
-                </PieChart>
-              </ResponsiveContainer>
-            </div>
-
-            <StatusList data={analytics.carts.byStatus} />
-          </div>
-        </section>
-
+     
         {/* Product performance */}
         <section className="grid gap-6 lg:grid-cols-[1.5fr_1fr]">
           <div className="rounded-2xl border border-[#EDEAE4] bg-white p-6">
@@ -735,183 +635,9 @@ export default function AnalyticsPage() {
         </section>
 
         {/* Academy */}
-        <section className="grid gap-6 lg:grid-cols-2">
-          <div className="rounded-2xl border border-[#EDEAE4] bg-white p-6">
-            <SectionHeader
-              eyebrow="SBS Academy"
-              title="Experience levels"
-            />
-
-            <div className="h-[260px]">
-              <ResponsiveContainer width="100%" height="100%">
-                <BarChart data={academyChartData}>
-                  <CartesianGrid
-                    vertical={false}
-                    stroke="#EEECE7"
-                  />
-
-                  <XAxis
-                    dataKey="name"
-                    axisLine={false}
-                    tickLine={false}
-                    tick={{ fill: "#777", fontSize: 11 }}
-                  />
-
-                  <YAxis
-                    allowDecimals={false}
-                    axisLine={false}
-                    tickLine={false}
-                    tick={{ fill: "#999", fontSize: 11 }}
-                  />
-
-                  <Tooltip content={<CustomTooltip />} />
-
-                  <Bar
-                    dataKey="value"
-                    fill={BLACK}
-                    radius={[6, 6, 0, 0]}
-                    barSize={42}
-                  />
-                </BarChart>
-              </ResponsiveContainer>
-            </div>
-          </div>
-
-          <div className="rounded-2xl border border-[#EDEAE4] bg-white p-6">
-            <SectionHeader
-              eyebrow="Academy pipeline"
-              title="Application status"
-            />
-
-            <StatusList data={analytics.academy.byStatus} />
-
-            <div className="mt-8 rounded-xl bg-[#F8F6F2] p-4">
-              <div className="flex items-center gap-3">
-                <BookOpen className="h-5 w-5 text-[#C9A227]" />
-
-                <div>
-                  <p className="text-sm font-semibold text-[#0E0E0E]">
-                    {analytics.academy.total} applications
-                  </p>
-
-                  <p className="text-xs text-[#777]">
-                    Current SBS Academy interest
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
 
         {/* Recent activity */}
-        <section>
-          <SectionHeader
-            eyebrow="Recent activity"
-            title="Latest business activity"
-          />
-
-          <div className="grid gap-6 lg:grid-cols-2">
-            {/* Recent quotes */}
-            <div className="overflow-hidden rounded-2xl border border-[#EDEAE4] bg-white">
-              <div className="flex items-center justify-between border-b border-[#EDEAE4] px-6 py-4">
-                <div className="flex items-center gap-2">
-                  <FileText className="h-4 w-4 text-[#C9A227]" />
-
-                  <span className="text-sm font-semibold text-[#0E0E0E]">
-                    Recent quotes
-                  </span>
-                </div>
-
-                <span className="text-xs text-[#999]">
-                  {analytics.quotes.total} total
-                </span>
-              </div>
-
-              <div className="divide-y divide-[#F0EEE9]">
-                {analytics.quotes.recent
-                  .slice(0, 6)
-                  .map((quote) => (
-                    <div
-                      key={quote.id}
-                      className="flex items-center justify-between px-6 py-4"
-                    >
-                      <div>
-                        <p className="text-sm font-medium text-[#0E0E0E]">
-                          {quote.referenceNumber}
-                        </p>
-
-                        <p className="mt-1 text-xs text-[#999]">
-                          {formatDate(quote.createdAt)}
-                        </p>
-                      </div>
-
-                      <span
-                        className="rounded-full px-2.5 py-1 text-[11px] font-medium"
-                        style={{
-                          backgroundColor: `${statusColor(
-                            quote.status,
-                          )}12`,
-                          color: statusColor(quote.status),
-                        }}
-                      >
-                        {formatStatus(quote.status)}
-                      </span>
-                    </div>
-                  ))}
-              </div>
-            </div>
-
-            {/* Recent orders */}
-            <div className="overflow-hidden rounded-2xl border border-[#EDEAE4] bg-white">
-              <div className="flex items-center justify-between border-b border-[#EDEAE4] px-6 py-4">
-                <div className="flex items-center gap-2">
-                  <ShoppingBag className="h-4 w-4 text-[#C9A227]" />
-
-                  <span className="text-sm font-semibold text-[#0E0E0E]">
-                    Recent orders
-                  </span>
-                </div>
-
-                <span className="text-xs text-[#999]">
-                  {analytics.carts.total} total
-                </span>
-              </div>
-
-              <div className="divide-y divide-[#F0EEE9]">
-                {analytics.carts.recent
-                  .slice(0, 6)
-                  .map((order) => (
-                    <div
-                      key={order.id}
-                      className="flex items-center justify-between px-6 py-4"
-                    >
-                      <div>
-                        <p className="text-sm font-medium text-[#0E0E0E]">
-                          {order.orderNumber}
-                        </p>
-
-                        <p className="mt-1 text-xs text-[#999]">
-                          {formatDate(order.createdAt)}
-                        </p>
-                      </div>
-
-                      <span
-                        className="rounded-full px-2.5 py-1 text-[11px] font-medium"
-                        style={{
-                          backgroundColor: `${statusColor(
-                            order.status,
-                          )}12`,
-                          color: statusColor(order.status),
-                        }}
-                      >
-                        {formatStatus(order.status)}
-                      </span>
-                    </div>
-                  ))}
-              </div>
-            </div>
-          </div>
-        </section>
+     
 
         {/* Contacts */}
         <section className="grid gap-6 lg:grid-cols-[1fr_1.5fr]">

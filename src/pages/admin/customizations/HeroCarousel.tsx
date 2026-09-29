@@ -18,7 +18,7 @@ import { Input } from "@/components/ui/input";
 import { Switch } from "@/components/ui/switch";
 import { Skeleton } from "@/components/ui/skeleton";
 import { getAdminCarousel, createCarousel, updateCarousel, deleteCarousel } from "@/api/customizations";
-import { uploadToCloudinary } from "@/lib/uploadToCloudinary";
+import { uploadToCloudinary } from "@/lib/Cloudinary";
 
 interface CarouselItem {
   id: string;

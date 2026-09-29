@@ -13,9 +13,7 @@ import {
 
 import ConfirmationModal from "@/components/shared/modals/ActionsModal";
 import { toast } from "sonner";
-import {
-  deleteCollection,
-} from "@/api/Collections";
+
 import { deleteProduct } from "@/api/products";
 
 interface ProductActionsProps {

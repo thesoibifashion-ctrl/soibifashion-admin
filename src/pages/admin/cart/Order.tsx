@@ -1,14 +1,15 @@
 import ErrorState from "@/components/shared/ErrorState";
 import { useQuery } from "@tanstack/react-query";
-import { useNavigate, useParams } from "react-router-dom";
-import OrderDrawer from "./Drawer";
+import { 
+  // useNavigate,
+   useParams } from "react-router-dom";
 import type { CartOrder } from "@/types";
-import { getAdminCartOrderById } from "@/api/cart";
-import CartOrderDrawer from "./Drawer";
+import { getAdminCartOrderById } from "@/api/requests/cart";
+// import CartOrderDrawer from "./Drawer";
 
 const CartOrderDetailsPage = () => {
   const { id } = useParams<{ id: string }>();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const { data, isLoading, isError } = useQuery({
     queryKey: ["admin-cart-order", id],
@@ -16,7 +17,7 @@ const CartOrderDetailsPage = () => {
     enabled: !!id,
   });
 
-  const order: CartOrder | null = data?.data ?? null;
+  const order: CartOrder | null = data ?? null;
 
   if (isLoading) {
     return (
@@ -41,12 +42,12 @@ const CartOrderDetailsPage = () => {
 
   return (
     <div className="min-h-screen bg-[#FAFAF8]">
-      <CartOrderDrawer
+      {/* <CartOrderDrawer
         order={order}
         onClose={() => navigate("/admin/cart-orders")}
         onUpdate={() => {}}
         isLoading={isLoading}
-      />
+      /> */}
     </div>
   );
 };

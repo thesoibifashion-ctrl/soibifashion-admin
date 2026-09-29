@@ -1,16 +1,15 @@
 "use client";
 
 import FormInput from "@/components/shared/inputs/FormInput";
-import { uploadToCloudinary } from "@/lib/uploadToCloudinary";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useRef, useState } from "react";
-import { apiUpdate } from "@/api/mutation";
 import SuccessModal from "@/components/shared/modals/SuccessModal";
 import { Loader2 } from "lucide-react";
 import { createCollection } from "@/api/Collections";
 import { apiPatch } from "@/api/client";
+import { uploadToCloudinary } from "@/lib/Cloudinary";
 
-const CollectionDrawer = ({ props, onClose }: any) => {
+const CollectionDrawer = ({ props }: any) => {
   const queryClient = useQueryClient();
 
   const [showModal, setShowModal] = useState(false);

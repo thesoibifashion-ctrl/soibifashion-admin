@@ -12,26 +12,24 @@ import {
   Sidebar,
 } from "../../ui/sidebar";
 import { Sheet, SheetContent, SheetTrigger } from "../../ui/sheet";
-import logo from "../../../assets/images/sarah-logo.jpg";
+import logo from "../../../assets/images/soibi.png";
 import { Toaster } from "sonner";
-import { LogOut, Menu, Settings2, SettingsIcon } from "lucide-react";
+import { LogOut, Menu } from "lucide-react";
 
 // Normal state icons
 import usersIcon from "../../../assets/images/users.svg";
 import contentIcon from "../../../assets/images/content.svg";
 import projectIcon from "../../../assets/images/project.svg";
 import researchIcon from "../../../assets/images/research.svg";
-import emailIcon from "../../../assets/images/email.svg";
 
 // Active state images
 import activeIcon1 from "../../../assets/images/1.svg";
 import activeIcon2 from "../../../assets/images/2.svg";
 import activeIcon3 from "../../../assets/images/3.svg";
 import activeIcon4 from "../../../assets/images/4.svg";
-import activeIcon5 from "../../../assets/images/5.svg";
 
 import { useQuery } from "@tanstack/react-query";
-import { getAdminContacts } from "@/api/contact";
+import { getAdminContacts } from "@/api/requests/contact";
 
 const navMain = [
   {
@@ -42,6 +40,12 @@ const navMain = [
         url: "/",
         iconNormal: usersIcon,
         iconActive: activeIcon1,
+      },
+      {
+        title: "Home",
+        url: "/home",
+        iconNormal: projectIcon,
+        iconActive: activeIcon3,
       },
       {
         title: "Collections",
@@ -55,43 +59,45 @@ const navMain = [
         iconNormal: projectIcon,
         iconActive: activeIcon3,
       },
-      {
-        title: "Quotes",
-        url: "/quotes",
-        iconNormal: projectIcon,
-        iconActive: activeIcon3,
-      },
+      // {
+      //   title: "Quotes",
+      //   url: "/quotes",
+      //   iconNormal: projectIcon,
+      //   iconActive: activeIcon3,
+      // },
+    
       {
         title: "Products",
         url: "/products",
         iconNormal: projectIcon,
         iconActive: activeIcon3,
       },
+    
       {
         title: "User Management",
         url: "/user",
         iconNormal: contentIcon,
         iconActive: activeIcon2,
       },
-      {
-        title: "Customizations",
-        url: "/customizations",
-        iconNormal: contentIcon,
-        iconActive: activeIcon2
-      },
-      {
-        title: "Analytics",
-        url: "/analytics",
-        iconNormal: contentIcon,
-        iconActive: activeIcon2
-      },
+      // {
+      //   title: "Customizations",
+      //   url: "/customizations",
+      //   iconNormal: contentIcon,
+      //   iconActive: activeIcon2
+      // },
+      // {
+      //   title: "Analytics",
+      //   url: "/analytics",
+      //   iconNormal: contentIcon,
+      //   iconActive: activeIcon2
+      // },
       {
         title: "Gallery",
         url: "/gallery",
         iconNormal: contentIcon,
         iconActive: activeIcon2
       },
-     
+   
       // {
       //   title: "Newsletter",
       //   url: "/newsletter",
@@ -118,7 +124,7 @@ function NavContent({ onNavigate }: { onNavigate?: () => void }) {
   });
 
   const hasUnreadContact =
-    data?.data?.some(
+    data?.some(
       (contact: { isRead?: boolean }) => contact.isRead === false
     ) ?? false;
 
@@ -128,10 +134,8 @@ function NavContent({ onNavigate }: { onNavigate?: () => void }) {
   return (
     <>
     <div className="flex items-center gap-2 px-4 py-3">
-    <img className="w-14 h-14" src={logo} alt="logo" />
-    <p className="font-semibold text-3xl lg:text-[38px] text-[#002E21]">
-        SBS
-    </p>
+    <img  src={logo} alt="logo" />
+  
   </div>
       <div className="flex-1 pt-10 px-4">
         {navMain.map((group) => (
@@ -226,7 +230,7 @@ export function AppSidebar() {
   });
 
   const hasUnreadContact =
-    data?.data?.some(
+    data?.some(
       (contact: { isRead?: boolean }) => contact.isRead === false
     ) ?? false;
 
@@ -235,20 +239,15 @@ export function AppSidebar() {
 
   return (
     <Sidebar>
-    <SidebarHeader className="bg-[#18120E] pt-10">
+    <SidebarHeader className="bg-[#170a01] pt-10">
     <div className="flex items-center gap-2">
-      <img className="w-10 h-10 rounded-full" src={logo} alt="logo" />
+      <img src={logo} alt="logo" />
      <div>
-     <p className="font-semibold font-display text-3xl lg:text-[16px] text-gold">
-        SIGNATURE
-      </p>
-      <p className="font-semibold text-3xl lg:text-sm font-display text-white">
-        by Sarah
-      </p>
+   
      </div>
     </div>
   </SidebarHeader>
-      <SidebarContent className="bg-[#18120E] pt-10">
+      <SidebarContent className="bg-[#170a01] pt-10">
         {navMain.map((group) => (
           <SidebarGroup key={group.title}>
             <SidebarGroupContent>
@@ -264,7 +263,7 @@ export function AppSidebar() {
                       <SidebarMenuButton
                         asChild
                         isActive={isActive}
-                        className="data-[active=true]:bg-[linear-gradient(135deg,#A67C00_0%,#18120E_100%)] hover:bg-transparent! py-2 mb-4 px-3 rounded-[20px]"
+                        className="data-[active=true]:bg-[linear-gradient(135deg,#170a01_0%,#7B3C10_100%)] hover:bg-transparent! py-2 mb-4 px-3 rounded-[20px]"
                       >
                         <Link
                           to={item.url}
@@ -320,12 +319,12 @@ export function AppSidebar() {
         />
       </SidebarContent>
 
-      <SidebarFooter className="bg-[#18120E]">
-        <SidebarMenu className="bg-[#18120E]">
+      <SidebarFooter className="bg-[#170a01]">
+        <SidebarMenu className="bg-[#170a01]">
           <SidebarMenuItem>
             <SidebarMenuButton
               onClick={handleLogout}
-              className="py-2 px-3 bg-[#18120E] rounded-[20px] text-[#DE0D0D] hover:text-[#DE0D0D] hover:bg-[#FDECEC]"
+              className="py-2 px-3 bg-[#170a01] rounded-[20px] text-[#DE0D0D] hover:text-[#DE0D0D] hover:bg-[#FDECEC]"
             >
               <LogOut size={16} />
               <span className="text-sm font-medium">Log out</span>

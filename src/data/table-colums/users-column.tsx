@@ -82,7 +82,7 @@ export const contactColumn: ColumnDef<ContactForm>[] = [
   {
     accessorKey: "email",
     header: "Email",
-    cell: ({ row }) => truncateText(row.original.email, 12),
+    cell: ({ row }) => truncateText(row.original.email ?? "", 12),
   },
   {
     accessorKey: "phone",
@@ -106,7 +106,7 @@ export const academyColumn: ColumnDef<ContactForm>[] = [
   {
     accessorKey: "email",
     header: "Email",
-    cell: ({ row }) => truncateText(row.original.email, 12),
+    cell: ({ row }) => truncateText(row.original.email ?? "", 12),
   },
   {
     accessorKey: "phone",
@@ -116,7 +116,7 @@ export const academyColumn: ColumnDef<ContactForm>[] = [
   {
     accessorKey: "motivation",
     header: "Motivation",
-    cell: ({ row }) => truncateText(row.original.motivation, 20),
+    cell: ({ row }) => truncateText(row.original.motivation ?? "", 20),
   },
 ];
 

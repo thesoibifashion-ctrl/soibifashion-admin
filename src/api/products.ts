@@ -1,9 +1,12 @@
-import { apiDelete, apiGet, apiPatch, apiPost } from "./client";
 
 /*                                  PUBLIC                                    */
 
+/*                                  PUBLIC                                    */
+import type { Product } from "@/types";
+import { apiDelete, apiGet, apiPatch, apiPost } from "./clients";
+
 export const getProducts = () => {
-  return apiGet("/api/admin/products");
+  return apiGet<Product[]>("/api/admin/products");
 };
 
 export const getFilteredProducts = (query: string) => {

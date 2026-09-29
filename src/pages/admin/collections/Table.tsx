@@ -7,11 +7,10 @@ import { DataTable } from "@/components/shared/table/DataTable";
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import ProjectDrawerContent from "./Drawer";
 import { PlusCircle } from "lucide-react";
-import type { Collection } from "@/types";
 import CollectionDrawer from "./Drawer";
 import { CollectionColun } from "@/data/table-colums/collection-column";
+import type { Collection } from "@/api/requests/collections";
 
 const ProjectTab = () => {
   const [selectedUser, setSelectedUser] = useState<Collection | null>(null);

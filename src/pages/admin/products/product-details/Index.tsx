@@ -18,7 +18,7 @@ import {
   createProductVariant,
   updateProductVariant,
   deleteProductVariant,
-} from "@/api/products";
+} from "@/api/requests/products";
 import { getCollections } from "@/api/Collections";
 import { uploadToCloudinary } from "@/lib/uploadToCloudinary";
 import CollectionsPanel from "./CollectionsPanel";
@@ -26,12 +26,11 @@ import ColorsSection from "./ColorsSection";
 import FlagsPanel from "./FlagsPanel";
 import GeneralInfoSection, { CATEGORIES } from "./GeneralInfoSection";
 import ImagesPanel from "./ImagesPanel";
-import MaterialsSection from "./MaterialsSection";
 import MetadataPanel from "./MetadataPanel";
-import PricingSection from "./PricingSection";
 import SizesSection from "./SizesSection";
 import StatusPanel, { STATUS_OPTIONS } from "./StatusPanel";
 import VariantsSection from "./VariantsSection";
+import type { Product, ProductVariant } from "@/types";
 
 
 const slugify = (value: string) =>
@@ -71,15 +70,7 @@ interface SavedColor {
   hexCode?: string;
 }
 
-interface Variant {
-  id?: string;
-  sizeLabel: string;
-  sizeValue: number | null;
-  sku: string;
-  priceAdjustment: number;
-  colorId: string | null;
-  isAvailable: boolean;
-}
+
 
 const ProductDetailsPages = () => {
   const { id } = useParams<{ id?: string }>();
@@ -96,7 +87,7 @@ const ProductDetailsPages = () => {
 
   const existingProduct = useMemo(() => {
     if (!editing) return null;
-    return (adminProducts?.data ?? []).find((p: any) => p.id === id) ?? null;
+    return (adminProducts ?? []).find((p: any) => p.id === id) ?? null;
   }, [adminProducts, editing, id]);
 
   const [name, setName] = useState("");
@@ -113,7 +104,6 @@ const ProductDetailsPages = () => {
   const [sizes, setSizes] = useState<number[]>([]);
   const [customSize, setCustomSize] = useState("");
   const [materials, setMaterials] = useState<string[]>([]);
-  const [newMaterial, setNewMaterial] = useState("");
   const [colors, setColors] = useState<{ name: string; hex: string }[]>([]);
   const [sortOrder, setSortOrder] = useState<number>(0);
   const [newColorHex, setNewColorHex] = useState("#000000");
@@ -136,7 +126,7 @@ const ProductDetailsPages = () => {
   const [deletingImageId, setDeletingImageId] = useState<string | null>(null);
 
   const [savedColors, setSavedColors] = useState<SavedColor[]>([]);
-  const [variants, setVariants] = useState<Variant[]>([]);
+  const [variants, setVariants] = useState<ProductVariant[]>([]);
   const [variantSavingId, setVariantSavingId] = useState<string | null>(null);
 
   useEffect(() => {
@@ -206,17 +196,17 @@ const ProductDetailsPages = () => {
     setCustomCategory("");
   };
 
-  const addMaterial = () => {
-    const trimmed = newMaterial.trim();
+  // const addMaterial = () => {
+  //   const trimmed = newMaterial.trim();
 
-    if (!trimmed || materials.includes(trimmed)) return;
+  //   if (!trimmed || materials.includes(trimmed)) return;
 
-    setMaterials((prev) => [...prev, trimmed]);
-    setNewMaterial("");
-  };
+  //   setMaterials((prev) => [...prev, trimmed]);
+  //   setNewMaterial("");
+  // };
 
-  const removeMaterial = (name: string) =>
-    setMaterials((prev) => prev.filter((m) => m !== name));
+  // const removeMaterial = (name: string) =>
+  //   setMaterials((prev) => prev.filter((m) => m !== name));
 
   const addColor = () => {
     const colorName = getColorName(newColorHex);
@@ -293,7 +283,7 @@ const ProductDetailsPages = () => {
 
   const updateVariantField = (
     index: number,
-    field: keyof Variant,
+    field: keyof ProductVariant,
     value: any
   ) => {
     setVariants((prev) =>
@@ -382,7 +372,7 @@ const ProductDetailsPages = () => {
         await updateProductVariant(id!, variant.id, payload);
       } else {
         const result = await createProductVariant(id!, payload);
-        const savedVariant = result?.data ?? result;
+        const savedVariant = result
 
         setVariants((prev) =>
           prev.map((v, i) =>
@@ -422,7 +412,7 @@ const ProductDetailsPages = () => {
       const payload = {
         name,
         slug: slugify(name),
-        description:"leather",
+        description: "leather",
         category,
         gender: gender || undefined,
         basePrice: Number(basePrice),
@@ -430,7 +420,7 @@ const ProductDetailsPages = () => {
         isFeatured,
         isHero,
         isCustomizable,
-        sortOrder:sortOrder,
+        sortOrder,
         colors: colors.length > 0 ? colors : undefined,
         materials:
           materials.length > 0
@@ -438,17 +428,17 @@ const ProductDetailsPages = () => {
             : undefined,
         sizes: sizes.length > 0 ? sizes : undefined,
       };
-
+  
       if (editing) {
         const result = await updateProduct(id!, payload);
-        return result?.data ?? result;
+        return result as Product;
       }
-
+  
       const result = await createProduct(payload);
-      return result?.data ?? result;
+      return result as Product;
     },
 
-    onSuccess: async (product) => {
+    onSuccess: async (product:Product) => {
       queryClient.invalidateQueries({
         queryKey: ["admin-products"],
       });
@@ -575,16 +565,16 @@ const ProductDetailsPages = () => {
             onAddColor={addColor}
             getColorName={getColorName}
           />
-
+{/* 
           <MaterialsSection
             materials={materials}
             onRemove={removeMaterial}
             newMaterial={newMaterial}
             onNewMaterialChange={setNewMaterial}
             onAdd={addMaterial}
-          />
+          /> */}
 
-          <PricingSection basePrice={basePrice} onChange={setBasePrice} />
+          {/* <PricingSection basePrice={basePrice} onChange={setBasePrice} /> */}
 
           <VariantsSection
             editing={editing}

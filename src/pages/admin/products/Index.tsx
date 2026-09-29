@@ -7,27 +7,26 @@ import { PlusCircle } from "lucide-react";
 import EmptyState from "@/components/shared/EmptyState";
 import ErrorState from "@/components/shared/ErrorState";
 import EmptySearch from "@/components/shared/EmptySearch";
-import { getProducts } from "@/api/products";
 import { useClientPagination } from "@/hooks/useClientPagination";
 import type { Product } from "@/types";
 import { ProductColumn } from "@/data/table-colums/product-column";
 import { PageHeader } from "@/components/shared/PageHeader";
 import { useNavigate } from "react-router-dom";
+import { getProducts } from "@/api/requests/products";
 
 const ProductsPage = () => {
   const [search, setSearch] = useState("");
   const navigate = useNavigate();
 
   const { data, isLoading, isError } = useQuery({
-    queryKey: ["products"],
+    queryKey: ["admin-products"],
     queryFn: getProducts,
     staleTime: 1000 * 60 * 5,
     placeholderData:
       search.length > 0 ? (previousData) => previousData : undefined,
   });
 
-  const products = data?.data ?? [];
-
+  const products = data ?? [];
   const filteredProducts = products.filter((product: Product) => {
     if (!search.trim()) return true;
 
@@ -55,9 +54,6 @@ const ProductsPage = () => {
     return <ErrorState />;
   }
 
-  if (!data) {
-    return <ErrorState />;
-  }
 
   return (
     <div className="space-y-6 mt-10">
@@ -82,7 +78,7 @@ const ProductsPage = () => {
       {products.length === 0 ? (
         <EmptyState text={""}        >
           <button
-            onClick={() => navigate("/products/new")}
+            onClick={() => navigate("/products-details")}
             className="px-4 py-1 mt-2 bg-near-brown rounded-[20px] text-white flex items-center gap-2"
           >
             <PlusCircle size={18} />

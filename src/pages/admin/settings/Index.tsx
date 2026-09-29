@@ -14,7 +14,6 @@ import { toast } from "sonner";
 
 import { getAdminSettings, updateAdminSetting } from "@/api/settings";
 import { PageHeader } from "@/components/shared/PageHeader";
-import { SkeletonTable } from "@/components/shared/skeleton";
 import SettingsSkeleton from "./Skeleton";
 
 type SettingValue = string | boolean | null;

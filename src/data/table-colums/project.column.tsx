@@ -1,11 +1,6 @@
-import { Badge } from "@/components/shared/Badge";
-import { statusBadge } from "@/lib/utils/statusBadge";
 import { truncateText } from "@/lib/utils/truncateText";
-import ProjectActions from "@/pages/admin/quotes/Actions";
 import type { Product } from "@/types";
-import type { statusType } from "@/types/status";
 import type { ColumnDef } from "@tanstack/react-table";
-import { Sparkles } from "lucide-react";
 
 
 export const ProjectColumn: ColumnDef<Product>[] = [
@@ -29,7 +24,7 @@ export const ProjectColumn: ColumnDef<Product>[] = [
   {
     accessorKey: "description",
     header: "Description",
-    cell: ({ row }) => truncateText(row.original.description, 20),
+    cell: ({ row }) => truncateText(row.original.description ?? "", 20),
   },
 
   // {
@@ -59,23 +54,22 @@ export const ProjectColumn: ColumnDef<Product>[] = [
     cell: ({ row }) => (row.original.basePrice || 0),
 
   },
-  {
-    accessorKey: "status",
-    header: "Status",
-    cell: ({ row }) => <span className="flex items-center gap-1"><Badge variant={row.original.status}>{row.original.status}</Badge></span>,
+  // {
+  //   accessorKey: "status",
+  //   header: "Status",
+  //   cell: ({ row }) => <span className="flex items-center gap-1"><Badge variant={row.original.status}>{row.original.status}</Badge></span>,
 
-    // cell: ({ row }) => getStatus(row.original.status ?? "draft"),
-  },
-  {
-    id: "actions",
-    header: "",
-    cell: ({ row }) => (
-      <div onClick={(e) => e.stopPropagation()}>
-        <ProjectActions
-          status={row.original.status}
-          projectId={row.original.id}
-        />
-      </div>
-    ),
-  },
+  // },
+  // {
+  //   id: "actions",
+  //   header: "",
+  //   cell: ({ row }) => (
+  //     <div onClick={(e) => e.stopPropagation()}>
+  //       <ProjectActions
+  //         status={row.original.status}
+  //         projectId={row.original.id}
+  //       />
+  //     </div>
+  //   ),
+  // },
 ];

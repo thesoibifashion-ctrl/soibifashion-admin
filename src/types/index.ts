@@ -2,37 +2,131 @@ export interface Product {
   id: string;
   name: string;
   slug: string;
-  description: string;
+  description?: string;
   shortDescription?: string;
-
-  basePrice: number;
+  sortOrder?:number;
+  basePrice?: number;
   salePrice?: number | null;
-isHero: boolean;
-sizes: number[];
+isHero?: boolean;
+sizes?: number[];
   isFeatured?: boolean;
-  isNewArrival: boolean;
-  isBestSeller: boolean;
+  isNewArrival?: boolean;
+  isBestSeller?: boolean;
   isCustomizable?: boolean;
-  gender: "male" | "female" | "unisex";
-  status: "published" | "draft";
+  gender?: "male" | "female" | "unisex";
+  status?: "published" | "draft";
   images?: ProductImage[];
   collections?: Collection[];
-  variants: ProductVariant[];
+  variants?: ProductVariant[];
   category?:string;
-  materials: {
+  materials?: {
     id?: string;
     name: string;
   }[];
 
   colors: {
-    id?: string;
+    id: string;
     name: string;
     hex?: string;
     hexCode?:string;
   }[];
 
-  createdAt: string;
-  updatedAt: string;
+  createdAt?: string;
+  updatedAt?: string;
+}
+export interface CreateProductPayload {
+  name: string;
+  slug: string;
+  description?: string;
+  shortDescription?: string;
+  sortOrder?: number;
+  basePrice?: number;
+  salePrice?: number | null;
+  isHero?: boolean;
+  sizes?: number[];
+  isFeatured?: boolean;
+  isNewArrival?: boolean;
+  isBestSeller?: boolean;
+  isCustomizable?: boolean;
+  gender?: "male" | "female" | "unisex";
+  status?: "published" | "draft";
+  prices?: ProductPriceResponse[];
+  images?: ProductImage[];
+  collections?: Collection[];
+  variants?: ProductVariant[];
+  category?: string;
+  measurements?: ProductMeasurement[];
+
+  materials?: {
+    id?: string;
+    name: string;
+  }[];
+
+  
+
+  colors: {
+    id?: string;
+    name: string;
+    hex?: string;
+    hexCode?: string;
+  }[];
+}
+export interface Measurement {
+  id: string;
+  title: string;
+  imageUrl: string;
+}
+
+export interface ProductMeasurement {
+  id?: string;
+  measurementId: string;
+  title?: string;
+  value: string;
+  imageUrl?: string;
+  sortOrder: number;
+}
+
+export interface ProductPrice {
+  currencyId: string;
+  amount: number;
+}
+
+export interface ProductPriceResponse {
+  currencyId: string;
+  currency: string;
+  name: string;
+  symbol: string;
+  amount: number;
+}
+
+export interface Currency {
+  id: string;
+  code: string;
+  name: string;
+  symbol: string;
+  isDefault: boolean;
+  isActive: boolean;
+}
+export interface ProductPrice {
+  currencyId: string;
+  amount: number;
+}
+
+export interface ProductPriceResponse {
+  currencyId: string;
+  currency: string;
+  name: string;
+  symbol: string;
+  amount: number;
+}
+
+export interface Currency {
+  id: string;
+  code: string;
+  name: string;
+  symbol: string;
+  isDefault: boolean;
+  isActive: boolean;
 }
 
 export interface ProductImage {
@@ -45,14 +139,15 @@ export interface ProductImage {
 }
 
 export interface ProductVariant {
-  id: string;
-  sizeLabel: string;
-  sizeValue: number;
-  sku: string;
-  priceAdjustment: number;
-  color: Color;
-  isAvailable: boolean;
-  sortOrder: number;
+  id?: string;
+  sizeLabel?: string;
+  sizeValue?: number | null;
+  sku?: string;
+  priceAdjustment?: number;
+  color?: Color;
+  colorId?:string | null
+  isAvailable?: boolean;
+  sortOrder?: number;
 }
 
 export interface Collection {
@@ -328,3 +423,17 @@ status: "active" | "inactive";
 sortOrder: number;
 options: CustomizationOption[];
 };
+
+export type GalleryCategory = "workshop" | "craftsmanship" | "completed_work";
+
+export type GalleryImage = {
+  id: string;
+  title: string;
+  imageUrl: string;
+  imagePublicId: string;
+  category: GalleryCategory;
+  sortOrder: number;
+  isPublished: boolean;
+  createdAt?: string;
+};
+

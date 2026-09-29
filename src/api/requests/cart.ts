@@ -1,12 +1,13 @@
-import { apiGet, apiPatch } from "./client";
+import type { CartOrder } from "@/types";
+import { apiGet, apiPatch } from "../clients";
 
 
 export const getAdminCartOrders = (query?: string) => {
-  return apiGet(`/api/admin/cart/history${query ? `?${query}` : ""}`);
+  return apiGet<CartOrder[]>(`/api/admin/cart/history${query ? `?${query}` : ""}`);
 };
 
 export const getAdminCartOrderById = (id: string) => {
-  return apiGet(`/api/admin/cart/history/${id}`);
+  return apiGet<CartOrder>(`/api/admin/cart/history/${id}`);
 };
 
 export const updateAdminCartOrderStatus = (

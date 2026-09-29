@@ -20,10 +20,10 @@ export const CartOrderColumns: ColumnDef<CartOrder>[] = [
     cell: ({ row }) => (
       <div>
         <p className="font-medium">
-          {truncateText(row.original.customer?.name || "—", 24)}
+          {truncateText(row.original.customerName || "—", 24)}
         </p>
         <p className="text-xs text-[#78716C] mt-0.5">
-          {truncateText(row.original.customer?.email || "—", 28)}
+          {truncateText(row.original.customerEmail || "—", 28)}
         </p>
       </div>
     ),

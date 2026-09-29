@@ -27,10 +27,24 @@ const badgeStyles: Record<BadgeVariant, string> = {
   neutral: 'bg-stone-100 text-stone-600 border-stone-200',
 }
 
-export function Badge({ variant, children, className }: { variant: BadgeVariant; children: ReactNode; className?: string }) {
+export function Badge({
+  variant,
+  children,
+  className,
+}: {
+  variant?: BadgeVariant;
+  children: ReactNode;
+  className?: string;
+}) {
   return (
-    <span className={cn('inline-flex items-center px-2 py-0.5 rounded-md text-xs font-medium border', badgeStyles[variant], className)}>
+    <span
+      className={cn(
+        "inline-flex items-center px-2 py-0.5 rounded-md text-xs font-medium border",
+        badgeStyles[variant ?? "neutral"] ?? badgeStyles.neutral,
+        className
+      )}
+    >
       {children}
     </span>
-  )
+  );
 }

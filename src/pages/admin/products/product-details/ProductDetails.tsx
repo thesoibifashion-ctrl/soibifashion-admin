@@ -3,26 +3,48 @@
 import { useEffect, useMemo, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { Check, Plus, Star, Trash2, Upload, X, ArrowLeft, Loader2 } from "lucide-react";
+import {
+  Check,
+  Plus,
+  Star,
+  Trash2,
+  Upload,
+  X,
+  ArrowLeft,
+  Loader2,
+} from "lucide-react";
 
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
 
-import {
-  createProduct,
-  updateProduct,
-  getAdminProducts,
-  addProductImage,
-  deleteProductImage,
-  assignProductToCollection,
-  removeProductFromCollection,
-  createProductVariant,
-  updateProductVariant,
-  deleteProductVariant,
-} from "@/api/products";
+// import {
+//   createProduct,
+//   updateProduct,
+//   getAdminProducts,
+//   addProductImage,
+//   deleteProductImage,
+//   assignProductToCollection,
+//   removeProductFromCollection,
+//   createProductVariant,
+//   updateProductVariant,
+//   deleteProductVariant,
+// } from "@/api/products";
 import { getCollections } from "@/api/Collections";
 import { uploadToCloudinary } from "@/lib/uploadToCloudinary";
+import {
+  addProductImage,
+  assignProductToCollection,
+  createProduct,
+  createProductVariant,
+  deleteProductImage,
+  deleteProductVariant,
+  getAdminProducts,
+  removeProductFromCollection,
+  updateProduct,
+  updateProductVariant,
+} from "@/api/requests/products";
+import type { Product } from "@/types";
 
 const CATEGORIES = ["Shoes", "Bags", "Belts", "Wallets", "Accessories"];
 const GENDERS = ["male", "female", "unisex"];
@@ -101,7 +123,7 @@ const ProductFormPage = () => {
 
   const existingProduct = useMemo(() => {
     if (!editing) return null;
-    return (adminProducts?.data ?? []).find((p: any) => p.id === id) ?? null;
+    return (adminProducts ?? []).find((p: any) => p.id === id) ?? null;
   }, [adminProducts, editing, id]);
 
   // ── General info ────────────────────────────────────────────────
@@ -111,7 +133,8 @@ const ProductFormPage = () => {
   const [customCategory, setCustomCategory] = useState("");
   const [gender, setGender] = useState("");
   const [basePrice, setBasePrice] = useState<number>(0);
-  const [status, setStatus] = useState<(typeof STATUS_OPTIONS)[number]>("draft");
+  const [status, setStatus] =
+    useState<(typeof STATUS_OPTIONS)[number]>("draft");
   const [isFeatured, setIsFeatured] = useState(false);
   const [isHero, setIsHero] = useState(false);
   const [isCustomizable, setIsCustomizable] = useState(false);
@@ -130,7 +153,9 @@ const ProductFormPage = () => {
   });
 
   const [selectedCollections, setSelectedCollections] = useState<string[]>([]);
-  const [collectionLoadingId, setCollectionLoadingId] = useState<string | null>(null);
+  const [collectionLoadingId, setCollectionLoadingId] = useState<string | null>(
+    null
+  );
 
   // ── Images ──────────────────────────────────────────────────────
   const [savedImages, setSavedImages] = useState<SavedImage[]>([]);
@@ -158,7 +183,9 @@ const ProductFormPage = () => {
     setSizes(existingProduct.sizes ?? []);
     setMaterials((existingProduct.materials ?? []).map((m: any) => m.name));
     setSavedColors(existingProduct.colors ?? []);
-    setSelectedCollections((existingProduct.collections ?? []).map((c: any) => c.id));
+    setSelectedCollections(
+      (existingProduct.collections ?? []).map((c: any) => c.id)
+    );
     setSavedImages(existingProduct.images ?? []);
     setVariants(
       (existingProduct.variants ?? []).map((v: any) => ({
@@ -175,12 +202,22 @@ const ProductFormPage = () => {
 
   // ── Toggles ─────────────────────────────────────────────────────
   const toggleSize = (size: number) => {
-    setSizes((prev) => (prev.includes(size) ? prev.filter((s) => s !== size) : [...prev, size].sort((a, b) => a - b)));
+    setSizes((prev) =>
+      prev.includes(size)
+        ? prev.filter((s) => s !== size)
+        : [...prev, size].sort((a, b) => a - b)
+    );
   };
 
   const addCustomSize = () => {
     const value = Number(customSize);
-    if (!customSize.trim() || Number.isNaN(value) || value <= 0 || sizes.includes(value)) return;
+    if (
+      !customSize.trim() ||
+      Number.isNaN(value) ||
+      value <= 0 ||
+      sizes.includes(value)
+    )
+      return;
     setSizes((prev) => [...prev, value].sort((a, b) => a - b));
     setCustomSize("");
   };
@@ -199,7 +236,8 @@ const ProductFormPage = () => {
     setNewMaterial("");
   };
 
-  const removeMaterial = (name: string) => setMaterials((prev) => prev.filter((m) => m !== name));
+  const removeMaterial = (name: string) =>
+    setMaterials((prev) => prev.filter((m) => m !== name));
 
   const addColor = () => {
     const colorName = getColorName(newColorHex);
@@ -208,7 +246,8 @@ const ProductFormPage = () => {
     setNewColorHex("#000000");
   };
 
-  const removeColor = (name: string) => setColors((prev) => prev.filter((c) => c.name !== name));
+  const removeColor = (name: string) =>
+    setColors((prev) => prev.filter((c) => c.name !== name));
 
   const handleImagesSelected = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = Array.from(e.target.files ?? []);
@@ -218,7 +257,8 @@ const ProductFormPage = () => {
       file,
       previewUrl: URL.createObjectURL(file),
       altText: file.name.replace(/\.[^.]+$/, "").replace(/-/g, " "),
-      isPrimary: savedImages.length === 0 && pendingImages.length === 0 && i === 0,
+      isPrimary:
+        savedImages.length === 0 && pendingImages.length === 0 && i === 0,
     }));
 
     setPendingImages((prev) => [...prev, ...newImgs]);
@@ -230,22 +270,39 @@ const ProductFormPage = () => {
   };
 
   const setPendingPrimary = (index: number) => {
-    setPendingImages((prev) => prev.map((img, i) => ({ ...img, isPrimary: i === index })));
+    setPendingImages((prev) =>
+      prev.map((img, i) => ({ ...img, isPrimary: i === index }))
+    );
   };
 
   const updatePendingAlt = (index: number, altText: string) => {
-    setPendingImages((prev) => prev.map((img, i) => (i === index ? { ...img, altText } : img)));
+    setPendingImages((prev) =>
+      prev.map((img, i) => (i === index ? { ...img, altText } : img))
+    );
   };
 
   const addVariant = () => {
     setVariants((prev) => [
       ...prev,
-      { sizeLabel: "", sizeValue: null, sku: "", priceAdjustment: 0, colorId: null, isAvailable: true },
+      {
+        sizeLabel: "",
+        sizeValue: null,
+        sku: "",
+        priceAdjustment: 0,
+        colorId: null,
+        isAvailable: true,
+      },
     ]);
   };
 
-  const updateVariantField = (index: number, field: keyof Variant, value: any) => {
-    setVariants((prev) => prev.map((v, i) => (i === index ? { ...v, [field]: value } : v)));
+  const updateVariantField = (
+    index: number,
+    field: keyof Variant,
+    value: any
+  ) => {
+    setVariants((prev) =>
+      prev.map((v, i) => (i === index ? { ...v, [field]: value } : v))
+    );
   };
 
   // ── Collection toggle (immediate when editing, staged when creating) ──
@@ -254,7 +311,9 @@ const ProductFormPage = () => {
 
     if (!editing) {
       setSelectedCollections((prev) =>
-        isSelected ? prev.filter((x) => x !== collectionId) : [...prev, collectionId]
+        isSelected
+          ? prev.filter((x) => x !== collectionId)
+          : [...prev, collectionId]
       );
       return;
     }
@@ -264,7 +323,9 @@ const ProductFormPage = () => {
     try {
       if (isSelected) {
         await removeProductFromCollection(id!, collectionId);
-        setSelectedCollections((prev) => prev.filter((x) => x !== collectionId));
+        setSelectedCollections((prev) =>
+          prev.filter((x) => x !== collectionId)
+        );
       } else {
         await assignProductToCollection(id!, { collectionId });
         setSelectedCollections((prev) => [...prev, collectionId]);
@@ -308,8 +369,10 @@ const ProductFormPage = () => {
         await updateProductVariant(id!, variant.id, payload);
       } else {
         const result = await createProductVariant(id!, payload);
-        const savedVariant = result?.data ?? result;
-        setVariants((prev) => prev.map((v, i) => (i === index ? { ...v, id: savedVariant?.id } : v)));
+        const savedVariant = result;
+        setVariants((prev) =>
+          prev.map((v, i) => (i === index ? { ...v, id: savedVariant?.id } : v))
+        );
       }
       queryClient.invalidateQueries({ queryKey: ["admin-products"] });
     } finally {
@@ -330,7 +393,7 @@ const ProductFormPage = () => {
 
   // ── Save (create or update the product itself) ─────────────────
   const { mutate: saveProduct, isPending: isSaving } = useMutation({
-    mutationFn: async (nextStatus: typeof status) => {
+    mutationFn: async (nextStatus: string) => {
       const payload = {
         name,
         slug: slugify(name),
@@ -343,20 +406,24 @@ const ProductFormPage = () => {
         isHero,
         isCustomizable,
         colors: colors.length > 0 ? colors : undefined,
-        materials: materials.length > 0 ? materials.map((n) => ({ name: n })) : undefined,
+        materials:
+          materials.length > 0
+            ? materials.map((n) => ({ name: n }))
+            : undefined,
         sizes: sizes.length > 0 ? sizes : undefined,
       };
-
+  
       if (editing) {
         const result = await updateProduct(id!, payload);
-        return result?.data ?? result;
+        return result as Product;
       }
-
+  
       const result = await createProduct(payload);
-      return result?.data ?? result;
+      return result as Product;
     },
+  
 
-    onSuccess: async (product) => {
+    onSuccess: async (product: Product) => {
       queryClient.invalidateQueries({ queryKey: ["admin-products"] });
 
       const productId = product?.id ?? id;
@@ -405,10 +472,16 @@ const ProductFormPage = () => {
   });
 
   if (editing && productsLoading) {
-    return <div className="p-10 text-center text-sm text-gray-500">Loading product...</div>;
+    return (
+      <div className="p-10 text-center text-sm text-gray-500">
+        Loading product...
+      </div>
+    );
   }
 
-  const allSizes = Array.from(new Set([...EU_SIZES, ...sizes])).sort((a, b) => a - b);
+  const allSizes = Array.from(new Set([...EU_SIZES, ...sizes])).sort(
+    (a, b) => a - b
+  );
   const showCurrentCategoryAsExtra = category && !CATEGORIES.includes(category);
 
   return (
@@ -434,7 +507,11 @@ const ProductFormPage = () => {
             disabled={isSaving || !name.trim()}
             onClick={() => saveProduct("draft")}
           >
-            {isSaving ? <Loader2 className="animate-spin" size={16} /> : "Save Draft"}
+            {isSaving ? (
+              <Loader2 className="animate-spin" size={16} />
+            ) : (
+              "Save Draft"
+            )}
           </Button>
 
           <Button
@@ -442,7 +519,13 @@ const ProductFormPage = () => {
             onClick={() => saveProduct("published")}
             className="bg-[green] hover:bg-[#b99220]"
           >
-            {isSaving ? <Loader2 className="animate-spin" size={16} /> : <><Check size={14} className="mr-1" /> Publish</>}
+            {isSaving ? (
+              <Loader2 className="animate-spin" size={16} />
+            ) : (
+              <>
+                <Check size={14} className="mr-1" /> Publish
+              </>
+            )}
           </Button>
         </div>
       </div>
@@ -452,23 +535,39 @@ const ProductFormPage = () => {
         <div className="flex-1 space-y-6">
           {/* General Info */}
           <section className="rounded-2xl border bg-white p-6">
-            <h2 className="mb-4 font-semibold text-near-brown">General Information</h2>
+            <h2 className="mb-4 font-semibold text-near-brown">
+              General Information
+            </h2>
 
             <div className="space-y-4">
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="mb-1.5 block text-sm font-medium text-gray-700">Product Name</label>
-                  <Input value={name} onChange={(e) => setName(e.target.value)} placeholder="Classic Brown Leather Loafer" />
+                  <label className="mb-1.5 block text-sm font-medium text-gray-700">
+                    Product Name
+                  </label>
+                  <Input
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    placeholder="Classic Brown Leather Loafer"
+                  />
                 </div>
 
                 <div>
-                  <label className="mb-1.5 block text-sm font-medium text-gray-700">Slug</label>
-                  <Input value={slugify(name)} disabled className="bg-gray-50 text-gray-500" />
+                  <label className="mb-1.5 block text-sm font-medium text-gray-700">
+                    Slug
+                  </label>
+                  <Input
+                    value={slugify(name)}
+                    disabled
+                    className="bg-gray-50 text-gray-500"
+                  />
                 </div>
               </div>
 
               <div>
-                <label className="mb-1.5 block text-sm font-medium text-gray-700">Description</label>
+                <label className="mb-1.5 block text-sm font-medium text-gray-700">
+                  Description
+                </label>
                 <textarea
                   rows={4}
                   value={description}
@@ -480,7 +579,9 @@ const ProductFormPage = () => {
 
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="mb-1.5 block text-sm font-medium text-gray-700">Category</label>
+                  <label className="mb-1.5 block text-sm font-medium text-gray-700">
+                    Category
+                  </label>
 
                   <div className="flex flex-wrap gap-2">
                     {CATEGORIES.map((c) => (
@@ -489,7 +590,9 @@ const ProductFormPage = () => {
                         type="button"
                         onClick={() => setCategory(c)}
                         className={`rounded-xl border px-3.5 py-2 text-sm font-medium ${
-                          category === c ? "border-near-brown bg-near-brown text-white" : "hover:border-[#C9A227]"
+                          category === c
+                            ? "border-near-brown bg-near-brown text-white"
+                            : "hover:border-[#C9A227]"
                         }`}
                       >
                         {c}
@@ -519,14 +622,21 @@ const ProductFormPage = () => {
                       }}
                       className="h-9"
                     />
-                    <Button type="button" variant="outline" size="sm" onClick={addCustomCategory}>
+                    <Button
+                      type="button"
+                      variant="outline"
+                      size="sm"
+                      onClick={addCustomCategory}
+                    >
                       <Plus size={14} />
                     </Button>
                   </div>
                 </div>
 
                 <div>
-                  <label className="mb-1.5 block text-sm font-medium text-gray-700">Gender</label>
+                  <label className="mb-1.5 block text-sm font-medium text-gray-700">
+                    Gender
+                  </label>
                   <div className="flex flex-wrap gap-2">
                     {GENDERS.map((g) => (
                       <button
@@ -534,7 +644,9 @@ const ProductFormPage = () => {
                         type="button"
                         onClick={() => setGender(gender === g ? "" : g)}
                         className={`rounded-xl border px-3.5 py-2 text-sm font-medium capitalize ${
-                          gender === g ? "border-near-brown bg-near-brown text-white" : "hover:border-[#C9A227]"
+                          gender === g
+                            ? "border-near-brown bg-near-brown text-white"
+                            : "hover:border-[#C9A227]"
                         }`}
                       >
                         {g}
@@ -548,7 +660,9 @@ const ProductFormPage = () => {
 
           {/* Sizes */}
           <section className="rounded-2xl border bg-white p-6">
-            <h2 className="mb-4 font-semibold text-near-brown">Available Sizes (EU)</h2>
+            <h2 className="mb-4 font-semibold text-near-brown">
+              Available Sizes (EU)
+            </h2>
 
             <div className="flex flex-wrap gap-2">
               {allSizes.map((size) => {
@@ -559,7 +673,9 @@ const ProductFormPage = () => {
                     type="button"
                     onClick={() => toggleSize(size)}
                     className={`h-12 w-12 rounded-xl border text-sm font-semibold ${
-                      active ? "border-near-brown bg-near-brown text-white" : "hover:border-[#C9A227]"
+                      active
+                        ? "border-near-brown bg-near-brown text-white"
+                        : "hover:border-[#C9A227]"
                     }`}
                   >
                     {size}
@@ -594,8 +710,14 @@ const ProductFormPage = () => {
             {editing && savedColors.length > 0 && (
               <div className="mb-4 flex flex-wrap gap-2">
                 {savedColors.map((c) => (
-                  <span key={c.id} className="flex items-center gap-2 rounded-full border px-3 py-1.5 text-sm">
-                    <span className="h-3.5 w-3.5 rounded-full border" style={{ backgroundColor: c.hex ?? c.hexCode }} />
+                  <span
+                    key={c.id}
+                    className="flex items-center gap-2 rounded-full border px-3 py-1.5 text-sm"
+                  >
+                    <span
+                      className="h-3.5 w-3.5 rounded-full border"
+                      style={{ backgroundColor: c.hex ?? c.hexCode }}
+                    />
                     {c.name}
                   </span>
                 ))}
@@ -604,10 +726,20 @@ const ProductFormPage = () => {
 
             <div className="flex flex-wrap gap-2">
               {colors.map((c) => (
-                <span key={c.name} className="flex items-center gap-2 rounded-full border border-[#C9A227] bg-[#C9A227]/10 px-3 py-1.5 text-sm">
-                  <span className="h-3.5 w-3.5 rounded-full border" style={{ backgroundColor: c.hex }} />
+                <span
+                  key={c.name}
+                  className="flex items-center gap-2 rounded-full border border-[#C9A227] bg-[#C9A227]/10 px-3 py-1.5 text-sm"
+                >
+                  <span
+                    className="h-3.5 w-3.5 rounded-full border"
+                    style={{ backgroundColor: c.hex }}
+                  />
                   {c.name}
-                  <button type="button" onClick={() => removeColor(c.name)} className="text-[#C9A227] hover:text-red-600">
+                  <button
+                    type="button"
+                    onClick={() => removeColor(c.name)}
+                    className="text-[#C9A227] hover:text-red-600"
+                  >
                     <X size={13} />
                   </button>
                 </span>
@@ -621,7 +753,9 @@ const ProductFormPage = () => {
                 onChange={(e) => setNewColorHex(e.target.value)}
                 className="h-10 w-10 cursor-pointer rounded-md border p-1"
               />
-              <span className="flex-1 text-sm text-gray-500">{getColorName(newColorHex)}</span>
+              <span className="flex-1 text-sm text-gray-500">
+                {getColorName(newColorHex)}
+              </span>
               <Button type="button" onClick={addColor} variant="outline">
                 <Plus size={16} /> Add Color
               </Button>
@@ -634,9 +768,16 @@ const ProductFormPage = () => {
 
             <div className="mb-4 flex flex-wrap gap-2">
               {materials.map((m) => (
-                <span key={m} className="flex items-center gap-2 rounded-xl border px-3.5 py-2 text-sm">
+                <span
+                  key={m}
+                  className="flex items-center gap-2 rounded-xl border px-3.5 py-2 text-sm"
+                >
                   {m}
-                  <button type="button" onClick={() => removeMaterial(m)} className="text-gray-400 hover:text-red-600">
+                  <button
+                    type="button"
+                    onClick={() => removeMaterial(m)}
+                    className="text-gray-400 hover:text-red-600"
+                  >
                     <X size={13} />
                   </button>
                 </span>
@@ -655,7 +796,11 @@ const ProductFormPage = () => {
                   }
                 }}
               />
-              <Button type="button" onClick={addMaterial} className="bg-[#C9A227] hover:bg-[#b99220]">
+              <Button
+                type="button"
+                onClick={addMaterial}
+                className="bg-[#C9A227] hover:bg-[#b99220]"
+              >
                 <Plus size={18} />
               </Button>
             </div>
@@ -666,7 +811,9 @@ const ProductFormPage = () => {
             <h2 className="mb-4 font-semibold text-near-brown">Pricing</h2>
 
             <div className="max-w-xs">
-              <label className="mb-1.5 block text-sm font-medium text-gray-700">Base Price (₦)</label>
+              <label className="mb-1.5 block text-sm font-medium text-gray-700">
+                Base Price (₦)
+              </label>
               <Input
                 type="number"
                 value={basePrice || ""}
@@ -680,7 +827,12 @@ const ProductFormPage = () => {
           <section className="rounded-2xl border bg-white p-6">
             <div className="mb-4 flex items-center justify-between">
               <h2 className="font-semibold text-near-brown">Variants</h2>
-              <Button type="button" variant="outline" size="sm" onClick={addVariant}>
+              <Button
+                type="button"
+                variant="outline"
+                size="sm"
+                onClick={addVariant}
+              >
                 <Plus size={14} /> Add Variant
               </Button>
             </div>
@@ -692,8 +844,19 @@ const ProductFormPage = () => {
                 <table className="w-full text-sm">
                   <thead>
                     <tr className="border-b bg-gray-50">
-                      {["Size Label", "Size", "SKU", "Color", "Price Adj.", "Available", ""].map((h) => (
-                        <th key={h} className="px-3 py-2 text-left text-xs font-semibold uppercase text-gray-500">
+                      {[
+                        "Size Label",
+                        "Size",
+                        "SKU",
+                        "Color",
+                        "Price Adj.",
+                        "Available",
+                        "",
+                      ].map((h) => (
+                        <th
+                          key={h}
+                          className="px-3 py-2 text-left text-xs font-semibold uppercase text-gray-500"
+                        >
                           {h}
                         </th>
                       ))}
@@ -702,11 +865,16 @@ const ProductFormPage = () => {
 
                   <tbody>
                     {variants.map((v, i) => (
-                      <tr key={v.id ?? `new-${i}`} className="border-b last:border-b-0">
+                      <tr
+                        key={v.id ?? `new-${i}`}
+                        className="border-b last:border-b-0"
+                      >
                         <td className="px-3 py-2">
                           <Input
                             value={v.sizeLabel}
-                            onChange={(e) => updateVariantField(i, "sizeLabel", e.target.value)}
+                            onChange={(e) =>
+                              updateVariantField(i, "sizeLabel", e.target.value)
+                            }
                             className="h-8 w-20"
                           />
                         </td>
@@ -714,21 +882,35 @@ const ProductFormPage = () => {
                           <Input
                             type="number"
                             value={v.sizeValue ?? ""}
-                            onChange={(e) => updateVariantField(i, "sizeValue", e.target.value ? Number(e.target.value) : null)}
+                            onChange={(e) =>
+                              updateVariantField(
+                                i,
+                                "sizeValue",
+                                e.target.value ? Number(e.target.value) : null
+                              )
+                            }
                             className="h-8 w-16"
                           />
                         </td>
                         <td className="px-3 py-2">
                           <Input
                             value={v.sku}
-                            onChange={(e) => updateVariantField(i, "sku", e.target.value)}
+                            onChange={(e) =>
+                              updateVariantField(i, "sku", e.target.value)
+                            }
                             className="h-8 w-28"
                           />
                         </td>
                         <td className="px-3 py-2">
                           <select
                             value={v.colorId ?? ""}
-                            onChange={(e) => updateVariantField(i, "colorId", e.target.value || null)}
+                            onChange={(e) =>
+                              updateVariantField(
+                                i,
+                                "colorId",
+                                e.target.value || null
+                              )
+                            }
                             className="h-8 rounded-lg border px-2 text-sm"
                           >
                             <option value="">—</option>
@@ -743,16 +925,30 @@ const ProductFormPage = () => {
                           <Input
                             type="number"
                             value={v.priceAdjustment}
-                            onChange={(e) => updateVariantField(i, "priceAdjustment", Number(e.target.value))}
+                            onChange={(e) =>
+                              updateVariantField(
+                                i,
+                                "priceAdjustment",
+                                Number(e.target.value)
+                              )
+                            }
                             className="h-8 w-24"
                           />
                         </td>
                         <td className="px-3 py-2">
                           <button
                             type="button"
-                            onClick={() => updateVariantField(i, "isAvailable", !v.isAvailable)}
+                            onClick={() =>
+                              updateVariantField(
+                                i,
+                                "isAvailable",
+                                !v.isAvailable
+                              )
+                            }
                             className={`flex h-8 w-8 items-center justify-center rounded-lg border ${
-                              v.isAvailable ? "border-green-300 bg-green-50 text-green-600" : "border-gray-200 bg-gray-100 text-gray-400"
+                              v.isAvailable
+                                ? "border-green-300 bg-green-50 text-green-600"
+                                : "border-gray-200 bg-gray-100 text-gray-400"
                             }`}
                           >
                             <Check size={14} />
@@ -763,13 +959,23 @@ const ProductFormPage = () => {
                             <button
                               type="button"
                               onClick={() => handleSaveVariant(i)}
-                              disabled={variantSavingId === (v.id ?? `new-${i}`)}
+                              disabled={
+                                variantSavingId === (v.id ?? `new-${i}`)
+                              }
                               className="text-xs font-semibold text-[#C9A227] hover:underline"
                             >
-                              {variantSavingId === (v.id ?? `new-${i}`) ? <Loader2 size={14} className="animate-spin" /> : "Save"}
+                              {variantSavingId === (v.id ?? `new-${i}`) ? (
+                                <Loader2 size={14} className="animate-spin" />
+                              ) : (
+                                "Save"
+                              )}
                             </button>
                           )}
-                          <button type="button" onClick={() => handleRemoveVariant(i)} className="text-gray-400 hover:text-red-500">
+                          <button
+                            type="button"
+                            onClick={() => handleRemoveVariant(i)}
+                            className="text-gray-400 hover:text-red-500"
+                          >
                             <X size={14} />
                           </button>
                         </td>
@@ -781,7 +987,9 @@ const ProductFormPage = () => {
             )}
 
             {!editing && variants.length > 0 && (
-              <p className="mt-2 text-xs text-gray-500">Variants will be created once you save the product.</p>
+              <p className="mt-2 text-xs text-gray-500">
+                Variants will be created once you save the product.
+              </p>
             )}
           </section>
         </div>
@@ -794,17 +1002,36 @@ const ProductFormPage = () => {
               <h3 className="font-semibold text-near-brown">Images</h3>
               <label className="flex cursor-pointer items-center gap-1.5 text-xs font-medium text-[#C9A227] hover:underline">
                 <Upload size={12} /> Upload
-                <input type="file" multiple accept="image/*" className="hidden" onChange={handleImagesSelected} />
+                <input
+                  type="file"
+                  multiple
+                  accept="image/*"
+                  className="hidden"
+                  onChange={handleImagesSelected}
+                />
               </label>
             </div>
 
             <div className="space-y-2">
               {savedImages.map((img) => (
-                <div key={img.id} className="flex items-center gap-2.5 rounded-xl border p-2">
-                  <img src={img.imageUrl} alt={img.altText ?? ""} className="h-9 w-9 rounded-lg object-cover" />
+                <div
+                  key={img.id}
+                  className="flex items-center gap-2.5 rounded-xl border p-2"
+                >
+                  <img
+                    src={img.imageUrl}
+                    alt={img.altText ?? ""}
+                    className="h-9 w-9 rounded-lg object-cover"
+                  />
                   <div className="flex-1 min-w-0">
-                    <p className="truncate text-xs text-gray-600">{img.altText || "No alt text"}</p>
-                    {img.isPrimary && <span className="text-[10px] font-semibold text-[#C9A227]">Primary</span>}
+                    <p className="truncate text-xs text-gray-600">
+                      {img.altText || "No alt text"}
+                    </p>
+                    {img.isPrimary && (
+                      <span className="text-[10px] font-semibold text-[#C9A227]">
+                        Primary
+                      </span>
+                    )}
                   </div>
                   <button
                     type="button"
@@ -812,14 +1039,25 @@ const ProductFormPage = () => {
                     disabled={deletingImageId === img.id}
                     className="text-gray-400 hover:text-red-500"
                   >
-                    {deletingImageId === img.id ? <Loader2 size={14} className="animate-spin" /> : <Trash2 size={14} />}
+                    {deletingImageId === img.id ? (
+                      <Loader2 size={14} className="animate-spin" />
+                    ) : (
+                      <Trash2 size={14} />
+                    )}
                   </button>
                 </div>
               ))}
 
               {pendingImages.map((img, i) => (
-                <div key={i} className="flex items-center gap-2.5 rounded-xl border border-dashed p-2">
-                  <img src={img.previewUrl} alt="" className="h-9 w-9 rounded-lg object-cover" />
+                <div
+                  key={i}
+                  className="flex items-center gap-2.5 rounded-xl border border-dashed p-2"
+                >
+                  <img
+                    src={img.previewUrl}
+                    alt=""
+                    className="h-9 w-9 rounded-lg object-cover"
+                  />
                   <div className="flex-1 min-w-0">
                     <input
                       value={img.altText}
@@ -827,17 +1065,29 @@ const ProductFormPage = () => {
                       placeholder="Alt text"
                       className="w-full border-none bg-transparent text-xs outline-none"
                     />
-                    {img.isPrimary && <span className="text-[10px] font-semibold text-[#C9A227]">Primary (pending)</span>}
+                    {img.isPrimary && (
+                      <span className="text-[10px] font-semibold text-[#C9A227]">
+                        Primary (pending)
+                      </span>
+                    )}
                   </div>
                   <button
                     type="button"
                     onClick={() => setPendingPrimary(i)}
                     title="Set primary"
-                    className={`h-6 w-6 rounded-md text-xs ${img.isPrimary ? "bg-[#C9A227] text-white" : "text-gray-300 hover:text-[#C9A227]"}`}
+                    className={`h-6 w-6 rounded-md text-xs ${
+                      img.isPrimary
+                        ? "bg-[#C9A227] text-white"
+                        : "text-gray-300 hover:text-[#C9A227]"
+                    }`}
                   >
                     <Star size={13} className="mx-auto" />
                   </button>
-                  <button type="button" onClick={() => removePendingImage(i)} className="text-gray-400 hover:text-red-500">
+                  <button
+                    type="button"
+                    onClick={() => removePendingImage(i)}
+                    className="text-gray-400 hover:text-red-500"
+                  >
                     <X size={14} />
                   </button>
                 </div>
@@ -860,7 +1110,9 @@ const ProductFormPage = () => {
                   type="button"
                   onClick={() => setStatus(s)}
                   className={`flex w-full items-center gap-3 rounded-xl border px-3.5 py-2.5 text-sm font-medium capitalize ${
-                    status === s ? "border-near-brown bg-near-brown text-white" : "hover:border-[#C9A227]"
+                    status === s
+                      ? "border-near-brown bg-near-brown text-white"
+                      : "hover:border-[#C9A227]"
                   }`}
                 >
                   {/* <span
@@ -877,13 +1129,17 @@ const ProductFormPage = () => {
 
           {/* Flags */}
           <div className="rounded-2xl border bg-white p-5">
-            <h3 className="mb-4 font-semibold text-near-brown">Product Flags</h3>
+            <h3 className="mb-4 font-semibold text-near-brown">
+              Product Flags
+            </h3>
 
             <div className="space-y-4">
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-sm font-medium">Featured</p>
-                  <p className="text-xs text-gray-500">Shown in featured sections</p>
+                  <p className="text-xs text-gray-500">
+                    Shown in featured sections
+                  </p>
                 </div>
                 <Switch checked={isFeatured} onCheckedChange={setIsFeatured} />
               </div>
@@ -899,9 +1155,14 @@ const ProductFormPage = () => {
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-sm font-medium">Customizable</p>
-                  <p className="text-xs text-gray-500">Customers can request a bespoke quote</p>
+                  <p className="text-xs text-gray-500">
+                    Customers can request a bespoke quote
+                  </p>
                 </div>
-                <Switch checked={isCustomizable} onCheckedChange={setIsCustomizable} />
+                <Switch
+                  checked={isCustomizable}
+                  onCheckedChange={setIsCustomizable}
+                />
               </div>
             </div>
           </div>
@@ -921,7 +1182,9 @@ const ProductFormPage = () => {
                   return (
                     <label
                       key={col.id}
-                      className={`flex items-center gap-3 rounded-xl px-3 py-2 ${active ? "bg-[#C9A227]/10" : "hover:bg-gray-50"}`}
+                      className={`flex items-center gap-3 rounded-xl px-3 py-2 ${
+                        active ? "bg-[#C9A227]/10" : "hover:bg-gray-50"
+                      }`}
                     >
                       <input
                         type="checkbox"
@@ -931,7 +1194,12 @@ const ProductFormPage = () => {
                         className="h-3.5 w-3.5 accent-[#C9A227]"
                       />
                       <span className="flex-1 text-sm">{col.name}</span>
-                      {loading && <Loader2 size={14} className="animate-spin text-[#C9A227]" />}
+                      {loading && (
+                        <Loader2
+                          size={14}
+                          className="animate-spin text-[#C9A227]"
+                        />
+                      )}
                     </label>
                   );
                 })}
@@ -946,7 +1214,9 @@ const ProductFormPage = () => {
               <div className="space-y-1.5 text-xs text-gray-500">
                 <div className="flex justify-between">
                   <span>ID</span>
-                  <span className="font-mono text-[10px] text-gray-700">{existingProduct.id}</span>
+                  <span className="font-mono text-[10px] text-gray-700">
+                    {existingProduct.id}
+                  </span>
                 </div>
               </div>
             </div>

@@ -1,29 +1,26 @@
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Check, Loader2, Plus, X } from "lucide-react";
+import type { ProductVariant } from "@/types";
+
 
 interface SavedColor {
   id: string;
   name: string;
+  hex?: string;
+  hexCode?: string;
 }
 
-interface Variant {
-  id?: string;
-  sizeLabel: string;
-  sizeValue: number | null;
-  sku: string;
-  priceAdjustment: number;
-  colorId: string | null;
-  isAvailable: boolean;
-}
+
+
 
 interface Props {
   editing: boolean;
-  variants: Variant[];
+  variants: ProductVariant[];
   savedColors: SavedColor[];
   variantSavingId: string | null;
   onAdd: () => void;
-  onUpdateField: (index: number, field: keyof Variant, value: any) => void;
+  onUpdateField: (index: number, field: keyof ProductVariant, value: any) => void;
   onSave: (index: number) => void;
   onRemove: (index: number) => void;
 }

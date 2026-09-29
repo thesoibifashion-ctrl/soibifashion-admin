@@ -9,11 +9,10 @@ import EmptyState from "@/components/shared/EmptyState";
 import ErrorState from "@/components/shared/ErrorState";
 import EmptySearch from "@/components/shared/EmptySearch";
 import { useClientPagination } from "@/hooks/useClientPagination";
-import type { Collection } from "@/types";
-import { getCollections } from "@/api/Collections";
 import { CollectionColun } from "@/data/table-colums/collection-column";
 import { PageHeader } from "@/components/shared/PageHeader";
 import CollectionDrawer from "./Drawer";
+import { getAdminCollections, type Collection } from "@/api/requests/collections";
 // import ProductDrawerContent from "./Drawer/Index";
 
 const ProductsPage = () => {
@@ -23,13 +22,13 @@ const ProductsPage = () => {
 
   const { data, isLoading, isError } = useQuery({
     queryKey: ["collections"],
-    queryFn: getCollections,
+    queryFn: getAdminCollections,
     staleTime: 1000 * 60 * 5,
     placeholderData:
       search.length > 0 ? (previousData) => previousData : undefined,
   });
   const { page, pageCount, paginatedData, handlePageChange } =
-    useClientPagination<Collection>(data?.data ?? [],8);
+    useClientPagination<Collection>(data ?? [],8);
 
 
   if (isLoading) {
@@ -63,7 +62,7 @@ const ProductsPage = () => {
           </button>
         </div>
       </div>
-      {data.data.length === 0 ? (
+      {data.length === 0 ? (
         <EmptyState text="You have no collection yet">
           <button
             onClick={() => {
@@ -85,7 +84,7 @@ const ProductsPage = () => {
               onChange={setSearch}
             />
           </div>
-          {data.data.length === 0 ? (
+          {data.length === 0 ? (
             <EmptySearch text="You have no project in this search" />
           ) : (
             <div className="mt-4">

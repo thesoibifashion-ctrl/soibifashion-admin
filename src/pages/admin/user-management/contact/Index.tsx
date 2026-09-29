@@ -1,7 +1,7 @@
 import {
   getAdminContacts,
   markContactAsRead,
-} from "@/api/contact";
+} from "@/api/requests/contact";
 import EmptyState from "@/components/shared/EmptyState";
 import ErrorState from "@/components/shared/ErrorState";
 import { SearchInput } from "@/components/shared/inputs/SearchInput";
@@ -12,15 +12,13 @@ import {
   useQuery,
   useQueryClient,
 } from "@tanstack/react-query";
-import { Clock, Mail } from "lucide-react";
+import { Clock } from "lucide-react";
 import { useMemo, useState } from "react";
 import { cn } from "@/lib/utils";
-import { useSearchParams } from "react-router-dom";
 
 const ContactPage = () => {
   const [selectedUser, setSelectedUser] = useState<ContactForm | null>(null);
   const [search, setSearch] = useState("");
-  const [searchParams, setSearchParams] = useSearchParams();
 
   const queryClient = useQueryClient();
 
@@ -42,15 +40,15 @@ const ContactPage = () => {
   });
 
   const filteredData = useMemo(() => {
-    if (!data?.data) return [];
+    if (!data) return [];
 
-    return data.data.filter((user: ContactForm) =>
-      user.email.toLowerCase().includes(search.toLowerCase())
+    return data.filter((user: ContactForm) =>
+      user?.email?.toLowerCase().includes(search.toLowerCase())
     );
   }, [data, search]);
 
   const unread =
-    data?.data?.filter(
+    data?.filter(
       (user: ContactForm) => user.isRead === false
     ).length ?? 0;
 
@@ -141,12 +139,12 @@ const ContactPage = () => {
                           </p>
 
                           <span className="text-[10px] text-[#A8A29E] shrink-0">
-                            {new Date(
-                              user.createdAt
-                            ).toLocaleDateString("en-GB", {
-                              day: "numeric",
-                              month: "short",
-                            })}
+                          {user.createdAt
+  ? new Date(user.createdAt).toLocaleDateString("en-GB", {
+      day: "numeric",
+      month: "short",
+    })
+  : "-"}
                           </span>
                         </div>
 
@@ -212,14 +210,12 @@ const ContactPage = () => {
                     <div className="flex items-center gap-1.5 text-sm text-[#78716C]">
                       <Clock size={12} />
 
-                      {new Date(
-                        selectedUser.createdAt
-                      ).toLocaleDateString("en-GB", {
-                        weekday: "long",
-                        day: "numeric",
-                        month: "long",
-                        year: "numeric",
-                      })}
+                      {selectedUser.createdAt
+  ? new Date(selectedUser.createdAt).toLocaleDateString("en-GB", {
+      day: "numeric",
+      month: "short",
+    })
+  : "-"}
                     </div>
                   </div>
                 </div>

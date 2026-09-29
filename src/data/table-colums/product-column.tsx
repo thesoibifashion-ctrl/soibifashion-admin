@@ -1,7 +1,5 @@
 import { Badge } from "@/components/shared/Badge";
 import ImagePreview from "@/components/shared/ImagePreview";
-import { formatDate } from "@/lib/utils/formatDate";
-import { statusBadge } from "@/lib/utils/statusBadge";
 import { truncateText } from "@/lib/utils/truncateText";
 import ProductActions from "@/pages/admin/products/Actions";
 import type { Product } from "@/types";
@@ -21,7 +19,7 @@ export const ProductColumn: ColumnDef<Product>[] = [
         //   className="w-10 h-10 object-cover object-top rounded-lg"
         // />
         <div onClick={(e) => e.stopPropagation()}>
-          <ImagePreview src={image?.imageUrl} />
+          <ImagePreview src={image?.imageUrl ?? ""} />
           {/* <img
                   src=
                   className="w-10 h-10 object-cover object-top rounded-lg"
@@ -34,7 +32,7 @@ export const ProductColumn: ColumnDef<Product>[] = [
     accessorKey: "name",
     header: "Product",
     cell: ({ row }) => (
-      <div className="max-w-[180px]">
+      <div className="max-w-45">
         <p className="font-medium truncate">
           {truncateText(row.original.name ?? "", 20)}
         </p>
@@ -45,15 +43,15 @@ export const ProductColumn: ColumnDef<Product>[] = [
     ),
   },
 
-  {
-    accessorKey: "basePrice",
-    header: "Price",
-    cell: ({ row }) => (
-      <span className="font-medium">
-        ₦{Number(row.original.basePrice ?? 0).toLocaleString()}
-      </span>
-    ),
-  },
+  // {
+  //   accessorKey: "basePrice",
+  //   header: "Price",
+  //   cell: ({ row }) => (
+  //     <span className="font-medium">
+  //       ₦{Number(row.original.salePrice ?? 0).toLocaleString()}
+  //     </span>
+  //   ),
+  // },
   {
     accessorKey: "status",
     header: "Status",

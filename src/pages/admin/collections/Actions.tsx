@@ -14,10 +14,7 @@ import {
 import ConfirmationModal from "@/components/shared/modals/ActionsModal";
 import type { statusType } from "@/types/status";
 import { toast } from "sonner";
-import {
-  deleteCollection,
-  updateCollection,
-} from "@/api/Collections";
+import { deleteCollection, updateCollection } from "@/api/requests/collections";
 
 interface ResearchActionsProps {
   researchId: string;
@@ -48,17 +45,21 @@ const ResearchActions = ({
 
   const { mutate: editProject, isPending: editLoading } = useMutation({
     mutationFn: (payload: Record<string, any>) =>
-      updateCollection(researchId, payload),
+      updateCollection({
+        id: researchId,
+        payload,
+      }),
+  
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["collections"] });
       setArchiveOpen(false);
       toast.success("Collection updated successfully");
     },
+  
     onError: (error: any) => {
       toast.error(error?.message || "Failed to edit collection");
     },
   });
-
   const handleStatusUpdate = (status: statusType) => {
     editProject({ status });
   };
@@ -100,7 +101,7 @@ const ResearchActions = ({
           )}
 
           <DropdownMenuItem onClick={handleFeaturedToggle}>
-            {isFeatured ? "Remove Highlight" : "Highlight"}
+            {isFeatured ? "unHighlight" : "Highlight"}
           </DropdownMenuItem>
 
           <DropdownMenuItem

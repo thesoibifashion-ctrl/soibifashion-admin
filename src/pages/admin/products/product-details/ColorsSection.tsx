@@ -1,6 +1,10 @@
 import { Button } from "@/components/ui/button";
 import { Plus, X } from "lucide-react";
 
+
+
+
+
 interface SavedColor {
   id: string;
   name: string;

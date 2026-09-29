@@ -1,11 +1,12 @@
-import { apiGet, apiPatch, apiPost } from "./client";
+import type { ContactForm } from "@/types";
+import {  apiGet, apiPatch, apiPost } from "../clients";
 
 export const submitContact = (payload: unknown) => {
   return apiPost("/api/contact", payload);
 };
 
 export const getAdminContacts = () => {
-  return apiGet("/api/admin/contact");
+  return apiGet<ContactForm[]>("/api/admin/contact");
 };
 
 export const getAdminContact = (id: string) => {

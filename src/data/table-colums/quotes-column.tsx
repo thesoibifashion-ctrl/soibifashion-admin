@@ -1,4 +1,3 @@
-import ProjectActions from "@/pages/admin/quotes/Actions";
 import { truncateText } from "@/lib/utils/truncateText";
 import type { ColumnDef } from "@tanstack/react-table";
 import { Badge } from "@/components/shared/Badge";
