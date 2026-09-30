@@ -498,7 +498,7 @@ const ProductDetailsPages = () => {
       }
     },
   });
-  // deoployment
+  // deployment
 
   if (editing && productsLoading) {
     return (
