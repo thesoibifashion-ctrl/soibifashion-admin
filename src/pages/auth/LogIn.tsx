@@ -56,7 +56,7 @@ const LogIn = () => {
       }
 console.log(response)
       authStorage.setToken(response.data.accessToken);
-      window.location.href = "/";
+      window.location.href = "/home";
     },
 
     onError: (error) => {
