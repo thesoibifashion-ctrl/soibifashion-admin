@@ -25,12 +25,12 @@ function App() {
 
   return (
     <Routes>
-        <Route path="/">
+        <Route path="/auth">
           <Route path="login" element={<LogIn />} />
         </Route>
 
         <Route element={<DashboardLayout />}>
-          <Route path="/home" element={<AnalyticsPage />} />
+          <Route path="/" element={<AnalyticsPage />} />
           <Route path="/create" element={<CreateProductPage />} />
 
           <Route path="/user" element={<UserManagement />} />
