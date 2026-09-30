@@ -83,9 +83,9 @@ const ContactPage = () => {
         </p>
       </div>
 
-      <div className="flex gap-6 h-[calc(100vh-220px)] min-h-[500px]">
+      <div className="flex flex-col lg:flex-row gap-6 h-[calc(100vh-220px)] min-h-[500px]">
         {/* List panel */}
-        <div className="w-[360px] shrink-0 bg-white rounded-2xl border border-[#E7E2DC] shadow-sm flex flex-col overflow-hidden">
+        <div className="w-full lg:w-[360px] shrink-0 bg-white rounded-2xl border border-[#E7E2DC] shadow-sm flex flex-col overflow-hidden">
           <div className="p-4 border-b border-[#E7E2DC]">
             <SearchInput
               placeholder="Search messages..."
@@ -166,14 +166,14 @@ const ContactPage = () => {
         </div>
 
         {/* Reading panel */}
-        <div className="flex-1 bg-white rounded-2xl border border-[#E7E2DC] shadow-sm overflow-hidden flex flex-col">
+        <div className="lg:flex-1 h-120 lg:h-full bg-white  rounded-2xl border border-[#E7E2DC] shadow-sm lg:overflow-hidden flex flex-col">
           {!selectedUser ? (
             <div className="flex-1 flex items-center justify-center">
               <EmptyState text="Select a message" />
             </div>
           ) : (
             <>
-              <div className="px-8 py-5 border-b border-[#E7E2DC] flex items-start justify-between gap-4">
+              <div className="px-8 py-5 border-b  border-[#E7E2DC] flex items-start justify-between gap-4">
                 <div>
                   <h2 className="font-serif text-xl font-semibold text-[#1C1917]">
                     {selectedUser.subject || "Contact Message"}

@@ -4,7 +4,10 @@ import { DataTable } from "@/components/shared/table/DataTable";
 import EmptyState from "@/components/shared/EmptyState";
 import ErrorState from "@/components/shared/ErrorState";
 import EmptySearch from "@/components/shared/EmptySearch";
-import { getAdminCartOrders, updateAdminCartOrderStatus } from "@/api/requests/cart";
+import {
+  getAdminCartOrders,
+  updateAdminCartOrderStatus,
+} from "@/api/requests/cart";
 import { useClientPagination } from "@/hooks/useClientPagination";
 
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
@@ -16,6 +19,13 @@ import { AppDrawer } from "@/components/shared/drawer/DataDrawer";
 import type { CartOrder } from "@/types";
 import { CartOrderColumns } from "@/data/table-colums/cart-column";
 import { PageHeader } from "@/components/shared/PageHeader";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 const SUGGESTED_STATUSES = [
   "submitted",
@@ -52,17 +62,17 @@ const CartOrdersPage = () => {
       id: string;
       payload: Partial<CartOrder>;
     }) => updateAdminCartOrderStatus(id, payload),
-  
+
     onSuccess: (response) => {
       const updatedOrder = response as CartOrder;
-  
+
       setSelectedOrder(updatedOrder);
-  
+
       queryClient.setQueryData(
         ["admin-cart-orders"],
         (oldData: CartOrder[] | undefined) => {
           if (!oldData) return oldData;
-  
+
           return oldData.map((order) =>
             order.id === updatedOrder.id ? updatedOrder : order
           );
@@ -116,7 +126,7 @@ const CartOrdersPage = () => {
 
   return (
     <div className="space-y-6 mt-14">
-      <PageHeader title="Cart Orders"/>
+      <PageHeader title="Cart Orders" />
       <div className="flex items-center justify-between gap-4">
         <SearchInput
           value={search}
@@ -136,19 +146,23 @@ const CartOrdersPage = () => {
             All
           </button>
 
-          {SUGGESTED_STATUSES.map((status) => (
-            <button
-              key={status}
-              onClick={() => setStatusFilter(status)}
-              className={`h-9 px-4 rounded-xl text-xs font-medium border capitalize transition-all cursor-pointer ${
-                statusFilter === status
-                  ? "bg-[#18120E] text-white border-[#18120E]"
-                  : "bg-white text-[#78716C] border-[#E7E2DC] hover:border-[#8B5E3C]/40"
-              }`}
-            >
-              {status}
-            </button>
-          ))}
+          <Select value={statusFilter} onValueChange={setStatusFilter}>
+            <SelectTrigger className="h-9 w-[160px] rounded-xl border-[#E7E2DC] bg-white text-xs font-medium capitalize text-[#78716C] focus:ring-0 focus:ring-offset-0 data-[state=open]:border-[#8B5E3C]/40">
+              <SelectValue placeholder="Filter by status" />
+            </SelectTrigger>
+
+            <SelectContent className="rounded-xl border-[#E7E2DC] bg-white">
+              {SUGGESTED_STATUSES.map((status) => (
+                <SelectItem
+                  key={status}
+                  value={status}
+                  className="cursor-pointer text-xs font-medium capitalize text-[#57534E] focus:bg-[#F5F0EB] focus:text-[#18120E] data-[state=checked]:text-[#8B5E3C]"
+                >
+                  {status}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
         </div>
       </div>
 
@@ -168,7 +182,7 @@ const CartOrdersPage = () => {
       )}
 
       <AppDrawer
-        width="w-[60%] lg:max-w-[40%]!"
+        width="w-[80%]! lg:max-w-[40%]!"
         open={open}
         onOpenChange={setOpen}
       >

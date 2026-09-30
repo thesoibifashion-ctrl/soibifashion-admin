@@ -11,7 +11,7 @@ import {
   SidebarRail,
   Sidebar,
 } from "../../ui/sidebar";
-import { Sheet, SheetContent, SheetTrigger } from "../../ui/sheet";
+import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "../../ui/sheet";
 import logo from "../../../assets/images/soibi.png";
 import { Toaster } from "sonner";
 import { LogOut, Menu } from "lucide-react";
@@ -36,7 +36,7 @@ const navMain = [
     title: "Overview",
     items: [
       {
-        title: "Dahsboard",
+        title: "Dashboard",
         url: "/home",
         iconNormal: usersIcon,
         iconActive: activeIcon1,
@@ -65,14 +65,14 @@ const navMain = [
       //   iconNormal: projectIcon,
       //   iconActive: activeIcon3,
       // },
-    
+
       {
         title: "Products",
         url: "/products",
         iconNormal: projectIcon,
         iconActive: activeIcon3,
       },
-    
+
       {
         title: "User Management",
         url: "/user",
@@ -83,7 +83,7 @@ const navMain = [
         title: "Blogs",
         url: "/content-management",
         iconNormal: contentIcon,
-        iconActive: activeIcon2
+        iconActive: activeIcon2,
       },
       // {
       //   title: "Analytics",
@@ -95,9 +95,9 @@ const navMain = [
         title: "Gallery",
         url: "/gallery",
         iconNormal: contentIcon,
-        iconActive: activeIcon2
+        iconActive: activeIcon2,
       },
-   
+
       // {
       //   title: "Newsletter",
       //   url: "/newsletter",
@@ -108,39 +108,47 @@ const navMain = [
   },
 ];
 
-function NavContent({ onNavigate }: { onNavigate?: () => void }) {
-  const { pathname } = useLocation();
-  const navigate = useNavigate();
-
-  const handleLogout = () => {
-    localStorage.removeItem("accessToken");
-    navigate("/");
-  };
-
+/* Shared hooks */
+function useHasUnreadContact() {
   const { data } = useQuery({
     queryKey: ["contact"],
     queryFn: getAdminContacts,
     staleTime: 1000 * 60 * 5,
   });
 
-  const hasUnreadContact =
-    data?.some(
-      (contact: { isRead?: boolean }) => contact.isRead === false
-    ) ?? false;
+  return (
+    data?.some((contact: { isRead?: boolean }) => contact.isRead === false) ??
+    false
+  );
+}
 
-  console.log("NavContent contacts:", data);
-  console.log("Has unread:", hasUnreadContact);
+function useLogout() {
+  const navigate = useNavigate();
+
+  return () => {
+    localStorage.removeItem("accessToken");
+    navigate("/");
+  };
+}
+
+/* Mobile sidebar content (same look as the desktop sidebar) */
+function NavContent({ onNavigate }: { onNavigate?: () => void }) {
+  const { pathname } = useLocation();
+  const handleLogout = useLogout();
+  const hasUnreadContact = useHasUnreadContact();
 
   return (
-    <>
-    <div className="flex items-center gap-2 px-4 py-3">
-    <img  src={logo} alt="logo" />
-  
-  </div>
-      <div className="flex-1 pt-10 px-4">
+    <div className="flex h-full flex-col bg-[#170a01]">
+      {/* Header */}
+      <div className="flex items-center gap-2 px-4 pb-2 pt-10">
+        <img src={logo} alt="logo" />
+      </div>
+
+      {/* Nav */}
+      <div className="flex-1 overflow-y-auto px-4 pt-10">
         {navMain.map((group) => (
           <div key={group.title}>
-            <ul className="flex flex-col gap-1">
+            <ul className="flex flex-col">
               {group.items.map((item) => {
                 const isActive =
                   item.url === "/"
@@ -152,24 +160,29 @@ function NavContent({ onNavigate }: { onNavigate?: () => void }) {
                     <Link
                       to={item.url}
                       onClick={onNavigate}
-                      className={`flex items-center gap-2 py-2 mb-3 px-3 rounded-[20px] text-sm font-medium transition-colors ${
+                      className={`mb-4 flex items-center gap-2 rounded-[20px] px-3 py-2 transition-colors ${
                         isActive
-                          ? "text-white [background:linear-gradient(233.89deg,#A0F88A_-3.62%,#C9A227_47.04%)]"
-                          : "text-[#404944] hover:bg-transparent!"
+                          ? "bg-[linear-gradient(135deg,#170a01_0%,#7B3C10_100%)]"
+                          : "hover:bg-transparent"
                       }`}
                     >
                       <img
                         src={isActive ? item.iconActive : item.iconNormal}
                         alt=""
-                        className="w-4 h-4"
+                        className="h-4 w-4"
                       />
 
-                      {item.title}
+                      <span
+                        className={`text-sm font-medium ${
+                          isActive ? "text-[white]" : "text-[gray]"
+                        }`}
+                      >
+                        {item.title}
+                      </span>
 
-                      {item.title === "User Management" &&
-                        hasUnreadContact && (
-                          <span className="w-2 h-2 rounded-full bg-[#DE0D0D] shrink-0" />
-                        )}
+                      {item.title === "User Management" && hasUnreadContact && (
+                        <span className="h-2 w-2 shrink-0 rounded-full bg-[#DE0D0D]" />
+                      )}
                     </Link>
                   </li>
                 );
@@ -179,16 +192,17 @@ function NavContent({ onNavigate }: { onNavigate?: () => void }) {
         ))}
       </div>
 
-      <div className="px-4 py-3">
+      {/* Footer */}
+      <div className="bg-[#170a01] px-4 py-3">
         <button
           onClick={handleLogout}
-          className="flex items-center gap-2 py-2 px-3 rounded-[20px] text-[#DE0D0D] w-full text-sm font-medium"
+          className="flex w-full items-center gap-2 rounded-[20px] bg-[#170a01] px-3 py-2 text-sm font-medium text-[#DE0D0D] transition-colors hover:bg-[#FDECEC]"
         >
           <LogOut size={16} />
           Log out
         </button>
       </div>
-    </>
+    </div>
   );
 }
 
@@ -196,12 +210,17 @@ export function MobileSidebarTrigger() {
   return (
     <Sheet>
       <SheetTrigger asChild>
-        <button>
+        <button aria-label="Open menu">
           <Menu />
         </button>
       </SheetTrigger>
 
-      <SheetContent side="left">
+      <SheetContent
+        side="left"
+        className="w-72 border-none bg-[#170a01] p-0 [&>button]:text-white"
+      >
+        <SheetTitle className="sr-only">Navigation menu</SheetTitle>
+
         <NavContent
           onNavigate={() =>
             document.dispatchEvent(
@@ -214,39 +233,21 @@ export function MobileSidebarTrigger() {
   );
 }
 
+/* Desktop sidebar */
 export function AppSidebar() {
   const { pathname } = useLocation();
-  const navigate = useNavigate();
-
-  const handleLogout = () => {
-    localStorage.removeItem("accessToken");
-    navigate("/");
-  };
-
-  const { data } = useQuery({
-    queryKey: ["contact"],
-    queryFn: getAdminContacts,
-    staleTime: 1000 * 60 * 5,
-  });
-
-  const hasUnreadContact =
-    data?.some(
-      (contact: { isRead?: boolean }) => contact.isRead === false
-    ) ?? false;
-
-  console.log("AppSidebar contacts:", data);
-  console.log("AppSidebar has unread:", hasUnreadContact);
+  const handleLogout = useLogout();
+  const hasUnreadContact = useHasUnreadContact();
 
   return (
     <Sidebar>
-    <SidebarHeader className="bg-[#170a01] pt-10">
-    <div className="flex items-center gap-2">
-      <img src={logo} alt="logo" />
-     <div>
-   
-     </div>
-    </div>
-  </SidebarHeader>
+      <SidebarHeader className="bg-[#170a01] pt-10">
+        <div className="flex items-center gap-2">
+          <img src={logo} alt="logo" />
+          <div></div>
+        </div>
+      </SidebarHeader>
+
       <SidebarContent className="bg-[#170a01] pt-10">
         {navMain.map((group) => (
           <SidebarGroup key={group.title}>
@@ -265,25 +266,16 @@ export function AppSidebar() {
                         isActive={isActive}
                         className="data-[active=true]:bg-[linear-gradient(135deg,#170a01_0%,#7B3C10_100%)] hover:bg-transparent! py-2 mb-4 px-3 rounded-[20px]"
                       >
-                        <Link
-                          to={item.url}
-                          className="flex items-center gap-2"
-                        >
+                        <Link to={item.url} className="flex items-center gap-2">
                           <img
-                            src={
-                              isActive
-                                ? item.iconActive
-                                : item.iconNormal
-                            }
+                            src={isActive ? item.iconActive : item.iconNormal}
                             alt=""
                             className="w-4 h-4"
                           />
 
                           <span
                             className={`text-sm font-medium ${
-                              isActive
-                                ? "text-[white]"
-                                : "text-[gray]"
+                              isActive ? "text-[white]" : "text-[gray]"
                             }`}
                           >
                             {item.title}

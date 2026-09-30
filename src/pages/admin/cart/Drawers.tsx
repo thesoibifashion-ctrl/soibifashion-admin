@@ -323,7 +323,7 @@ const CartOrderDrawer = ({
             </div>
           ) : (
             <Card className="px-4 py-5">
-              <div className="flex items-start">
+              <div className="flex overflow-auto items-start">
                 {PROGRESS_STEPS.map((step, index) => {
                   const done = index <= currentStepIndex;
                   const isLast = index === PROGRESS_STEPS.length - 1;

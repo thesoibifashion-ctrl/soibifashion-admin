@@ -62,7 +62,7 @@ const BlogPage = () => {
     <div className="space-y-6 mt-10">
       <PageHeader title="Blog" />
 
-      <div className="flex items-center justify-between">
+      <div className="lg:flex items-center justify-between">
         <SearchInput
           value={search}
           onChange={(value) => setSearch(value)}
@@ -73,7 +73,7 @@ const BlogPage = () => {
           onClick={() =>
             navigate("/content-management/edit-content/blog/new")
           }
-          className="px-4 py-1 bg-near-brown rounded-[20px] text-white flex items-center gap-2"
+          className="px-4 mt-2 lg:mt-0 py-1 bg-near-brown rounded-[20px] text-white flex items-center gap-2"
         >
           <PlusCircle size={18} />
           New Blog

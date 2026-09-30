@@ -21,7 +21,7 @@ interface EditContentActions {
   status?: statusType;
 }
 
-const EditContentActions = ({ contentId, status }: EditContentActions) => {
+const EditContentActions = ({ contentId }: EditContentActions) => {
   const [archiveOpen, setArchiveOpen] = useState(false);
   const [deleteOpen, setDeleteOpen] = useState(false);
   const queryClient = useQueryClient();

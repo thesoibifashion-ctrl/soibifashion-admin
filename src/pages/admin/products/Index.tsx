@@ -59,7 +59,7 @@ const ProductsPage = () => {
     <div className="space-y-6 mt-10">
       <PageHeader title="Products" />
 
-      <div className="flex items-center justify-between">
+      <div className="lg:flex items-center justify-between">
         <SearchInput
           value={search}
           onChange={(value) => setSearch(value)}
@@ -68,7 +68,7 @@ const ProductsPage = () => {
 
         <button
           onClick={() => navigate("/products-details")}
-          className="px-4 py-1 bg-near-brown rounded-[20px] text-white flex items-center gap-2"
+          className="px-4 mt-3 lg:mt-0 py-1 bg-near-brown rounded-[20px] text-white flex items-center gap-2"
         >
           <PlusCircle size={18} />
           New Product
@@ -79,7 +79,7 @@ const ProductsPage = () => {
         <EmptyState text={""}        >
           <button
             onClick={() => navigate("/products-details")}
-            className="px-4 py-1 mt-2 bg-near-brown rounded-[20px] text-white flex items-center gap-2"
+            className="px-4  py-1 mt-2 bg-near-brown rounded-[20px] text-white flex items-center gap-2"
           >
             <PlusCircle size={18} />
             Create New Product
