@@ -114,7 +114,7 @@ function NavContent({ onNavigate }: { onNavigate?: () => void }) {
 
   const handleLogout = () => {
     localStorage.removeItem("accessToken");
-    navigate("/auth/login");
+    navigate("/");
   };
 
   const { data } = useQuery({
@@ -220,7 +220,7 @@ export function AppSidebar() {
 
   const handleLogout = () => {
     localStorage.removeItem("accessToken");
-    navigate("/auth/login");
+    navigate("/");
   };
 
   const { data } = useQuery({
