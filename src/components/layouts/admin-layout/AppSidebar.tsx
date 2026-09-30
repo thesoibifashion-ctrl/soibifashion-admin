@@ -43,7 +43,7 @@ const navMain = [
       },
       {
         title: "Home",
-        url: "/home",
+        url: "/customization",
         iconNormal: projectIcon,
         iconActive: activeIcon3,
       },

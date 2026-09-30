@@ -2,7 +2,7 @@ import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import DashboardLayout from "./components/layouts/admin-layout/Index";
 import ResearchPage from "./pages/admin/collections/Index";
-// import { RedirectIfAuthed } from "./componessnts/ReqdduireAuth";
+// import { RedirectIfAuthed } from "./componesnts/RequireAuth";
 import LogIn from "./pages/auth/LogIn";
 import CreateProductPage from "./pages/admin/quotes/Products";
 import UserManagement from "./pages/admin/user-management/Index";
@@ -25,12 +25,10 @@ function App() {
 
   return (
     <Routes>
-        <Route path="/auth">
-          <Route path="login" element={<LogIn />} />
-        </Route>
+          <Route path="/" element={<LogIn />} />
 
         <Route element={<DashboardLayout />}>
-          <Route path="/" element={<AnalyticsPage />} />
+          <Route path="/home" element={<AnalyticsPage />} />
           <Route path="/create" element={<CreateProductPage />} />
 
           <Route path="/user" element={<UserManagement />} />
@@ -43,9 +41,9 @@ function App() {
           <Route path="/products-details/:id" element={<ProductDetailsPages />} />
           <Route path="/collections" element={<ResearchPage />} />
           <Route path="/settings" element={<SettingsPage />} />
-          <Route path="/customizations" element={<CustomizationsPage />} />
+          <Route path="/customization" element={<CustomizationsPage />} />
           <Route path="/gallery" element={<GalleryPage />} />
-          <Route path="/home" element={<HomePage />} />
+          <Route path="/custmomization" element={<HomePage />} />
           <Route path="/measurement" element={<MeasurementPage />} />
           <Route path="/content-management" element={<ContentManagement />} />
           <Route
