@@ -28,9 +28,9 @@ const EditContentActions = ({ contentId, status }: EditContentActions) => {
   const navigate = useNavigate();
 
   const { mutate: deleteProject, isPending } = useMutation({
-    mutationFn: (id: string) => apiDelete(`/posts/${id}`),
+    mutationFn: (id: string) => apiDelete(`/api/admin/blog/${id}`),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["posts"] });
+      queryClient.invalidateQueries({ queryKey: ["admin-blog"] });
       navigate(`/content-management`);
     },
   });
@@ -41,19 +41,19 @@ const EditContentActions = ({ contentId, status }: EditContentActions) => {
   //   };
 
   function updateProject(payload: Record<string, any>) {
-    return apiUpdate(`/posts/${contentId}`, payload);
+    return apiUpdate(`/api/admin/blog/${contentId}`, payload);
   }
 
   const { mutate: editProject, isPending: editLoading } = useMutation({
     mutationFn: updateProject,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["posts"] });
+      queryClient.invalidateQueries({ queryKey: ["admin-blog"] });
       setArchiveOpen(false);
       toast.success("Content updated successfully");
 
     },
     onError: () => {
-      toast.error( "Failed to delete post");
+      toast.error( "Failed to edit post");
     },
   });
 
@@ -117,21 +117,18 @@ const EditContentActions = ({ contentId, status }: EditContentActions) => {
         </DropdownMenuTrigger>
 
         <DropdownMenuContent align="end" onClick={(e) => e.stopPropagation()}>
-          {status === "draft" ? (
             <DropdownMenuItem onClick={() => handleStatusUpdate("published")}>
               Publish
             </DropdownMenuItem>
-          ) : (
             <DropdownMenuItem onClick={() => handleStatusUpdate("draft")}>
               Save as Draft
             </DropdownMenuItem>
-          )}
 
-          {status !== "archived" && (
+          {/* {status !== "archived" && (
             <DropdownMenuItem onClick={() => setArchiveOpen(true)}>
               Archive
             </DropdownMenuItem>
-          )}
+          )} */}
 
           <DropdownMenuItem
             className="text-red-600"

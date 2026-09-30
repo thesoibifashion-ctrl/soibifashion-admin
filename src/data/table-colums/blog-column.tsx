@@ -2,6 +2,7 @@ import type { BlogPost } from "@/api/requests/blog";
 import { Badge } from "@/components/shared/Badge";
 import ImagePreview from "@/components/shared/ImagePreview";
 import { truncateText } from "@/lib/utils/truncateText";
+import EditContentActions from "@/pages/admin/content-management/EditContentActions";
 import type { ColumnDef } from "@tanstack/react-table";
 
 export const BlogColumn: ColumnDef<BlogPost>[] = [
@@ -64,6 +65,15 @@ export const BlogColumn: ColumnDef<BlogPost>[] = [
           ? new Date(row.original.publishedAt).toLocaleDateString()
           : "—"}
       </span>
+    ),
+  },
+  {
+    id: "actions",
+    header: "",
+    cell: ({ row }) => (
+      <div onClick={(e) => e.stopPropagation()}>
+        <EditContentActions contentId={row.original.id ?? ""} />
+      </div>
     ),
   },
 ];

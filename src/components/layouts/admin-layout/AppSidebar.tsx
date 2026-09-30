@@ -37,7 +37,7 @@ const navMain = [
     items: [
       {
         title: "Dahsboard",
-        url: "/",
+        url: "/home",
         iconNormal: usersIcon,
         iconActive: activeIcon1,
       },
@@ -79,12 +79,12 @@ const navMain = [
         iconNormal: contentIcon,
         iconActive: activeIcon2,
       },
-      // {
-      //   title: "Customizations",
-      //   url: "/customizations",
-      //   iconNormal: contentIcon,
-      //   iconActive: activeIcon2
-      // },
+      {
+        title: "Blogs",
+        url: "/content-management",
+        iconNormal: contentIcon,
+        iconActive: activeIcon2
+      },
       // {
       //   title: "Analytics",
       //   url: "/analytics",
