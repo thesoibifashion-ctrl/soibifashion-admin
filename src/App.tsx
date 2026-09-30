@@ -2,7 +2,7 @@ import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import DashboardLayout from "./components/layouts/admin-layout/Index";
 import ResearchPage from "./pages/admin/collections/Index";
-// import { RedirectIfAuthed } from "./componesnts/RequireAuth";
+// import { RedirectIfAuthed } from "./componessnts/RequireAuth";
 import LogIn from "./pages/auth/LogIn";
 import CreateProductPage from "./pages/admin/quotes/Products";
 import UserManagement from "./pages/admin/user-management/Index";
