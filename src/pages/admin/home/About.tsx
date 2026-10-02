@@ -110,7 +110,7 @@ export default function AboutPage() {
             </p>
           </div>
 
-          <Button onClick={handleOpenCreate}>Add About Item</Button>
+          <Button className="bg-[#4B2D5D]" onClick={handleOpenCreate}>Add About Item</Button>
         </div>
 
         {/* Content */}
@@ -129,8 +129,8 @@ export default function AboutPage() {
               section.
             </p>
 
-            <Button onClick={handleOpenCreate} className="mt-6">
-              Add About Item
+            <Button onClick={handleOpenCreate} className="mt-6 bg-[#4B2D5D]">
+              Add About Items
             </Button>
           </div>
         ) : (

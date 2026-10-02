@@ -30,7 +30,7 @@ const HomePage = () => {
         onValueChange={handleTabChange}
         className="mt-14.75 w-full"
       >
-        <TabsList className="w-fit justify-start h-10! bg-[#F5F0EB] py-1 rounded-xl">
+        <TabsList className="w-fit justify-start h-10! bg-[#E2D8E8] py-1 rounded-xl">
           {/* <TabsTrigger
             className="px-5 rounded-lg text-[#1C1917]!  text-sm data-active:bg-[white] data-active:shadow-sm! "
             value="contact"

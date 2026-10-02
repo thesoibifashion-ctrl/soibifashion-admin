@@ -265,7 +265,7 @@ const CarouselPage = () => {
         </div>
       ) : items.length === 0 ? (
         <div className="flex min-h-80 flex-col items-center justify-center rounded-2xl border border-dashed border-[#D6D0C8] bg-white">
-          <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[#F5F0EB]">
+          <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[#E2D8E8]">
             <ImageIcon size={20} className="text-[#8B5E3C]" />
           </div>
 
@@ -293,7 +293,7 @@ const CarouselPage = () => {
               className="overflow-hidden rounded-2xl border border-[#E7E2DC] bg-white shadow-sm"
             >
               {/* Image */}
-              <div className="relative aspect-[4/3] overflow-hidden bg-[#F5F0EB]">
+              <div className="relative aspect-[4/3] overflow-hidden bg-[#E2D8E8]">
                 <img
                   src={item.imageUrl}
                   alt={`Carousel slide ${index + 1}`}
@@ -394,7 +394,7 @@ const CarouselPage = () => {
                 type="button"
                 onClick={closeModal}
                 disabled={isSaving}
-                className="flex h-9 w-9 items-center justify-center rounded-full hover:bg-[#F5F0EB] disabled:opacity-50"
+                className="flex h-9 w-9 items-center justify-center rounded-full hover:bg-[#E2D8E8] disabled:opacity-50"
               >
                 <X size={18} />
               </button>

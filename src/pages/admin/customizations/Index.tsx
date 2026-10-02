@@ -8,12 +8,7 @@ import { PageHeader } from "@/components/shared/PageHeader";
 import { SkeletonTable } from "@/components/shared/skeleton";
 import ErrorState from "@/components/shared/ErrorState";
 
-import {
-  createCustomizationOption,
-  deleteCustomizationOption,
-  getAdminCustomizations,
-  updateCustomizationOption,
-} from "@/api/customizations";
+
 
 import CustomizationSection from "./CustomizationSection";
 import CustomizationOptionDrawer from "./CustomizationOptionDrawer";
@@ -22,6 +17,7 @@ import CarouselPage from "./HeroCarousel";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import ConfirmationModal from "@/components/shared/modals/ActionsModal";
 import { toast } from "sonner";
+import { createCustomizationOption, deleteCustomizationOption, getAdminCustomizations, updateCustomizationOption } from "@/api/requests/customization";
 
 type CustomizationOption = {
   id: string;
@@ -93,7 +89,7 @@ const CustomizationsPage = () => {
   });
 
   const categories: CustomizationCategory[] = useMemo(() => {
-    return [...(data?.data ?? [])].sort((a, b) => a.sortOrder - b.sortOrder);
+    return [...(data ?? [])].sort((a, b) => a.sortOrder - b.sortOrder);
   }, [data]);
 
   const optionMutation = useMutation({
@@ -107,14 +103,17 @@ const CustomizationsPage = () => {
       id?: string;
     }) => {
       if (id) {
-        return updateCustomizationOption(id, {
-          name: option.name,
-          slug: option.slug,
-          imageUrl: option.imageUrl,
-          imagePublicId: option.imagePublicId,
-          description: option.description,
-          status: option.status,
-          sortOrder: option.sortOrder,
+        return updateCustomizationOption({
+          id,
+          payload: {
+            name: option.name,
+            slug: option.slug,
+            imageUrl: option.imageUrl,
+            imagePublicId: option.imagePublicId,
+            description: option.description,
+            status: option.status,
+            sortOrder: option.sortOrder,
+          },
         });
       }
 
@@ -232,7 +231,7 @@ const CustomizationsPage = () => {
         onValueChange={handleTabChange}
         className="w-full"
       >
-        <TabsList className="w-fit justify-start h-10! bg-[#F5F0EB] py-1 rounded-xl">
+        <TabsList className="w-fit justify-start h-10! bg-[#E2D8E8] py-1 rounded-xl">
           <TabsTrigger
             value="carousel"
             className="px-5 rounded-lg text-[#1C1917]! text-sm data-active:bg-white data-active:shadow-sm!"

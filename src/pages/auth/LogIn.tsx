@@ -4,6 +4,7 @@ import { ArrowLeft, Loader2 } from "lucide-react";
 import { useMutation } from "@tanstack/react-query";
 import { authStorage } from "@/lib/auth-storage";
 import { requestCode, verifyCode } from "@/api/requests/auth";
+import { toast, Toaster } from "sonner";
 
 type LoginView = "email" | "code";
 
@@ -54,19 +55,17 @@ const LogIn = () => {
         inputRefs.current[0]?.focus();
         return;
       }
-console.log(response)
       authStorage.setToken(response.data.accessToken);
       window.location.href = "/home";
     },
 
     onError: (error) => {
-      console.error("Code verification failed:", error);
-
+      toast.error("Code verification failed:" + (error as Error).message);
+      console.log("Code verification failed:", error);
       setDigits(["", "", "", "", "", ""]);
       inputRefs.current[0]?.focus();
     },
   });
-
   const handleSendCode = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
@@ -149,17 +148,17 @@ console.log(response)
   };
 
   return (
-    <div className="flex min-h-screen bg-[#F8F6F2]">
+    <div className="flex min-h-screen p-3 bg-[#F8F6F2]">
       {/* Left — Brand panel */}
-      <div className="relative hidden w-[52%] overflow-hidden bg-[#171411] lg:block">
-        <div className="absolute inset-0">
-          <img
+      <div className="relative hidden rounded-xl  w-[52%] overflow-hidden bg-[#171411] lg:block">
+        <div className="absolute h-full bg-[#2F1C3D] inset-0">
+          {/* <img
             src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1200&h=1600&fit=crop&auto=format&q=85"
             alt="Soibi Fashion"
-            className="h-full w-full object-cover opacity-45"
-          />
+            className="h-full rounded-lg w-full object-cover opacity-45"
+          /> */}
 
-          <div className="absolute inset-0 bg-gradient-to-t from-[#171411] via-[#171411]/45 to-[#171411]/20" />
+          {/* <div className="absolute inset-0 bg-gradient-to-t from-[#171411] via-[#171411]/45 to-[#171411]/20" /> */}
         </div>
 
         <div className="relative z-10 flex h-full flex-col justify-between p-14">
@@ -177,7 +176,7 @@ console.log(response)
                 The Soibi Fashion
               </p>
 
-              <p className="mt-0.5 text-[11px] uppercase tracking-[0.2em] text-[#C8A96B]">
+              <p className="mt-0.5 text-[11px] uppercase tracking-[0.2em] text-[#B79DC6]">
                 Admin Portal
               </p>
             </div>
@@ -218,11 +217,11 @@ console.log(response)
           </div>
 
           <div>
-            <p className="text-[15px] font-medium text-[#171411]">
+            <p className="text-[15px] font-medium text-[#B79DC6]">
               The Soibi Fashion
             </p>
 
-            <p className="mt-0.5 text-[11px] uppercase tracking-[0.18em] text-[#A8864F]">
+            <p className="mt-0.5 text-[11px] uppercase tracking-[0.18em] text-[#B79DC6]">
               Admin Portal
             </p>
           </div>
@@ -233,7 +232,7 @@ console.log(response)
           {view === "email" && (
             <>
               <div className="mb-10">
-                <p className="mb-3 text-[11px] font-medium uppercase tracking-[0.22em] text-[#A8864F]">
+                <p className="mb-3 text-[11px] font-medium uppercase tracking-[0.22em] text-[#2F1C3Dz]">
                   Welcome back
                 </p>
 
@@ -268,7 +267,7 @@ console.log(response)
                 <button
                   type="submit"
                   disabled={requestCodeMutation.isPending}
-                  className="flex h-[52px] w-full cursor-pointer items-center justify-center rounded-md bg-[#171411] text-sm font-medium text-white transition-all duration-200 hover:bg-[#29231F] disabled:cursor-not-allowed disabled:opacity-60 active:scale-[0.99]"
+                  className="flex h-[52px] w-full cursor-pointer items-center justify-center rounded-md bg-[#2F1C3D] text-sm font-medium text-white transition-all duration-200 hover:bg-[#29231F] disabled:cursor-not-allowed disabled:opacity-60 active:scale-[0.99]"
                 >
                   {requestCodeMutation.isPending ? (
                     <Loader2 size={19} className="animate-spin" />
@@ -414,6 +413,18 @@ console.log(response)
           © {new Date().getFullYear()} The Soibi Fashion
         </p>
       </div>
+      <Toaster
+          position="top-right"
+          richColors
+          toastOptions={{
+            classNames: {
+              success:
+                "!bg-[#EAF7E9] !border !border-[#C9A22733] !text-[black]",
+              error:
+                "!bg-[#FDECEC] !border !border-[#DE0D0D33] !text-[#DE0D0D]",
+            },
+          }}
+        />
     </div>
   );
 };

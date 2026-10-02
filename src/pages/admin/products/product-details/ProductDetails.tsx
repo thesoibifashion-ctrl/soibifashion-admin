@@ -39,6 +39,7 @@ import {
   createProductVariant,
   deleteProductImage,
   deleteProductVariant,
+  getAdminCollections,
   getAdminProducts,
   removeProductFromCollection,
   updateProduct,
@@ -148,7 +149,7 @@ const ProductFormPage = () => {
   // ── Collections ─────────────────────────────────────────────────
   const { data: collectionsData } = useQuery({
     queryKey: ["collections"],
-    queryFn: getCollections,
+    queryFn: getAdminCollections,
     staleTime: 1000 * 60 * 5,
   });
 
@@ -1171,11 +1172,11 @@ const ProductFormPage = () => {
           <div className="rounded-2xl border bg-white p-5">
             <h3 className="mb-3 font-semibold text-near-brown">Collections</h3>
 
-            {!collectionsData?.data || collectionsData.data.length === 0 ? (
+            {!collectionsData || collectionsData.length === 0 ? (
               <p className="text-sm text-gray-500">No collections yet.</p>
             ) : (
               <div className="space-y-1.5">
-                {collectionsData.data.map((col: Collection) => {
+                {collectionsData.map((col: Collection) => {
                   const active = selectedCollections.includes(col.id);
                   const loading = collectionLoadingId === col.id;
 

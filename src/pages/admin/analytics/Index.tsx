@@ -27,7 +27,7 @@ import {
 
 import { apiGet } from "@/api/clients";
 
-const GOLD = "#C9A227";
+const GOLD = "#8B5C9E";
 // const BLACK = "#0E0E0E";
 
 type AnalyticsResponse = {
@@ -164,7 +164,7 @@ function SectionHeader({
 }) {
   return (
     <div className="mb-5">
-      <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#C9A227]">
+      <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#8B5C9E]">
         {eyebrow}
       </p>
 
@@ -192,26 +192,26 @@ function StatCard({
     <div
       className={`rounded-2xl border p-5 transition-shadow hover:shadow-md ${
         accent
-          ? "border-[#C9A227]/30 bg-[#0E0E0E]"
+          ? "border-[#8B5C9E]/30 bg-[#0E0E0E]"
           : "border-[#EDEAE4] bg-white"
       }`}
     >
       <div className="flex items-start justify-between">
         <div
           className={`flex h-10 w-10 items-center justify-center rounded-xl ${
-            accent ? "bg-[#C9A227]" : "bg-[#F8F6F2]"
+            accent ? "bg-[#8B5C9E]" : "bg-[#F8F6F2]"
           }`}
         >
           <Icon
             className={`h-5 w-5 ${
-              accent ? "text-[#0E0E0E]" : "text-[#C9A227]"
+              accent ? "text-[#0E0E0E]" : "text-[#8B5C9E]"
             }`}
           />
         </div>
 
         <ArrowUpRight
           className={`h-4 w-4 ${
-            accent ? "text-[#C9A227]" : "text-[#999]"
+            accent ? "text-[#8B5C9E]" : "text-[#999]"
           }`}
         />
       </div>
@@ -377,7 +377,7 @@ export default function AnalyticsPage() {
       <div className="flex min-h-[500px] items-center justify-center p-6">
         <div className="text-center">
           <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-[#F8F6F2]">
-            <Activity className="h-5 w-5 text-[#C9A227]" />
+            <Activity className="h-5 w-5 text-[#8B5C9E]" />
           </div>
 
           <h2 className="mt-4 text-lg font-semibold text-[#0E0E0E]">
@@ -399,9 +399,9 @@ export default function AnalyticsPage() {
         <div className="flex flex-col justify-between gap-5 lg:flex-row lg:items-end">
           <div>
             <div className="mb-2 flex items-center gap-2">
-              <Sparkles className="h-4 w-4 text-[#C9A227]" />
+              <Sparkles className="h-4 w-4 text-[#8B5C9E]" />
 
-              <span className="text-[11px] font-semibold uppercase tracking-[0.2em] text-[#C9A227]">
+              <span className="text-[11px] font-semibold uppercase tracking-[0.2em] text-[#8B5C9E]">
                Analytics
               </span>
             </div>
@@ -427,7 +427,7 @@ export default function AnalyticsPage() {
                 type="date"
                 value={from}
                 onChange={(event) => setFrom(event.target.value)}
-                className="h-10 rounded-xl border border-[#E4E1DA] bg-white px-3 text-sm outline-none transition focus:border-[#C9A227]"
+                className="h-10 rounded-xl border border-[#E4E1DA] bg-white px-3 text-sm outline-none transition focus:border-[#8B5C9E]"
               />
             </div>
 
@@ -440,7 +440,7 @@ export default function AnalyticsPage() {
                 type="date"
                 value={to}
                 onChange={(event) => setTo(event.target.value)}
-                className="h-10 rounded-xl border border-[#E4E1DA] bg-white px-3 text-sm outline-none transition focus:border-[#C9A227]"
+                className="h-10 rounded-xl border border-[#E4E1DA] bg-white px-3 text-sm outline-none transition focus:border-[#8B5C9E]"
               />
             </div>
 
@@ -451,7 +451,7 @@ export default function AnalyticsPage() {
                   setFrom("");
                   setTo("");
                 }}
-                className="h-10 rounded-xl border border-[#E4E1DA] bg-white px-4 text-sm font-medium text-[#555] transition hover:border-[#C9A227] hover:text-[#0E0E0E]"
+                className="h-10 rounded-xl border border-[#E4E1DA] bg-white px-4 text-sm font-medium text-[#555] transition hover:border-[#8B5C9E] hover:text-[#0E0E0E]"
               >
                 Reset
               </button>
@@ -617,7 +617,7 @@ export default function AnalyticsPage() {
                 >
                   <div className="flex items-center gap-3">
                     <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#F8F6F2]">
-                      <Icon className="h-4 w-4 text-[#C9A227]" />
+                      <Icon className="h-4 w-4 text-[#8B5C9E]" />
                     </div>
 
                     <span className="text-sm text-[#555]">
@@ -642,7 +642,7 @@ export default function AnalyticsPage() {
         {/* Contacts */}
         <section className="grid gap-6 lg:grid-cols-[1fr_1.5fr]">
           <div className="rounded-2xl border border-[#EDEAE4] bg-[#0E0E0E] p-6">
-            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#C9A227]">
+            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#8B5C9E]">
               <Bell className="h-5 w-5 text-[#0E0E0E]" />
             </div>
 
@@ -662,7 +662,7 @@ export default function AnalyticsPage() {
           <div className="overflow-hidden rounded-2xl border border-[#EDEAE4] bg-white">
             <div className="border-b border-[#EDEAE4] px-6 py-4">
               <div className="flex items-center gap-2">
-                <MessageSquare className="h-4 w-4 text-[#C9A227]" />
+                <MessageSquare className="h-4 w-4 text-[#8B5C9E]" />
 
                 <span className="text-sm font-semibold text-[#0E0E0E]">
                   Recent enquiries

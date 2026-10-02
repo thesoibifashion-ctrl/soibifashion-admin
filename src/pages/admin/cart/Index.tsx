@@ -156,7 +156,7 @@ const CartOrdersPage = () => {
                 <SelectItem
                   key={status}
                   value={status}
-                  className="cursor-pointer text-xs font-medium capitalize text-[#57534E] focus:bg-[#F5F0EB] focus:text-[#18120E] data-[state=checked]:text-[#8B5E3C]"
+                  className="cursor-pointer text-xs font-medium capitalize text-[#57534E] focus:bg-[#E2D8E8] focus:text-[#18120E] data-[state=checked]:text-[#8B5E3C]"
                 >
                   {status}
                 </SelectItem>

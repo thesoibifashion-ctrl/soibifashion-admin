@@ -110,7 +110,7 @@ export default function BrandValues() {
             </p>
           </div>
 
-          <Button onClick={handleOpenCreate}>Add About Item</Button>
+          <Button onClick={handleOpenCreate} className="bg-[#4B2D5D]">Add About Item</Button>
         </div>
 
         {/* Content */}
@@ -129,8 +129,8 @@ export default function BrandValues() {
               section.
             </p>
 
-            <Button onClick={handleOpenCreate} className="mt-6">
-              Add About Item
+            <Button onClick={handleOpenCreate} className="mt-6 bg-[red]">
+              Add About Items
             </Button>
           </div>
         ) : (

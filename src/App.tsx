@@ -41,7 +41,7 @@ function App() {
           <Route path="/products-details/:id" element={<ProductDetailsPages />} />
           <Route path="/collections" element={<ResearchPage />} />
           <Route path="/settings" element={<SettingsPage />} />
-          <Route path="/customization" element={<CustomizationsPage />} />
+          <Route path="/customization" element={<HomePage />} />
           <Route path="/gallery" element={<GalleryPage />} />
           <Route path="/custmomization" element={<HomePage />} />
           <Route path="/measurement" element={<MeasurementPage />} />

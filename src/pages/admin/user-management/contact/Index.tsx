@@ -96,7 +96,7 @@ const ContactPage = () => {
             />
           </div>
 
-          <div className="flex-1 overflow-y-auto divide-y divide-[#F5F0EB]">
+          <div className="flex-1 overflow-y-auto divide-y divide-[#E2D8E8]">
             {filteredData.length === 0 ? (
               <div className="py-12">
                 <EmptyState text="No messages" />

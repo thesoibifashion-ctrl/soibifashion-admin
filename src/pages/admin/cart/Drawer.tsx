@@ -59,7 +59,7 @@
 // const getStatusStyle = (status?: string) =>
 //   STATUS_STYLES[status ?? ""] ?? {
 //     dot: "bg-[#A8A29E]",
-//     badge: "bg-[#F5F0EB] text-[#78716C] border-[#E7E2DC]",
+//     badge: "bg-[#E2D8E8] text-[#78716C] border-[#E7E2DC]",
 //   };
 
 // const formatDateTime = (value?: string | Date | null) => {
@@ -168,7 +168,7 @@
 //       {/* Header */}
 //       <div className="border-b border-[#E7E2DC] bg-white px-6 pb-5 pt-6">
 //         <div className="flex items-start gap-4">
-//           <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#F5F0EB] ring-4 ring-[#F5F0EB]/60">
+//           <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#E2D8E8] ring-4 ring-[#E2D8E8]/60">
 //             {customerName !== "Guest Customer" ? (
 //               <span className="text-sm font-semibold text-[#8B5E3C]">
 //                 {getInitials(customerName)}
@@ -329,7 +329,7 @@
 //                   {item.imageUrlSnapshot ? (
 //                     <ImagePreview src={item.imageUrlSnapshot} />
 //                   ) : (
-//                     <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-xl border border-[#E7E2DC] bg-[#F5F0EB]">
+//                     <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-xl border border-[#E7E2DC] bg-[#E2D8E8]">
 //                       <Package size={20} className="text-[#8B5E3C]" />
 //                     </div>
 //                   )}
@@ -341,17 +341,17 @@
 
 //                     <div className="mt-2 flex flex-wrap gap-1.5">
 //                       {item.selectedSize && (
-//                         <span className="rounded-md bg-[#F5F0EB] px-2 py-0.5 text-[11px] font-medium text-[#78716C]">
+//                         <span className="rounded-md bg-[#E2D8E8] px-2 py-0.5 text-[11px] font-medium text-[#78716C]">
 //                           Size {item.selectedSize}
 //                         </span>
 //                       )}
 //                       {item.selectedColor && (
-//                         <span className="rounded-md bg-[#F5F0EB] px-2 py-0.5 text-[11px] font-medium text-[#78716C]">
+//                         <span className="rounded-md bg-[#E2D8E8] px-2 py-0.5 text-[11px] font-medium text-[#78716C]">
 //                           {item.selectedColor}
 //                         </span>
 //                       )}
 //                       {item.selectedMaterial && (
-//                         <span className="rounded-md bg-[#F5F0EB] px-2 py-0.5 text-[11px] font-medium text-[#78716C]">
+//                         <span className="rounded-md bg-[#E2D8E8] px-2 py-0.5 text-[11px] font-medium text-[#78716C]">
 //                           {item.selectedMaterial}
 //                         </span>
 //                       )}
@@ -444,7 +444,7 @@
 //           <Card>
 //             <div className="flex items-center justify-between gap-3">
 //               <div className="flex items-center gap-3">
-//                 <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#F5F0EB]">
+//                 <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#E2D8E8]">
 //                   <CreditCard size={16} className="text-[#8B5E3C]" />
 //                 </div>
 //                 <div>
@@ -499,7 +499,7 @@
 //           <Card>
 //             {order.address ? (
 //               <div className="flex gap-3">
-//                 <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-[#F5F0EB]">
+//                 <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-[#E2D8E8]">
 //                   <MapPin size={16} className="text-[#8B5E3C]" />
 //                 </div>
 
@@ -529,7 +529,7 @@
 //             <Card>
 //               <div className="flex items-center justify-between gap-3">
 //                 <div className="flex min-w-0 items-center gap-3">
-//                   <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-[#F5F0EB]">
+//                   <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-[#E2D8E8]">
 //                     <Truck size={16} className="text-[#8B5E3C]" />
 //                   </div>
 //                   <div className="min-w-0">
@@ -557,7 +557,7 @@
 //                   href={order.shippingTrackingUrl}
 //                   target="_blank"
 //                   rel="noopener noreferrer"
-//                   className="mt-4 flex items-center justify-center gap-1.5 rounded-xl border border-[#E7E2DC] bg-[#FAFAF8] py-2.5 text-sm font-medium text-[#8B5E3C] transition-colors hover:bg-[#F5F0EB]"
+//                   className="mt-4 flex items-center justify-center gap-1.5 rounded-xl border border-[#E7E2DC] bg-[#FAFAF8] py-2.5 text-sm font-medium text-[#8B5E3C] transition-colors hover:bg-[#E2D8E8]"
 //                 >
 //                   <ExternalLink size={13} />
 //                   Track shipment
@@ -647,7 +647,7 @@
 //                         "rounded-full px-1.5 py-0.5 text-[9px] font-semibold uppercase tracking-wide",
 //                         isSelected
 //                           ? "bg-white/15 text-white"
-//                           : "bg-[#F5F0EB] text-[#8B5E3C]"
+//                           : "bg-[#E2D8E8] text-[#8B5E3C]"
 //                       )}
 //                     >
 //                       Current

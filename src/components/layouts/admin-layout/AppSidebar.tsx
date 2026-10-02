@@ -138,7 +138,7 @@ function NavContent({ onNavigate }: { onNavigate?: () => void }) {
   const hasUnreadContact = useHasUnreadContact();
 
   return (
-    <div className="flex h-full flex-col bg-[#170a01]">
+    <div className="flex h-full flex-col bg-[#1A0D25]">
       {/* Header */}
       <div className="flex items-center gap-2 px-4 pb-2 pt-10">
         <img src={logo} alt="logo" />
@@ -162,7 +162,7 @@ function NavContent({ onNavigate }: { onNavigate?: () => void }) {
                       onClick={onNavigate}
                       className={`mb-4 flex items-center gap-2 rounded-[20px] px-3 py-2 transition-colors ${
                         isActive
-                          ? "bg-[linear-gradient(135deg,#170a01_0%,#7B3C10_100%)]"
+                          ? "bg-[linear-gradient(135deg,#1A0D25_0%,#7B3C10_100%)]"
                           : "hover:bg-transparent"
                       }`}
                     >
@@ -193,10 +193,10 @@ function NavContent({ onNavigate }: { onNavigate?: () => void }) {
       </div>
 
       {/* Footer */}
-      <div className="bg-[#170a01] px-4 py-3">
+      <div className="bg-[#1A0D25] px-4 py-3">
         <button
           onClick={handleLogout}
-          className="flex w-full items-center gap-2 rounded-[20px] bg-[#170a01] px-3 py-2 text-sm font-medium text-[#DE0D0D] transition-colors hover:bg-[#FDECEC]"
+          className="flex w-full items-center gap-2 rounded-[20px] bg-[#1A0D25] px-3 py-2 text-sm font-medium text-[#DE0D0D] transition-colors hover:bg-[#FDECEC]"
         >
           <LogOut size={16} />
           Log out
@@ -217,7 +217,7 @@ export function MobileSidebarTrigger() {
 
       <SheetContent
         side="left"
-        className="w-72 border-none bg-[#170a01] p-0 [&>button]:text-white"
+        className="w-72 border-none bg-[#1A0D25] p-0 [&>button]:text-white"
       >
         <SheetTitle className="sr-only">Navigation menu</SheetTitle>
 
@@ -241,14 +241,14 @@ export function AppSidebar() {
 
   return (
     <Sidebar>
-      <SidebarHeader className="bg-[#170a01] pt-10">
+      <SidebarHeader className="bg-[#1A0D25] pt-10">
         <div className="flex items-center gap-2">
           <img src={logo} alt="logo" />
           <div></div>
         </div>
       </SidebarHeader>
 
-      <SidebarContent className="bg-[#170a01] pt-10">
+      <SidebarContent className="bg-[#1A0D25] pt-10">
         {navMain.map((group) => (
           <SidebarGroup key={group.title}>
             <SidebarGroupContent>
@@ -264,7 +264,7 @@ export function AppSidebar() {
                       <SidebarMenuButton
                         asChild
                         isActive={isActive}
-                        className="data-[active=true]:bg-[linear-gradient(135deg,#170a01_0%,#7B3C10_100%)] hover:bg-transparent! py-2 mb-4 px-3 rounded-[20px]"
+                        className="data-[active=true]:bg-[linear-gradient(135deg,#1A0D25_0%,#8B5C9E_100%)] hover:bg-transparent! py-2 mb-4 px-3 rounded-[20px]"
                       >
                         <Link to={item.url} className="flex items-center gap-2">
                           <img
@@ -311,12 +311,12 @@ export function AppSidebar() {
         />
       </SidebarContent>
 
-      <SidebarFooter className="bg-[#170a01]">
-        <SidebarMenu className="bg-[#170a01]">
+      <SidebarFooter className="bg-[#1A0D25]">
+        <SidebarMenu className="bg-[#1A0D25]">
           <SidebarMenuItem>
             <SidebarMenuButton
               onClick={handleLogout}
-              className="py-2 px-3 bg-[#170a01] rounded-[20px] text-[#DE0D0D] hover:text-[#DE0D0D] hover:bg-[#FDECEC]"
+              className="py-2 px-3 bg-[#1A0D25] rounded-[20px] text-[#DE0D0D] hover:text-[#DE0D0D] hover:bg-[#FDECEC]"
             >
               <LogOut size={16} />
               <span className="text-sm font-medium">Log out</span>

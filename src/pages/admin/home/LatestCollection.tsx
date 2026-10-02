@@ -113,7 +113,7 @@ export default function LatestCollectionPage() {
             </p>
           </div>
 
-          <Button onClick={handleOpenCreate}>Add Collection Item</Button>
+          <Button className="bg-[#4B2D5D]" onClick={handleOpenCreate}>Add Collection Item</Button>
         </div>
 
         {/* Content */}
@@ -211,7 +211,7 @@ export default function LatestCollectionPage() {
                   <Button variant="outline" onClick={() => handleEdit(item)}>
                     Edit
                   </Button>
-                  <Button onClick={() => handleDelete(item.id)}>
+                  <Button className="bg-[#4B2D5D]" onClick={() => handleDelete(item.id)}>
                     {deleteCategory.isPending ? "deleting" : "delete"}
                   </Button>
                 </div>

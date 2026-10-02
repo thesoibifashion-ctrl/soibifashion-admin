@@ -107,7 +107,7 @@
 //         {/* Header */}
 //         <div className="border-b border-[#E7E2DC] px-6 py-5">
 //           <div className="flex items-center gap-4">
-//             <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#F5F0EB] text-sm font-semibold text-[#8B5E3C]">
+//             <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#E2D8E8] text-sm font-semibold text-[#8B5E3C]">
 //               {getInitials(fullQuote.customerName)}
 //             </div>
 
@@ -274,7 +274,7 @@
 //                           {item.imageUrlSnapshot ? (
 //                             <ImagePreview src={item.imageUrlSnapshot} />
 //                           ) : (
-//                             <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-xl border border-[#E7E2DC] bg-[#F5F0EB]">
+//                             <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-xl border border-[#E7E2DC] bg-[#E2D8E8]">
 //                               <Package size={20} className="text-[#8B5E3C]" />
 //                             </div>
 //                           )}
@@ -394,7 +394,7 @@
 
 //                 <div className="rounded-2xl border border-[#E7E2DC] bg-[#FAFAF8] p-4">
 //                   <div className="flex items-center gap-3">
-//                     <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#F5F0EB]">
+//                     <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#E2D8E8]">
 //                       <CreditCard size={16} className="text-[#8B5E3C]" />
 //                     </div>
 
@@ -490,7 +490,7 @@
 
 //                   <div className="rounded-2xl border border-[#E7E2DC] bg-[#FAFAF8] p-4">
 //                     <div className="flex items-center gap-3">
-//                       <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#F5F0EB]">
+//                       <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#E2D8E8]">
 //                         <Truck size={16} className="text-[#8B5E3C]" />
 //                       </div>
 
@@ -522,7 +522,7 @@
 
 //                 <div className="space-y-3">
 //                   <div className="flex items-start gap-3">
-//                     <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#F5F0EB]">
+//                     <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#E2D8E8]">
 //                       <Check size={11} className="text-[#8B5E3C]" />
 //                     </div>
 
@@ -537,7 +537,7 @@
 
 //                   {fullQuote.reviewedAt && (
 //                     <div className="flex items-start gap-3">
-//                       <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#F5F0EB]">
+//                       <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#E2D8E8]">
 //                         <Check size={11} className="text-[#8B5E3C]" />
 //                       </div>
 
@@ -553,7 +553,7 @@
 
 //                   {fullQuote.completedAt && (
 //                     <div className="flex items-start gap-3">
-//                       <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#F5F0EB]">
+//                       <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#E2D8E8]">
 //                         <Check size={11} className="text-[#8B5E3C]" />
 //                       </div>
 

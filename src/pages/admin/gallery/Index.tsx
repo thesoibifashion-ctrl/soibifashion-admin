@@ -201,7 +201,7 @@ const GalleryPage = () => {
           <button
             type="button"
             onClick={() => setShowUpload(true)}
-            className="flex h-11 w-full cursor-pointer items-center justify-center gap-2 rounded-xl bg-[#8B5E3C] px-5 text-sm font-medium text-white transition-colors hover:bg-[#744C31] md:w-auto"
+            className="flex h-11 w-full cursor-pointer items-center justify-center gap-2 rounded-xl bg-[#4B2D5D] px-5 text-sm font-medium text-white transition-colors hover:bg-[#744C31] md:w-auto"
           >
             <Plus size={17} />
             Add Image

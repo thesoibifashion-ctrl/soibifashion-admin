@@ -136,7 +136,7 @@
 }
 
 .brown-button{
-  @apply  bg-[black] px-3 py-2 rounded-lg text-white
+  @apply  bg-[#4B2D5D] px-3 py-2 rounded-lg text-white
 }
 .delete-button{
   @apply  bg-[#970000] flex items-center gap-1 px-2 py-1 rounded-lg text-white
@@ -156,7 +156,7 @@ p,a,span,li,button{
   --color-gold: #C9A227;
   --color-gold-dim: #c9ae09;
   --color-near-black: #0B0B0B;
-  --color-near-brown: #18120E;
+  --color-near-brown: #4B2D5D;
   --color-off-white: #F8F6F2;
   --color-border: #EAE6DD;
   --color-dark-text: #1E1E1E;

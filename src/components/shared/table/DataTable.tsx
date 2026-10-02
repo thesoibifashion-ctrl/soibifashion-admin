@@ -77,14 +77,14 @@ export function DataTable<TData, TValue>({
             ))}
           </TableHeader>
 
-          <TableBody className="divide-y divide-[#F5F0EB]">
+          <TableBody className="divide-y divide-[#E2D8E8]">
             {table.getRowModel().rows?.length ? (
               table.getRowModel().rows.map((row) => (
                 <TableRow
                   onClick={() => onRowClick?.(row.original)}
                   key={row.id}
                   data-state={row.getIsSelected() && "selected"}
-                  className="cursor-pointer border-b border-[#F5F0EB] hover:bg-[#FAFAF8] transition-colors"
+                  className="cursor-pointer border-b border-[#E2D8E8] hover:bg-[#FAFAF8] transition-colors"
                 >
                   {row.getVisibleCells().map((cell) => (
                     <TableCell

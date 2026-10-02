@@ -17,7 +17,7 @@ const CollectionsPanel = ({ collections, selectedCollections, loadingId, onToggl
     <h3 className="mb-3 font-semibold text-near-brown">Collections</h3>
 
     {collections.length === 0 ? (
-      <p className="text-sm text-gray-500">No collections yet.</p>
+      <p className="text-sm text-gray-500">Nod collections yet.</p>
     ) : (
       <div className="space-y-1.5">
         {collections.map((col) => {

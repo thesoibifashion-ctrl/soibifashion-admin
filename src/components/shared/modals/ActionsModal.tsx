@@ -52,7 +52,7 @@ export default function ConfirmationModal({
           <button
             type="button"
             onClick={() => onOpenChange(false)}
-            className="h-10 rounded-xl border border-[#E7E2DC] bg-white px-5 text-sm font-medium text-[#57534E] transition-colors hover:bg-[#F5F0EB] cursor-pointer"
+            className="h-10 rounded-xl border border-[#E7E2DC] bg-white px-5 text-sm font-medium text-[#57534E] transition-colors hover:bg-[#E2D8E8] cursor-pointer"
           >
             {cancelText}
           </button>

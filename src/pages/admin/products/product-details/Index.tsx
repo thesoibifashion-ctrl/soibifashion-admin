@@ -18,8 +18,8 @@ import {
   createProductVariant,
   updateProductVariant,
   deleteProductVariant,
+  getAdminCollections,
 } from "@/api/requests/products";
-import { getCollections } from "@/api/Collections";
 import { uploadToCloudinary } from "@/lib/uploadToCloudinary";
 import CollectionsPanel from "./CollectionsPanel";
 import ColorsSection from "./ColorsSection";
@@ -110,9 +110,10 @@ const ProductDetailsPages = () => {
 
   const { data: collectionsData } = useQuery({
     queryKey: ["collections"],
-    queryFn: getCollections,
+    queryFn: getAdminCollections,
     staleTime: 1000 * 60 * 5,
   });
+  
 
   const [selectedCollections, setSelectedCollections] = useState<string[]>(
     []
@@ -412,7 +413,7 @@ const ProductDetailsPages = () => {
       const payload = {
         name,
         slug: slugify(name),
-        description: "leather",
+        description,
         category,
         gender: gender || undefined,
         basePrice: Number(basePrice),
@@ -451,8 +452,8 @@ const ProductDetailsPages = () => {
           const imageUrl = await uploadToCloudinary(img.file);
 
           await addProductImage(productId, {
-            imageUrl,
-            imagePublicId: imageUrl,
+            imageUrl: imageUrl.secureUrl,
+            imagePublicId: imageUrl.publicId,
             altText: img.altText,
             sortOrder: savedImages.length + i,
             isPrimary: img.isPrimary,
@@ -613,7 +614,7 @@ const ProductDetailsPages = () => {
           />
 
           <CollectionsPanel
-            collections={collectionsData?.data ?? []}
+            collections={collectionsData ?? []}
             selectedCollections={selectedCollections}
             loadingId={collectionLoadingId}
             onToggle={handleToggleCollection}
