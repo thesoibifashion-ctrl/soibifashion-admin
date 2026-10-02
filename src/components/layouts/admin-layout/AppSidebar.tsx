@@ -162,7 +162,7 @@ function NavContent({ onNavigate }: { onNavigate?: () => void }) {
                       onClick={onNavigate}
                       className={`mb-4 flex items-center gap-2 rounded-[20px] px-3 py-2 transition-colors ${
                         isActive
-                          ? "bg-[linear-gradient(135deg,#1A0D25_0%,#7B3C10_100%)]"
+                          ? "bg-[linear-gradient(135deg,#1A0D25_0%,#8B5C9E_100%)]"
                           : "hover:bg-transparent"
                       }`}
                     >
