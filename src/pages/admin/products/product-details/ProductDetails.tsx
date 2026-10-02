@@ -30,7 +30,6 @@ import { Switch } from "@/components/ui/switch";
 //   updateProductVariant,
 //   deleteProductVariant,
 // } from "@/api/products";
-import { getCollections } from "@/api/Collections";
 import { uploadToCloudinary } from "@/lib/uploadToCloudinary";
 import {
   addProductImage,

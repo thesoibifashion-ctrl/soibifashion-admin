@@ -11,7 +11,7 @@ import CartOrdersPage from "./pages/admin/cart/Index";
 import ProductsPage from "./pages/admin/products/Index";
 import SettingsPage from "./pages/admin/settings/Index";
 import Analytics from "./pages/admin/analytics/Index";
-import CustomizationsPage from "./pages/admin/customizations/Index";
+// import CustomizationsPage from "./pages/admin/customizations/Index";
 import GalleryPage from "./pages/admin/gallery/Index";
 import ProductDetailsPages from "./pages/admin/products/product-details/Index";
 import HomePage from "./pages/admin/home/Index";
