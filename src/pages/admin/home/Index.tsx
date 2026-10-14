@@ -10,6 +10,7 @@ import LatestCollectionPage from "./LatestCollection";
 import GalleryPage from "./Gallery";
 import AboutPage from "./About";
 import BrandValues from "./BrandValues";
+import CarouselPage from "./HeroPage";
 
 const HomePage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -31,12 +32,12 @@ const HomePage = () => {
         className="mt-14.75 w-full"
       >
         <TabsList className="w-fit justify-start h-10! bg-[#E2D8E8] py-1 rounded-xl">
-          {/* <TabsTrigger
+          <TabsTrigger
             className="px-5 rounded-lg text-[#1C1917]!  text-sm data-active:bg-[white] data-active:shadow-sm! "
             value="contact"
           >
             Hero Video
-          </TabsTrigger> */}
+          </TabsTrigger>
 
           <TabsTrigger
             className="px-5 rounded-lg text-[#1C1917]!  text-sm data-active:bg-[white] data-active:shadow-sm! "
@@ -64,9 +65,9 @@ const HomePage = () => {
           </TabsTrigger>
         </TabsList>
 
-        {/* <TabsContent value="contact">
-          <HeroPages />
-        </TabsContent> */}
+        <TabsContent value="contact">
+          <CarouselPage />
+        </TabsContent>
 
         <TabsContent value="Collection">{/* <AcademyPage /> */}<LatestCollectionPage/></TabsContent>
         <TabsContent value="Gallery">{/* <AcademyPage /> */}<GalleryPage/></TabsContent>
