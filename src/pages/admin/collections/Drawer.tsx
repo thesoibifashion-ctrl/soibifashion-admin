@@ -6,8 +6,8 @@ import { useRef, useState } from "react";
 import SuccessModal from "@/components/shared/modals/SuccessModal";
 import { Loader2 } from "lucide-react";
 import { createCollection } from "@/api/Collections";
-import { apiPatch } from "@/api/client";
 import { uploadToCloudinary } from "@/lib/Cloudinary";
+import { apiPatch } from "@/api/clients";
 
 const CollectionDrawer = ({ props }: any) => {
   const queryClient = useQueryClient();
