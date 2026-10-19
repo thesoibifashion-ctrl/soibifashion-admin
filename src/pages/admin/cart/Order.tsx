@@ -23,7 +23,7 @@ const CartOrderDetailsPage = () => {
     return (
       <div className="min-h-screen bg-[#FAFAF8] flex items-center justify-center">
         <div className="text-center">
-          <div className="w-8 h-8 border-2 border-[#E7E2DC] border-t-[#8B5E3C] rounded-full animate-spin mx-auto mb-3" />
+          <div className="w-8 h-8 border-2 border-[#E7E2DC] border-t-[#E2D8E8] rounded-full animate-spin mx-auto mb-3" />
           <p className="text-sm text-[#78716C]">
             Loading order...
           </p>

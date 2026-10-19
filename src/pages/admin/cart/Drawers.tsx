@@ -59,7 +59,7 @@
 // const getStatusStyle = (status?: string) =>
 //   STATUS_STYLES[status ?? ""] ?? {
 //     dot: "bg-[#A8A29E]",
-//     badge: "bg-[#E2D8E8] text-[#78716C] border-[#E7E2DC]",
+//     badge: "bg-[#1A0D25] text-[#78716C] border-[#E7E2DC]",
 //   };
 
 // /**
@@ -125,7 +125,7 @@
 //   children: React.ReactNode;
 // }) => (
 //   <div className="mb-3 flex items-center gap-2">
-//     <Icon size={14} className="text-[#8B5E3C]" />
+//     <Icon size={14} className="text-[#1A0D25]" />
 //     <h3 className="text-[11px] font-semibold uppercase tracking-[0.14em] text-[#78716C]">
 //       {children}
 //     </h3>
@@ -227,13 +227,13 @@
 //       {/* Header */}
 //       <div className="border-b border-[#E7E2DC] bg-white px-6 pb-5 pt-6">
 //         <div className="flex items-start gap-4">
-//           <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#E2D8E8] ring-4 ring-[#E2D8E8]/60">
+//           <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#1A0D25] ring-4 ring-[#1A0D25]/60">
 //             {customerName ? (
-//               <span className="text-sm font-semibold text-[#8B5E3C]">
+//               <span className="text-sm font-semibold text-[#1A0D25]">
 //                 {getInitials(customerName)}
 //               </span>
 //             ) : (
-//               <User size={18} className="text-[#8B5E3C]" />
+//               <User size={18} className="text-[#E2D8E8]" />
 //             )}
 //           </div>
 
@@ -260,9 +260,9 @@
 //               {customerPhone && (
 //                 <a
 //                   href={`tel:${customerPhone}`}
-//                   className="inline-flex items-center gap-1.5 rounded-full border border-[#E7E2DC] bg-[#FAFAF8] px-2.5 py-1 text-xs text-[#57534E] transition-colors hover:border-[#8B5E3C]/40"
+//                   className="inline-flex items-center gap-1.5 rounded-full border border-[#E7E2DC] bg-[#FAFAF8] px-2.5 py-1 text-xs text-[#57534E] transition-colors hover:border-[#E2D8E8]/40"
 //                 >
-//                   <Phone size={11} className="text-[#8B5E3C]" />
+//                   <Phone size={11} className="text-[#E2D8E8]" />
 //                   {customerPhone}
 //                 </a>
 //               )}
@@ -270,9 +270,9 @@
 //               {customerEmail && (
 //                 <a
 //                   href={`mailto:${customerEmail}`}
-//                   className="inline-flex max-w-full items-center gap-1.5 rounded-full border border-[#E7E2DC] bg-[#FAFAF8] px-2.5 py-1 text-xs text-[#57534E] transition-colors hover:border-[#8B5E3C]/40"
+//                   className="inline-flex max-w-full items-center gap-1.5 rounded-full border border-[#E7E2DC] bg-[#FAFAF8] px-2.5 py-1 text-xs text-[#57534E] transition-colors hover:border-[#E2D8E8]/40"
 //                 >
-//                   <Mail size={11} className="shrink-0 text-[#8B5E3C]" />
+//                   <Mail size={11} className="shrink-0 text-[#E2D8E8]" />
 //                   <span className="truncate">{customerEmail}</span>
 //                 </a>
 //               )}
@@ -338,7 +338,7 @@
 //                           className={cn(
 //                             "flex h-6 w-6 items-center justify-center rounded-full border text-[10px] transition-colors",
 //                             done
-//                               ? "border-[#8B5E3C] bg-[#8B5E3C] text-white"
+//                               ? "border-[#E2D8E8] bg-[#E2D8E8] text-white"
 //                               : "border-[#E7E2DC] bg-white text-[#A8A29E]"
 //                           )}
 //                         >
@@ -359,7 +359,7 @@
 //                           className={cn(
 //                             "mt-3 h-0.5 flex-1 rounded-full",
 //                             index < currentStepIndex
-//                               ? "bg-[#8B5E3C]"
+//                               ? "bg-[#E2D8E8]"
 //                               : "bg-[#E7E2DC]"
 //                           )}
 //                         />
@@ -400,7 +400,7 @@
 //                       <ImagePreview src={imageUrl} />
 //                     ) : (
 //                       <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-xl border border-[#E7E2DC] bg-[#E2D8E8]">
-//                         <Package size={20} className="text-[#8B5E3C]" />
+//                         <Package size={20} className="text-[#E2D8E8]" />
 //                       </div>
 //                     )}
 
@@ -442,7 +442,7 @@
 //                     <div className="mt-4 flex gap-2.5 rounded-xl bg-[#FAFAF8] p-3">
 //                       <StickyNote
 //                         size={14}
-//                         className="mt-0.5 shrink-0 text-[#8B5E3C]"
+//                         className="mt-0.5 shrink-0 text-[#E2D8E8]"
 //                       />
 //                       <div>
 //                         <p className="text-[11px] font-medium uppercase tracking-wider text-[#A8A29E]">
@@ -458,7 +458,7 @@
 //                   {measurements.length > 0 && (
 //                     <div className="mt-4">
 //                       <div className="mb-2 flex items-center gap-2">
-//                         <Ruler size={13} className="text-[#8B5E3C]" />
+//                         <Ruler size={13} className="text-[#E2D8E8]" />
 //                         <p className="text-[11px] font-medium uppercase tracking-wider text-[#A8A29E]">
 //                           Measurements
 //                         </p>
@@ -514,7 +514,7 @@
 //             <div className="flex items-center justify-between gap-3">
 //               <div className="flex items-center gap-3">
 //                 <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#E2D8E8]">
-//                   <CreditCard size={16} className="text-[#8B5E3C]" />
+//                   <CreditCard size={16} className="text-[#E2D8E8]" />
 //                 </div>
 //                 <div>
 //                   <p className="text-xs text-[#A8A29E]">Payment evidence</p>
@@ -550,7 +550,7 @@
 //                   className="max-h-[320px] w-full object-contain transition-transform duration-300 group-hover:scale-[1.02]"
 //                 />
 
-//                 <div className="flex items-center justify-center gap-1.5 border-t border-[#E7E2DC] bg-white px-4 py-2.5 text-xs font-medium text-[#8B5E3C]">
+//                 <div className="flex items-center justify-center gap-1.5 border-t border-[#E7E2DC] bg-white px-4 py-2.5 text-xs font-medium text-[#E2D8E8]">
 //                   <ExternalLink size={12} />
 //                   Open / download receipt
 //                 </div>
@@ -567,7 +567,7 @@
 //             {address ? (
 //               <div className="flex gap-3">
 //                 <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-[#E2D8E8]">
-//                   <MapPin size={16} className="text-[#8B5E3C]" />
+//                   <MapPin size={16} className="text-[#E2D8E8]" />
 //                 </div>
 
 //                 <div className="min-w-0">
@@ -596,7 +596,7 @@
 //               <div className="flex items-center justify-between gap-3">
 //                 <div className="flex min-w-0 items-center gap-3">
 //                   <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-[#E2D8E8]">
-//                     <Truck size={16} className="text-[#8B5E3C]" />
+//                     <Truck size={16} className="text-[#E2D8E8]" />
 //                   </div>
 //                   <div className="min-w-0">
 //                     <p className="text-xs text-[#A8A29E]">Tracking number</p>
@@ -610,7 +610,7 @@
 //                   <button
 //                     type="button"
 //                     onClick={handleCopyTracking}
-//                     className="flex h-8 shrink-0 items-center gap-1.5 rounded-lg border border-[#E7E2DC] px-2.5 text-xs font-medium text-[#78716C] transition-colors hover:border-[#8B5E3C]/40"
+//                     className="flex h-8 shrink-0 items-center gap-1.5 rounded-lg border border-[#E7E2DC] px-2.5 text-xs font-medium text-[#78716C] transition-colors hover:border-[#E2D8E8]/40"
 //                   >
 //                     {copied ? <Check size={12} /> : <Copy size={12} />}
 //                     {copied ? "Copied" : "Copy"}
@@ -629,7 +629,7 @@
 //                   href={trackingUrl}
 //                   target="_blank"
 //                   rel="noopener noreferrer"
-//                   className="mt-4 flex items-center justify-center gap-1.5 rounded-xl border border-[#E7E2DC] bg-[#FAFAF8] py-2.5 text-sm font-medium text-[#8B5E3C] transition-colors hover:bg-[#E2D8E8]"
+//                   className="mt-4 flex items-center justify-center gap-1.5 rounded-xl border border-[#E7E2DC] bg-[#FAFAF8] py-2.5 text-sm font-medium text-[#E2D8E8] transition-colors hover:bg-[#E2D8E8]"
 //                 >
 //                   <ExternalLink size={13} />
 //                   Track shipment
@@ -703,7 +703,7 @@
 //                     "flex h-11 cursor-pointer items-center justify-between rounded-xl border px-3.5 text-sm font-medium capitalize transition-all",
 //                     isSelected
 //                       ? "border-[#18120E] bg-[#18120E] text-white shadow-sm"
-//                       : "border-[#E7E2DC] bg-white text-[#57534E] hover:border-[#8B5E3C]/40",
+//                       : "border-[#E7E2DC] bg-white text-[#57534E] hover:border-[#E2D8E8]/40",
 //                     isLoading && "cursor-not-allowed opacity-60"
 //                   )}
 //                 >
@@ -718,7 +718,7 @@
 //                         "rounded-full px-1.5 py-0.5 text-[9px] font-semibold uppercase tracking-wide",
 //                         isSelected
 //                           ? "bg-white/15 text-white"
-//                           : "bg-[#E2D8E8] text-[#8B5E3C]"
+//                           : "bg-[#E2D8E8] text-[#E2D8E8]"
 //                       )}
 //                     >
 //                       Current
@@ -755,7 +755,7 @@
 //         <button
 //           onClick={handleSave}
 //           disabled={isLoading || !hasChanges}
-//           className="flex h-11 w-full cursor-pointer items-center justify-center gap-2 rounded-xl bg-[#8B5E3C] text-sm font-medium text-white transition-colors hover:bg-[#7A5235] disabled:cursor-not-allowed disabled:opacity-50"
+//           className="flex h-11 w-full cursor-pointer items-center justify-center gap-2 rounded-xl bg-[#E2D8E8] text-sm font-medium text-white transition-colors hover:bg-[#7A5235] disabled:cursor-not-allowed disabled:opacity-50"
 //         >
 //           {isLoading ? (
 //             <>
@@ -943,7 +943,7 @@ const SectionTitle = ({
   children: React.ReactNode;
 }) => (
   <div className="mb-3 flex items-center gap-2">
-    <Icon size={14} className="text-[#8B5E3C]" />
+    <Icon size={14} className="text-[#E2D8E8]" />
     <h3 className="text-[11px] font-semibold uppercase tracking-[0.14em] text-[#78716C]">
       {children}
     </h3>
@@ -992,7 +992,6 @@ const CartOrderDrawer = ({
     onClose();
   };
 
-  /* Fields that may not exist on the CartOrder type */
   const raw = order as unknown as Record<string, unknown>;
 
   /* ---------- Safe, renderable values ---------- */
@@ -1094,11 +1093,11 @@ const CartOrderDrawer = ({
         <div className="flex items-start gap-4">
           <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#E2D8E8] ring-4 ring-[#E2D8E8]/60">
             {customerName ? (
-              <span className="text-sm font-semibold text-[#8B5E3C]">
+              <span className="text-sm font-semibold text-[#1A0D25]">
                 {getInitials(customerName)}
               </span>
             ) : (
-              <User size={18} className="text-[#8B5E3C]" />
+              <User size={18} className="text-[#1A0D25]" />
             )}
           </div>
 
@@ -1131,9 +1130,9 @@ const CartOrderDrawer = ({
               {customerPhone && (
                 <a
                   href={`tel:${customerPhone}`}
-                  className="inline-flex items-center gap-1.5 rounded-full border border-[#E7E2DC] bg-[#FAFAF8] px-2.5 py-1 text-xs text-[#57534E] transition-colors hover:border-[#8B5E3C]/40"
+                  className="inline-flex items-center gap-1.5 rounded-full border border-[#E7E2DC] bg-[#FAFAF8] px-2.5 py-1 text-xs text-[#57534E] transition-colors hover:border-[#E2D8E8]/40"
                 >
-                  <Phone size={11} className="text-[#8B5E3C]" />
+                  <Phone size={11} className="text-[#E2D8E8]" />
                   {customerPhone}
                 </a>
               )}
@@ -1141,16 +1140,16 @@ const CartOrderDrawer = ({
               {customerEmail && (
                 <a
                   href={`mailto:${customerEmail}`}
-                  className="inline-flex max-w-full items-center gap-1.5 rounded-full border border-[#E7E2DC] bg-[#FAFAF8] px-2.5 py-1 text-xs text-[#57534E] transition-colors hover:border-[#8B5E3C]/40"
+                  className="inline-flex max-w-full items-center gap-1.5 rounded-full border border-[#E7E2DC] bg-[#FAFAF8] px-2.5 py-1 text-xs text-[#57534E] transition-colors hover:border-[#E2D8E8]/40"
                 >
-                  <Mail size={11} className="shrink-0 text-[#8B5E3C]" />
+                  <Mail size={11} className="shrink-0 text-[#E2D8E8]" />
                   <span className="truncate">{customerEmail}</span>
                 </a>
               )}
 
               {contactMethod && (
                 <span className="inline-flex items-center gap-1.5 rounded-full border border-[#E7E2DC] bg-[#FAFAF8] px-2.5 py-1 text-xs capitalize text-[#57534E]">
-                  <MessageCircle size={11} className="text-[#8B5E3C]" />
+                  <MessageCircle size={11} className="text-[#E2D8E8]" />
                   Prefers {contactMethod}
                 </span>
               )}
@@ -1168,7 +1167,7 @@ const CartOrderDrawer = ({
               <p
                 className={cn(
                   "mt-0.5 truncate text-sm font-semibold capitalize",
-                  fact.highlight ? "text-[#8B5E3C]" : "text-[#1C1917]"
+                  fact.highlight ? "text-[#E2D8E8]" : "text-[#1C1917]"
                 )}
               >
                 {fact.value}
@@ -1205,7 +1204,7 @@ const CartOrderDrawer = ({
                           className={cn(
                             "flex h-6 w-6 items-center justify-center rounded-full border text-[10px] transition-colors",
                             done
-                              ? "border-[#8B5E3C] bg-[#8B5E3C] text-white"
+                              ? "border-[#E2D8E8] bg-[#E2D8E8] text-white"
                               : "border-[#E7E2DC] bg-white text-[#A8A29E]"
                           )}
                         >
@@ -1226,7 +1225,7 @@ const CartOrderDrawer = ({
                           className={cn(
                             "mt-3 h-0.5 flex-1 rounded-full",
                             index < currentStepIndex
-                              ? "bg-[#8B5E3C]"
+                              ? "bg-[#E2D8E8]"
                               : "bg-[#E7E2DC]"
                           )}
                         />
@@ -1272,7 +1271,7 @@ const CartOrderDrawer = ({
                       <ImagePreview src={imageUrl} />
                     ) : (
                       <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-xl border border-[#E7E2DC] bg-[#E2D8E8]">
-                        <Package size={20} className="text-[#8B5E3C]" />
+                        <Package size={20} className="text-[#E2D8E8]" />
                       </div>
                     )}
 
@@ -1319,7 +1318,7 @@ const CartOrderDrawer = ({
                   {prices.length > 0 && (
                     <div className="mt-4">
                       <div className="mb-2 flex items-center gap-2">
-                        <Coins size={13} className="text-[#8B5E3C]" />
+                        <Coins size={13} className="text-[#E2D8E8]" />
                         <p className="text-[11px] font-medium uppercase tracking-wider text-[#A8A29E]">
                           Price in each currency
                         </p>
@@ -1339,7 +1338,7 @@ const CartOrderDrawer = ({
                               className={cn(
                                 "flex items-center gap-2 rounded-xl border px-3 py-2 transition-all",
                                 isActive
-                                  ? "border-[#8B5E3C] bg-[#8B5E3C] text-white shadow-sm ring-2 ring-[#8B5E3C]/25"
+                                  ? "border-[#E2D8E8] bg-[#1A0D25] text-white shadow-sm ring-2 ring-[#E2D8E8]/25"
                                   : "border-[#E7E2DC] bg-[#FAFAF8] text-[#78716C]"
                               )}
                             >
@@ -1391,7 +1390,7 @@ const CartOrderDrawer = ({
                     <div className="mt-4 flex gap-2.5 rounded-xl bg-[#FAFAF8] p-3">
                       <StickyNote
                         size={14}
-                        className="mt-0.5 shrink-0 text-[#8B5E3C]"
+                        className="mt-0.5 shrink-0 text-[#E2D8E8]"
                       />
                       <div>
                         <p className="text-[11px] font-medium uppercase tracking-wider text-[#A8A29E]">
@@ -1407,7 +1406,7 @@ const CartOrderDrawer = ({
                   {measurements.length > 0 && (
                     <div className="mt-4">
                       <div className="mb-2 flex items-center gap-2">
-                        <Ruler size={13} className="text-[#8B5E3C]" />
+                        <Ruler size={13} className="text-[#E2D8E8]" />
                         <p className="text-[11px] font-medium uppercase tracking-wider text-[#A8A29E]">
                           Measurements
                         </p>
@@ -1447,7 +1446,7 @@ const CartOrderDrawer = ({
                 <span className="text-sm font-semibold text-[#1C1917]">
                   Order total
                   {activeCurrency && (
-                    <span className="ml-1.5 rounded-md bg-[#8B5E3C] px-1.5 py-0.5 text-[10px] font-semibold text-white">
+                    <span className="ml-1.5 rounded-md bg-[#E2D8E8] px-1.5 py-0.5 text-[10px] font-semibold text-white">
                       {activeCurrency}
                     </span>
                   )}
@@ -1468,7 +1467,7 @@ const CartOrderDrawer = ({
             <div className="flex items-center justify-between gap-3">
               <div className="flex items-center gap-3">
                 <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#E2D8E8]">
-                  <CreditCard size={16} className="text-[#8B5E3C]" />
+                  <CreditCard size={16} className="text-[#1A0D25]" />
                 </div>
                 <div>
                   <p className="text-xs text-[#A8A29E]">Payment evidence</p>
@@ -1495,7 +1494,7 @@ const CartOrderDrawer = ({
                 href={paymentUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-4 flex items-center justify-center gap-1.5 rounded-xl border border-[#E7E2DC] bg-[#FAFAF8] py-2.5 text-sm font-medium text-[#8B5E3C] transition-colors hover:bg-[#E2D8E8]"
+                className="mt-4 flex items-center justify-center gap-1.5 rounded-xl border border-[#E7E2DC] bg-[#FAFAF8] py-2.5 text-sm font-medium text-[#1A0D25] transition-colors hover:bg-[#1A0D25]"
               >
                 <Link2 size={13} />
                 Open payment link
@@ -1516,7 +1515,7 @@ const CartOrderDrawer = ({
                   className="max-h-[320px] w-full object-contain transition-transform duration-300 group-hover:scale-[1.02]"
                 />
 
-                <div className="flex items-center justify-center gap-1.5 border-t border-[#E7E2DC] bg-white px-4 py-2.5 text-xs font-medium text-[#8B5E3C]">
+                <div className="flex items-center justify-center gap-1.5 border-t border-[#E7E2DC] bg-white px-4 py-2.5 text-xs font-medium text-[#1A0D25]">
                   <ExternalLink size={12} />
                   Open / download receipt
                 </div>
@@ -1533,7 +1532,7 @@ const CartOrderDrawer = ({
             {address ? (
               <div className="flex gap-3">
                 <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-[#E2D8E8]">
-                  <MapPin size={16} className="text-[#8B5E3C]" />
+                  <MapPin size={16} className="text-[#1A0D25]" />
                 </div>
 
                 <div className="min-w-0">
@@ -1561,8 +1560,8 @@ const CartOrderDrawer = ({
             <Card>
               <div className="flex items-center justify-between gap-3">
                 <div className="flex min-w-0 items-center gap-3">
-                  <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-[#E2D8E8]">
-                    <Truck size={16} className="text-[#8B5E3C]" />
+                  <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-[#1A0D25]">
+                    <Truck size={16} className="text-[#1A0D25]" />
                   </div>
                   <div className="min-w-0">
                     <p className="text-xs text-[#A8A29E]">Tracking number</p>
@@ -1576,7 +1575,7 @@ const CartOrderDrawer = ({
                   <button
                     type="button"
                     onClick={handleCopyTracking}
-                    className="flex h-8 shrink-0 items-center gap-1.5 rounded-lg border border-[#E7E2DC] px-2.5 text-xs font-medium text-[#78716C] transition-colors hover:border-[#8B5E3C]/40"
+                    className="flex h-8 shrink-0 items-center gap-1.5 rounded-lg border border-[#E7E2DC] px-2.5 text-xs font-medium text-[#78716C] transition-colors hover:border-[#1A0D25]/40"
                   >
                     {copied ? <Check size={12} /> : <Copy size={12} />}
                     {copied ? "Copied" : "Copy"}
@@ -1595,7 +1594,7 @@ const CartOrderDrawer = ({
                   href={trackingUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="mt-4 flex items-center justify-center gap-1.5 rounded-xl border border-[#E7E2DC] bg-[#FAFAF8] py-2.5 text-sm font-medium text-[#8B5E3C] transition-colors hover:bg-[#E2D8E8]"
+                  className="mt-4 flex items-center justify-center gap-1.5 rounded-xl border border-[#E7E2DC] bg-[#FAFAF8] py-2.5 text-sm font-medium text-[#1A0D25] transition-colors hover:bg-[#1A0D25]"
                 >
                   <ExternalLink size={13} />
                   Track shipment
@@ -1669,7 +1668,7 @@ const CartOrderDrawer = ({
                     "flex h-11 cursor-pointer items-center justify-between rounded-xl border px-3.5 text-sm font-medium capitalize transition-all",
                     isSelected
                       ? "border-[#18120E] bg-[#18120E] text-white shadow-sm"
-                      : "border-[#E7E2DC] bg-white text-[#57534E] hover:border-[#8B5E3C]/40",
+                      : "border-[#E7E2DC] bg-white text-[#57534E] hover:border-[#1A0D25]/40",
                     isLoading && "cursor-not-allowed opacity-60"
                   )}
                 >
@@ -1684,7 +1683,7 @@ const CartOrderDrawer = ({
                         "rounded-full px-1.5 py-0.5 text-[9px] font-semibold uppercase tracking-wide",
                         isSelected
                           ? "bg-white/15 text-white"
-                          : "bg-[#E2D8E8] text-[#8B5E3C]"
+                          : "bg-[#1A0D25] text-[#1A0D25]"
                       )}
                     >
                       Current
@@ -1721,7 +1720,7 @@ const CartOrderDrawer = ({
         <button
           onClick={handleSave}
           disabled={isLoading || !hasChanges}
-          className="flex h-11 w-full cursor-pointer items-center justify-center gap-2 rounded-xl bg-[#8B5E3C] text-sm font-medium text-white transition-colors hover:bg-[#7A5235] disabled:cursor-not-allowed disabled:opacity-50"
+          className="flex h-11 w-full cursor-pointer items-center justify-center gap-2 rounded-xl bg-[#1A0D25] text-sm font-medium text-white transition-colors hover:bg-[#7A5235] disabled:cursor-not-allowed disabled:opacity-50"
         >
           {isLoading ? (
             <>

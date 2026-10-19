@@ -239,7 +239,7 @@ export default function GalleryPage() {
           onSaved={handleSaved}
           category={category}
           activeLimit={2}
-
+isGallery={true}
         />
       </div>
     </div>

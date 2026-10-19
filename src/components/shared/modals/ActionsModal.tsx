@@ -27,7 +27,7 @@ export default function ConfirmationModal({
   description,
   confirmText,
   cancelText = "Cancel",
-  confirmButtonClassName = "bg-[#8B5E3C] hover:bg-[#7A5235]",
+  confirmButtonClassName = "bg-[#E2D8E8] hover:bg-[#7A5235]",
   onConfirm,
 }: ConfirmationModalProps) {
   const handleConfirm = () => {

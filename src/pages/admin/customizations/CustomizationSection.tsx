@@ -30,7 +30,7 @@ const CustomizationSection = ({
       <div className="flex items-center justify-between px-5 py-4 border-b border-[#E7E2DC]">
         <div className="flex items-center gap-3">
           <div className="w-10 h-10 rounded-xl bg-[#F8F6F2] flex items-center justify-center">
-            <Settings2 size={18} className="text-[#8B5E3C]" />
+            <Settings2 size={18} className="text-[#E2D8E8]" />
           </div>
 
           <div>
@@ -56,7 +56,7 @@ const CustomizationSection = ({
         <button
           type="button"
           onClick={onAdd}
-          className="h-9 px-3 rounded-xl bg-[#8B5E3C] text-white text-xs font-medium flex items-center gap-1.5 hover:bg-[#7A5235] transition-colors cursor-pointer"
+          className="h-9 px-3 rounded-xl bg-[#E2D8E8] text-white text-xs font-medium flex items-center gap-1.5 hover:bg-[#7A5235] transition-colors cursor-pointer"
         >
        {loading ? <Loader2 className="animate-spin"/> : <span className="flex gap-2 items-center">   <Plus size={15} />  Add Option</span>}
         </button>

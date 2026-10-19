@@ -8,9 +8,8 @@ import {
 } from "../../../components/ui/tabs";
 import LatestCollectionPage from "./LatestCollection";
 import GalleryPage from "./Gallery";
-import AboutPage from "./About";
 import BrandValues from "./BrandValues";
-import CarouselPage from "./HeroPage";
+import Hero from "./Hero";
 
 const HomePage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -51,12 +50,7 @@ const HomePage = () => {
           >
             Gallery
           </TabsTrigger>
-          <TabsTrigger
-            className="px-5 rounded-lg text-[#1C1917]!  text-sm data-active:bg-[white] data-active:shadow-sm! "
-            value="About"
-          >
-            About
-          </TabsTrigger>
+        
           <TabsTrigger
             className="px-5 rounded-lg text-[#1C1917]!  text-sm data-active:bg-[white] data-active:shadow-sm! "
             value="Brand"
@@ -66,12 +60,12 @@ const HomePage = () => {
         </TabsList>
 
         <TabsContent value="contact">
-          <CarouselPage />
+          {/* <CarouselPage /> */}<Hero/>
         </TabsContent>
+
 
         <TabsContent value="Collection">{/* <AcademyPage /> */}<LatestCollectionPage/></TabsContent>
         <TabsContent value="Gallery">{/* <AcademyPage /> */}<GalleryPage/></TabsContent>
-        <TabsContent value="About">{/* <AcademyPage /> */}<AboutPage/></TabsContent>
         <TabsContent value="Brand">{/* <AcademyPage /> */}<BrandValues/></TabsContent>
       </Tabs>
     </div>

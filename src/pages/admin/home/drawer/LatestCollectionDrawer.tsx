@@ -22,6 +22,7 @@ interface LatestCollectionDrawerProps {
   category: CustomizationCategory;
   activeLimit?: number;
   showImage?: boolean;
+  isGallery?: boolean;
 }
 
 export function LatestCollectionDrawer({
@@ -31,7 +32,8 @@ export function LatestCollectionDrawer({
   onSaved,
   category,
   activeLimit = 1,
-  showImage = true
+  showImage = true,
+  isGallery = false,
 }: LatestCollectionDrawerProps) {
   const [name, setName] = useState("");
   const [slug, setSlug] = useState("");
@@ -123,7 +125,9 @@ export function LatestCollectionDrawer({
     const start = textarea.selectionStart;
     const end = textarea.selectionEnd;
 
-    setDescription((current) => current.slice(0, start) + text + current.slice(end));
+    setDescription(
+      (current) => current.slice(0, start) + text + current.slice(end)
+    );
 
     requestAnimationFrame(() => {
       const cursorPos = start + text.length;
@@ -244,64 +248,75 @@ export function LatestCollectionDrawer({
     >
       <div className="space-y-7">
         {/* Image */}
-       {
-        showImage &&  <div>
-        <label className="mb-2 block text-sm font-medium">Image</label>
+        {showImage && (
+          <div>
+            <label className="mb-2 block text-sm font-medium">Image</label>
 
-        <label className="group block cursor-pointer">
-          <div className="relative aspect-[4/5] overflow-hidden rounded-xl border-2 border-dashed bg-muted transition group-hover:border-black">
-            {preview ? (
-              <>
-                <img
-                  src={preview}
-                  alt="Collection preview"
-                  className="h-full w-full object-cover"
-                />
+            <label className="group block cursor-pointer">
+              <div className="relative aspect-[4/5] overflow-hidden rounded-xl border-2 border-dashed bg-muted transition group-hover:border-black">
+                {preview ? (
+                  <>
+                    <img
+                      src={preview}
+                      alt="Collection preview"
+                      className="h-full w-full object-cover"
+                    />
 
-                <div className="absolute inset-x-0 bottom-0 bg-black/60 px-4 py-3 text-xs text-white">
-                  Click to replace image
-                </div>
-              </>
-            ) : (
-              <div className="flex h-full flex-col items-center justify-center">
-                <div className="mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-white text-xl shadow-sm">
-                  +
-                </div>
+                    <div className="absolute inset-x-0 bottom-0 bg-black/60 px-4 py-3 text-xs text-white">
+                      Click to replace image
+                    </div>
+                  </>
+                ) : (
+                  <div className="flex h-full flex-col items-center justify-center">
+                    <div className="mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-white text-xl shadow-sm">
+                      +
+                    </div>
 
-                <p className="text-sm font-medium">Upload image</p>
+                    <p className="text-sm font-medium">Upload image</p>
 
-                <p className="mt-1 text-xs text-muted-foreground">
-                  Click to choose an image
-                </p>
+                    <p className="mt-1 text-xs text-muted-foreground">
+                      Click to choose an image
+                    </p>
+                  </div>
+                )}
               </div>
-            )}
+
+              <input
+                type="file"
+                accept="image/*"
+                className="hidden"
+                onChange={handleFileChange}
+              />
+            </label>
+
+            <p className="mt-2 text-xs text-muted-foreground">
+              The image will be uploaded securely to Cloudinary.
+            </p>
           </div>
-
-          <input
-            type="file"
-            accept="image/*"
-            className="hidden"
-            onChange={handleFileChange}
-          />
-        </label>
-
-        <p className="mt-2 text-xs text-muted-foreground">
-          The image will be uploaded securely to Cloudinary.
-        </p>
-      </div>
-       }
+        )}
 
         {/* Name */}
-        <div>
-          <label className="mb-2 block text-sm font-medium">Name</label>
+        {!isGallery ? (
+          <div>
+            <label className="mb-2 block text-sm font-medium">Name</label>
 
-          <input
+            <input
+              value={name}
+              onChange={(event) => handleNameChange(event.target.value)}
+              placeholder="e.g. Classic Handbag"
+              className="w-full rounded-lg border px-3 py-2.5 text-sm outline-none transition focus:border-black"
+            />
+          </div>
+        ) : (
+          <select
             value={name}
-            onChange={(event) => handleNameChange(event.target.value)}
-            placeholder="e.g. Classic Handbag"
+            onChange={(e) => handleNameChange(e.target.value)}
             className="w-full rounded-lg border px-3 py-2.5 text-sm outline-none transition focus:border-black"
-          />
-        </div>
+          >
+            <option value="blog">Blog</option>
+            <option value="gallery">Gallery</option>
+          </select>
+        )}
 
         {/* Slug */}
         <div>
@@ -417,10 +432,10 @@ export function LatestCollectionDrawer({
             {uploading
               ? "Uploading image..."
               : saving
-                ? "Saving..."
-                : isEditing
-                  ? "Save Changes"
-                  : "Add Item"}
+              ? "Saving..."
+              : isEditing
+              ? "Save Changes"
+              : "Add Item"}
           </button>
         </div>
       </div>

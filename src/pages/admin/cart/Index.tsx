@@ -140,14 +140,14 @@ const CartOrdersPage = () => {
             className={`h-9 px-4 rounded-xl text-xs font-medium border capitalize transition-all cursor-pointer ${
               statusFilter === "all"
                 ? "bg-[#18120E] text-white border-[#18120E]"
-                : "bg-white text-[#78716C] border-[#E7E2DC] hover:border-[#8B5E3C]/40"
+                : "bg-white text-[#78716C] border-[#E7E2DC] hover:border-[#E2D8E8]/40"
             }`}
           >
             All
           </button>
 
           <Select value={statusFilter} onValueChange={setStatusFilter}>
-            <SelectTrigger className="h-9 w-[160px] rounded-xl border-[#E7E2DC] bg-white text-xs font-medium capitalize text-[#78716C] focus:ring-0 focus:ring-offset-0 data-[state=open]:border-[#8B5E3C]/40">
+            <SelectTrigger className="h-9 w-[160px] rounded-xl border-[#E7E2DC] bg-white text-xs font-medium capitalize text-[#78716C] focus:ring-0 focus:ring-offset-0 data-[state=open]:border-[#E2D8E8]/40">
               <SelectValue placeholder="Filter by status" />
             </SelectTrigger>
 
@@ -156,7 +156,7 @@ const CartOrdersPage = () => {
                 <SelectItem
                   key={status}
                   value={status}
-                  className="cursor-pointer text-xs font-medium capitalize text-[#57534E] focus:bg-[#E2D8E8] focus:text-[#18120E] data-[state=checked]:text-[#8B5E3C]"
+                  className="cursor-pointer text-xs font-medium capitalize text-[#57534E] focus:bg-[#E2D8E8] focus:text-[#18120E] data-[state=checked]:text-[#E2D8E8]"
                 >
                   {status}
                 </SelectItem>

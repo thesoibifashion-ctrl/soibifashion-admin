@@ -111,7 +111,7 @@ const ContactPage = () => {
                     className={cn(
                       "w-full text-left px-4 py-3.5 hover:bg-[#FAFAF8] transition-colors cursor-pointer",
                       isSelected &&
-                        "bg-[#FFF8F3] border-r-2 border-r-[#8B5E3C]"
+                        "bg-[#FFF8F3] border-r-2 border-r-[#E2D8E8]"
                     )}
                   >
                     <div className="flex items-start gap-2.5">
@@ -120,7 +120,7 @@ const ContactPage = () => {
                       )}
 
                       {isUnread && (
-                        <span className="w-2 h-2 rounded-full bg-[#8B5E3C] shrink-0 mt-1.5" />
+                        <span className="w-2 h-2 rounded-full bg-[#E2D8E8] shrink-0 mt-1.5" />
                       )}
 
                       <div className="min-w-0 flex-1">
@@ -219,7 +219,7 @@ const ContactPage = () => {
                 </div>
 
                 {selectedUser.isRead === false && (
-                  <span className="px-2.5 py-1 rounded-full bg-[#FFF8F3] text-[#8B5E3C] text-xs font-medium border border-[#E7E2DC] shrink-0">
+                  <span className="px-2.5 py-1 rounded-full bg-[#FFF8F3] text-[#E2D8E8] text-xs font-medium border border-[#E7E2DC] shrink-0">
                     Unread
                   </span>
                 )}

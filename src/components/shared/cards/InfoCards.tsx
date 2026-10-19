@@ -39,7 +39,7 @@ const InfoCards = ({
         }
         <div className="mb-3 flex items-center justify-between">
           <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#E2D8E8]">
-            <Icon size={16} className="text-[#8B5E3C]" />
+            <Icon size={16} className="text-[#E2D8E8]" />
           </div>
 
           <div

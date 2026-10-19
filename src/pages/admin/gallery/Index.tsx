@@ -184,7 +184,7 @@ const GalleryPage = () => {
         {/* Header */}
         <div className="mb-8 flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
           <div>
-            <p className="mb-2 text-[10px] font-bold uppercase tracking-[0.3em] text-[#8B5E3C]">
+            <p className="mb-2 text-[10px] font-bold uppercase tracking-[0.3em] text-[#E2D8E8]">
               Visual Archive
             </p>
 
@@ -270,7 +270,7 @@ const GalleryPage = () => {
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder="Search gallery..."
-              className="h-10 w-full rounded-xl border border-[#E7E2DC] bg-white pl-9 pr-3 text-sm text-[#1C1917] outline-none transition focus:border-[#8B5E3C]"
+              className="h-10 w-full rounded-xl border border-[#E7E2DC] bg-white pl-9 pr-3 text-sm text-[#1C1917] outline-none transition focus:border-[#E2D8E8]"
             />
           </div>
         </div>
@@ -306,7 +306,7 @@ const GalleryPage = () => {
             {/* Drawer header */}
             <div className="flex items-center justify-between border-b border-[#EDE9E4] px-6 py-5">
               <div>
-                <p className="text-[10px] font-bold uppercase tracking-[0.25em] text-[#8B5E3C]">
+                <p className="text-[10px] font-bold uppercase tracking-[0.25em] text-[#E2D8E8]">
                   Gallery
                 </p>
 
@@ -379,9 +379,9 @@ const GalleryPage = () => {
                       type="button"
                       disabled={uploading}
                       onClick={() => fileInputRef.current?.click()}
-                      className="flex h-72 w-full cursor-pointer flex-col items-center justify-center rounded-2xl border border-dashed border-[#CFC7BF] bg-[#FAF9F7] px-6 text-center transition hover:border-[#8B5E3C] hover:bg-[#F8F6F2] disabled:cursor-not-allowed disabled:opacity-60"
+                      className="flex h-72 w-full cursor-pointer flex-col items-center justify-center rounded-2xl border border-dashed border-[#CFC7BF] bg-[#FAF9F7] px-6 text-center transition hover:border-[#E2D8E8] hover:bg-[#F8F6F2] disabled:cursor-not-allowed disabled:opacity-60"
                     >
-                      <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-[#8B5E3C]/10 text-[#8B5E3C]">
+                      <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-[#E2D8E8]/10 text-[#E2D8E8]">
                         <ImagePlus size={25} strokeWidth={1.6} />
                       </div>
 
@@ -411,7 +411,7 @@ const GalleryPage = () => {
                     disabled={uploading}
                     onChange={(e) => setTitle(e.target.value)}
                     placeholder="e.g. Hand stitching in the workshop"
-                    className="h-11 w-full rounded-xl border border-[#E7E2DC] bg-white px-3 text-sm text-[#1C1917] outline-none placeholder:text-[#A8A29E] focus:border-[#8B5E3C] focus:ring-2 focus:ring-[#8B5E3C]/10 disabled:opacity-60"
+                    className="h-11 w-full rounded-xl border border-[#E7E2DC] bg-white px-3 text-sm text-[#1C1917] outline-none placeholder:text-[#A8A29E] focus:border-[#E2D8E8] focus:ring-2 focus:ring-[#E2D8E8]/10 disabled:opacity-60"
                   />
                 </div>
 
@@ -428,7 +428,7 @@ const GalleryPage = () => {
                       onChange={(e) =>
                         setCategory(e.target.value as GalleryCategory)
                       }
-                      className="h-11 w-full appearance-none rounded-xl border border-[#E7E2DC] bg-white px-3 pr-10 text-sm text-[#1C1917] outline-none focus:border-[#8B5E3C] focus:ring-2 focus:ring-[#8B5E3C]/10 disabled:opacity-60"
+                      className="h-11 w-full appearance-none rounded-xl border border-[#E7E2DC] bg-white px-3 pr-10 text-sm text-[#1C1917] outline-none focus:border-[#E2D8E8] focus:ring-2 focus:ring-[#E2D8E8]/10 disabled:opacity-60"
                     >
                       {categoryOptions.map((item) => (
                         <option key={item.value} value={item.value}>
@@ -459,7 +459,7 @@ const GalleryPage = () => {
                       onChange={(e) =>
                         setSortOrder(Number(e.target.value))
                       }
-                      className="h-11 w-full rounded-xl border border-[#E7E2DC] bg-white px-3 text-sm text-[#1C1917] outline-none focus:border-[#8B5E3C] disabled:opacity-60"
+                      className="h-11 w-full rounded-xl border border-[#E7E2DC] bg-white px-3 text-sm text-[#1C1917] outline-none focus:border-[#E2D8E8] disabled:opacity-60"
                     />
                   </div>
 
@@ -475,7 +475,7 @@ const GalleryPage = () => {
                       onClick={() => setIsPublished((value) => !value)}
                       className={`flex h-11 w-full items-center justify-between rounded-xl border px-3 text-sm transition ${
                         isPublished
-                          ? "border-[#8B5E3C]/30 bg-[#8B5E3C]/5 text-[#8B5E3C]"
+                          ? "border-[#E2D8E8]/30 bg-[#E2D8E8]/5 text-[#E2D8E8]"
                           : "border-[#E7E2DC] bg-white text-[#78716C]"
                       } disabled:cursor-not-allowed disabled:opacity-60`}
                     >
@@ -486,7 +486,7 @@ const GalleryPage = () => {
                       <span
                         className={`flex h-5 w-5 items-center justify-center rounded-full ${
                           isPublished
-                            ? "bg-[#8B5E3C] text-white"
+                            ? "bg-[#E2D8E8] text-white"
                             : "bg-[#E7E2DC]"
                         }`}
                       >
@@ -506,7 +506,7 @@ const GalleryPage = () => {
                   uploading || !selectedFile || !title.trim()
                 }
                 onClick={handleUpload}
-                className="flex h-12 w-full cursor-pointer items-center justify-center gap-2 rounded-xl bg-[#8B5E3C] text-sm font-medium text-white transition hover:bg-[#744C31] disabled:cursor-not-allowed disabled:opacity-50"
+                className="flex h-12 w-full cursor-pointer items-center justify-center gap-2 rounded-xl bg-[#E2D8E8] text-sm font-medium text-white transition hover:bg-[#744C31] disabled:cursor-not-allowed disabled:opacity-50"
               >
                 {uploading ? (
                   <>
@@ -667,7 +667,7 @@ const GallerySkeleton = () => {
 const EmptyGallery = ({ onAdd }: { onAdd: () => void }) => {
   return (
     <div className="rounded-3xl border border-dashed border-[#CFC7BF] bg-white px-6 py-20 text-center">
-      <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-[#F8F6F2] text-[#8B5E3C]">
+      <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-[#F8F6F2] text-[#E2D8E8]">
         <ImagePlus size={28} strokeWidth={1.5} />
       </div>
 
@@ -683,7 +683,7 @@ const EmptyGallery = ({ onAdd }: { onAdd: () => void }) => {
       <button
         type="button"
         onClick={onAdd}
-        className="mt-6 inline-flex h-10 cursor-pointer items-center gap-2 rounded-xl bg-[#8B5E3C] px-5 text-sm font-medium text-white transition hover:bg-[#744C31]"
+        className="mt-6 inline-flex h-10 cursor-pointer items-center gap-2 rounded-xl bg-[#E2D8E8] px-5 text-sm font-medium text-white transition hover:bg-[#744C31]"
       >
         <Plus size={16} />
         Add First Image

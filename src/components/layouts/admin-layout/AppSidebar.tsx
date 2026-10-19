@@ -47,6 +47,12 @@ const navMain = [
         iconNormal: projectIcon,
         iconActive: activeIcon3,
       },
+       {
+        title: "About",
+        url: "/about",
+        iconNormal: projectIcon,
+        iconActive: activeIcon3,
+      },
       {
         title: "Collections",
         url: "/collections",
@@ -140,6 +146,11 @@ function NavContent({ onNavigate }: { onNavigate?: () => void }) {
   return (
     <div className="flex h-full flex-col bg-[#1A0D25]">
       {/* Header */}
+      <SheetTrigger asChild>
+        <button aria-label="Open menu">
+          <Menu />
+        </button>
+      </SheetTrigger>
       <div className="flex items-center gap-2 px-4 pb-2 pt-10">
         <img src={logo} alt="logo" />
       </div>

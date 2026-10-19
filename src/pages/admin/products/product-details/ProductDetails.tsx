@@ -18,18 +18,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
 
-// import {
-//   createProduct,
-//   updateProduct,
-//   getAdminProducts,
-//   addProductImage,
-//   deleteProductImage,
-//   assignProductToCollection,
-//   removeProductFromCollection,
-//   createProductVariant,
-//   updateProductVariant,
-//   deleteProductVariant,
-// } from "@/api/products";
+
 import { uploadToCloudinary } from "@/lib/uploadToCloudinary";
 import {
   addProductImage,

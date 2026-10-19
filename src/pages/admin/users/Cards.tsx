@@ -118,7 +118,7 @@ const Cards = () => {
         <SectionCard
           title="Recent Cart Orders"
           action={
-            <Link to="/cart" className="text-xs font-semibold text-[#8B5E3C]">
+            <Link to="/cart" className="text-xs font-semibold text-[#E2D8E8]">
               View All
             </Link>
           }
@@ -156,7 +156,7 @@ const Cards = () => {
         <SectionCard
           title="Recent Contact Submissions"
           action={
-            <Link to="/user" className="text-xs font-semibold text-[#8B5E3C]">
+            <Link to="/user" className="text-xs font-semibold text-[#E2D8E8]">
               View All
             </Link>
           }

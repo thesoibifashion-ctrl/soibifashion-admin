@@ -16,8 +16,6 @@ import {
   assignProductToCollection,
   removeProductFromCollection,
   createProductVariant,
-  updateProductVariant,
-  deleteProductVariant,
   getAdminCollections,
 } from "@/api/requests/products";
 import { uploadToCloudinary } from "@/lib/uploadToCloudinary";
@@ -29,7 +27,6 @@ import ImagesPanel from "./ImagesPanel";
 import MetadataPanel from "./MetadataPanel";
 import SizesSection from "./SizesSection";
 import StatusPanel, { STATUS_OPTIONS } from "./StatusPanel";
-import VariantsSection from "./VariantsSection";
 import type { Product, ProductVariant } from "@/types";
 
 
@@ -128,8 +125,7 @@ const ProductDetailsPages = () => {
 
   const [savedColors, setSavedColors] = useState<SavedColor[]>([]);
   const [variants, setVariants] = useState<ProductVariant[]>([]);
-  const [variantSavingId, setVariantSavingId] = useState<string | null>(null);
-
+  // const [variantSavingId, setVariantSavingId] = useState<string | null>(null);
   useEffect(() => {
     if (!existingProduct) return;
 
@@ -268,31 +264,31 @@ const ProductDetailsPages = () => {
       )
     );
 
-  const addVariant = () => {
-    setVariants((prev) => [
-      ...prev,
-      {
-        sizeLabel: "",
-        sizeValue: null,
-        sku: "",
-        priceAdjustment: 0,
-        colorId: null,
-        isAvailable: true,
-      },
-    ]);
-  };
+  // const addVariant = () => {
+  //   setVariants((prev) => [
+  //     ...prev,
+  //     {
+  //       sizeLabel: "",
+  //       sizeValue: null,
+  //       sku: "",
+  //       priceAdjustment: 0,
+  //       colorId: null,
+  //       isAvailable: true,
+  //     },
+  //   ]);
+  // };
 
-  const updateVariantField = (
-    index: number,
-    field: keyof ProductVariant,
-    value: any
-  ) => {
-    setVariants((prev) =>
-      prev.map((v, i) =>
-        i === index ? { ...v, [field]: value } : v
-      )
-    );
-  };
+  // const updateVariantField = (
+  //   index: number,
+  //   field: keyof ProductVariant,
+  //   value: any
+  // ) => {
+  //   setVariants((prev) =>
+  //     prev.map((v, i) =>
+  //       i === index ? { ...v, [field]: value } : v
+  //     )
+  //   );
+  // };
 
   const handleToggleCollection = async (collectionId: string) => {
     const isSelected = selectedCollections.includes(collectionId);
@@ -352,61 +348,61 @@ const ProductDetailsPages = () => {
     }
   };
 
-  const handleSaveVariant = async (index: number) => {
-    if (!editing) return;
+  // const handleSaveVariant = async (index: number) => {
+  //   if (!editing) return;
 
-    const variant = variants[index];
+  //   const variant = variants[index];
 
-    setVariantSavingId(variant.id ?? `new-${index}`);
+  //   // setVariantSavingId(variant.id ?? `new-${index}`);
 
-    try {
-      const payload = {
-        sizeLabel: variant.sizeLabel || undefined,
-        sizeValue: variant.sizeValue,
-        sku: variant.sku || undefined,
-        priceAdjustment: variant.priceAdjustment,
-        colorId: variant.colorId,
-        isAvailable: variant.isAvailable,
-      };
+  //   try {
+  //     const payload = {
+  //       sizeLabel: variant.sizeLabel || undefined,
+  //       sizeValue: variant.sizeValue,
+  //       sku: variant.sku || undefined,
+  //       priceAdjustment: variant.priceAdjustment,
+  //       colorId: variant.colorId,
+  //       isAvailable: variant.isAvailable,
+  //     };
 
-      if (variant.id) {
-        await updateProductVariant(id!, variant.id, payload);
-      } else {
-        const result = await createProductVariant(id!, payload);
-        const savedVariant = result
+  //     if (variant.id) {
+  //       await updateProductVariant(id!, variant.id, payload);
+  //     } else {
+  //       const result = await createProductVariant(id!, payload);
+  //       const savedVariant = result
 
-        setVariants((prev) =>
-          prev.map((v, i) =>
-            i === index
-              ? { ...v, id: savedVariant?.id }
-              : v
-          )
-        );
-      }
+  //       setVariants((prev) =>
+  //         prev.map((v, i) =>
+  //           i === index
+  //             ? { ...v, id: savedVariant?.id }
+  //             : v
+  //         )
+  //       );
+  //     }
 
-      queryClient.invalidateQueries({
-        queryKey: ["admin-products"],
-      });
-    } finally {
-      setVariantSavingId(null);
-    }
-  };
+  //     queryClient.invalidateQueries({
+  //       queryKey: ["admin-products"],
+  //     });
+  //   } finally {
+  //     setVariantSavingId(null);
+  //   }
+  // };
 
-  const handleRemoveVariant = async (index: number) => {
-    const variant = variants[index];
+  // const handleRemoveVariant = async (index: number) => {
+  //   const variant = variants[index];
 
-    if (editing && variant.id) {
-      await deleteProductVariant(id!, variant.id);
+  //   if (editing && variant.id) {
+  //     await deleteProductVariant(id!, variant.id);
 
-      queryClient.invalidateQueries({
-        queryKey: ["admin-products"],
-      });
-    }
+  //     queryClient.invalidateQueries({
+  //       queryKey: ["admin-products"],
+  //     });
+  //   }
 
-    setVariants((prev) =>
-      prev.filter((_, i) => i !== index)
-    );
-  };
+  //   setVariants((prev) =>
+  //     prev.filter((_, i) => i !== index)
+  //   );
+  // };
 
   const { mutate: saveProduct, isPending: isSaving } = useMutation({
     mutationFn: async (nextStatus: typeof status) => {
@@ -578,7 +574,7 @@ const ProductDetailsPages = () => {
 
           {/* <PricingSection basePrice={basePrice} onChange={setBasePrice} /> */}
 
-          <VariantsSection
+          {/* <VariantsSection
             editing={editing}
             variants={variants}
             savedColors={savedColors}
@@ -587,7 +583,7 @@ const ProductDetailsPages = () => {
             onUpdateField={updateVariantField}
             onSave={handleSaveVariant}
             onRemove={handleRemoveVariant}
-          />
+          /> */}
         </div>
 
         <div className="w-full space-y-5 lg:w-[360px]">

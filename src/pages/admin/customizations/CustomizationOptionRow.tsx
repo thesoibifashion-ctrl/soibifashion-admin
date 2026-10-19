@@ -20,7 +20,7 @@ const CustomizationOptionRow = ({
     <div className="flex items-center justify-between px-5 py-3.5 hover:bg-[#FAFAF8] transition-colors">
       <div className="flex items-center gap-3 min-w-0">
         <div className="w-8 h-8 rounded-lg bg-[#F8F6F2] flex items-center justify-center shrink-0">
-          <span className="text-xs font-semibold text-[#8B5E3C]">
+          <span className="text-xs font-semibold text-[#E2D8E8]">
             {option.sortOrder + 1}
           </span>
         </div>
@@ -47,7 +47,7 @@ const CustomizationOptionRow = ({
           <button
             type="button"
             onClick={onEdit}
-            className="w-8 h-8 rounded-lg flex items-center justify-center text-[#78716C] hover:text-[#8B5E3C] hover:bg-[#F8F6F2] transition-colors cursor-pointer"
+            className="w-8 h-8 rounded-lg flex items-center justify-center text-[#78716C] hover:text-[#E2D8E8] hover:bg-[#F8F6F2] transition-colors cursor-pointer"
             title="Edit option"
           >
             <Pencil size={14} />

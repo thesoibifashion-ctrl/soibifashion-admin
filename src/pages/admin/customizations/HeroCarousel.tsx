@@ -266,7 +266,7 @@ const CarouselPage = () => {
       ) : items.length === 0 ? (
         <div className="flex min-h-80 flex-col items-center justify-center rounded-2xl border border-dashed border-[#D6D0C8] bg-white">
           <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[#E2D8E8]">
-            <ImageIcon size={20} className="text-[#8B5E3C]" />
+            <ImageIcon size={20} className="text-[#E2D8E8]" />
           </div>
 
           <h2 className="mt-4 font-display text-lg font-bold text-[#1C1917]">
@@ -428,7 +428,7 @@ const CarouselPage = () => {
                   ) : (
                     <div className="flex flex-col items-center px-6 py-12 text-center">
                       <div className="flex h-12 w-12 items-center justify-center rounded-full bg-white">
-                        <Upload size={20} className="text-[#8B5E3C]" />
+                        <Upload size={20} className="text-[#E2D8E8]" />
                       </div>
 
                       <p className="mt-4 text-sm font-semibold text-[#1C1917]">

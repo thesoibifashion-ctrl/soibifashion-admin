@@ -29,7 +29,7 @@
 //     case "approved":
 //       return "bg-emerald-500";
 //     case "completed":
-//       return "bg-[#8B5E3C]";
+//       return "bg-[#E2D8E8]";
 //     case "cancelled":
 //       return "bg-red-500";
 //     default:
@@ -107,7 +107,7 @@
 //         {/* Header */}
 //         <div className="border-b border-[#E7E2DC] px-6 py-5">
 //           <div className="flex items-center gap-4">
-//             <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#E2D8E8] text-sm font-semibold text-[#8B5E3C]">
+//             <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#E2D8E8] text-sm font-semibold text-[#E2D8E8]">
 //               {getInitials(fullQuote.customerName)}
 //             </div>
 
@@ -145,7 +145,7 @@
 //           {isLoading ? (
 //             <div className="flex min-h-[300px] items-center justify-center">
 //               <div className="flex items-center gap-2 text-sm text-[#78716C]">
-//                 <Loader2 size={18} className="animate-spin text-[#8B5E3C]" />
+//                 <Loader2 size={18} className="animate-spin text-[#E2D8E8]" />
 //                 Loading quote details...
 //               </div>
 //             </div>
@@ -169,7 +169,7 @@
 
 //                 <div className="space-y-3 rounded-2xl border border-[#E7E2DC] bg-[#FAFAF8] p-4">
 //                   <div className="flex items-center gap-3">
-//                     <User size={15} className="text-[#8B5E3C]" />
+//                     <User size={15} className="text-[#E2D8E8]" />
 
 //                     <div>
 //                       <p className="text-xs text-[#A8A29E]">Name</p>
@@ -181,7 +181,7 @@
 //                   </div>
 
 //                   <div className="flex items-center gap-3">
-//                     <Mail size={15} className="text-[#8B5E3C]" />
+//                     <Mail size={15} className="text-[#E2D8E8]" />
 
 //                     <div>
 //                       <p className="text-xs text-[#A8A29E]">Email</p>
@@ -194,7 +194,7 @@
 
 //                   {fullQuote.customerPhone && (
 //                     <div className="flex items-center gap-3">
-//                       <Phone size={15} className="text-[#8B5E3C]" />
+//                       <Phone size={15} className="text-[#E2D8E8]" />
 
 //                       <div>
 //                         <p className="text-xs text-[#A8A29E]">Phone</p>
@@ -275,7 +275,7 @@
 //                             <ImagePreview src={item.imageUrlSnapshot} />
 //                           ) : (
 //                             <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-xl border border-[#E7E2DC] bg-[#E2D8E8]">
-//                               <Package size={20} className="text-[#8B5E3C]" />
+//                               <Package size={20} className="text-[#E2D8E8]" />
 //                             </div>
 //                           )}
 
@@ -395,7 +395,7 @@
 //                 <div className="rounded-2xl border border-[#E7E2DC] bg-[#FAFAF8] p-4">
 //                   <div className="flex items-center gap-3">
 //                     <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#E2D8E8]">
-//                       <CreditCard size={16} className="text-[#8B5E3C]" />
+//                       <CreditCard size={16} className="text-[#E2D8E8]" />
 //                     </div>
 
 //                     <div>
@@ -427,7 +427,7 @@
 //                         />
 
 //                         <div className="border-t border-[#E7E2DC] px-4 py-3">
-//                           <p className="text-xs font-medium text-[#8B5E3C]">
+//                           <p className="text-xs font-medium text-[#E2D8E8]">
 //                             Open / Download Receipt
 //                           </p>
 //                         </div>
@@ -491,7 +491,7 @@
 //                   <div className="rounded-2xl border border-[#E7E2DC] bg-[#FAFAF8] p-4">
 //                     <div className="flex items-center gap-3">
 //                       <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#E2D8E8]">
-//                         <Truck size={16} className="text-[#8B5E3C]" />
+//                         <Truck size={16} className="text-[#E2D8E8]" />
 //                       </div>
 
 //                       <div>
@@ -523,7 +523,7 @@
 //                 <div className="space-y-3">
 //                   <div className="flex items-start gap-3">
 //                     <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#E2D8E8]">
-//                       <Check size={11} className="text-[#8B5E3C]" />
+//                       <Check size={11} className="text-[#E2D8E8]" />
 //                     </div>
 
 //                     <div>
@@ -538,7 +538,7 @@
 //                   {fullQuote.reviewedAt && (
 //                     <div className="flex items-start gap-3">
 //                       <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#E2D8E8]">
-//                         <Check size={11} className="text-[#8B5E3C]" />
+//                         <Check size={11} className="text-[#E2D8E8]" />
 //                       </div>
 
 //                       <div>
@@ -554,7 +554,7 @@
 //                   {fullQuote.completedAt && (
 //                     <div className="flex items-start gap-3">
 //                       <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#E2D8E8]">
-//                         <Check size={11} className="text-[#8B5E3C]" />
+//                         <Check size={11} className="text-[#E2D8E8]" />
 //                       </div>
 
 //                       <div>
@@ -582,7 +582,7 @@
 //                   onChange={(e) => setNotes(e.target.value)}
 //                   placeholder="Add internal notes…"
 //                   rows={3}
-//                   className="w-full resize-none rounded-xl border border-[#E7E2DC] bg-white px-3 py-2.5 text-sm text-[#1C1917] placeholder:text-[#A8A29E] focus:border-[#8B5E3C] focus:outline-none focus:ring-2 focus:ring-[#8B5E3C]/20"
+//                   className="w-full resize-none rounded-xl border border-[#E7E2DC] bg-white px-3 py-2.5 text-sm text-[#1C1917] placeholder:text-[#A8A29E] focus:border-[#E2D8E8] focus:outline-none focus:ring-2 focus:ring-[#E2D8E8]/20"
 //                 />
 //               </div>
 
@@ -610,7 +610,7 @@
 //                         "h-10 cursor-pointer rounded-xl border text-sm font-medium capitalize transition-all",
 //                         status === s
 //                           ? `border-transparent text-white ${getStatusClass(s)}`
-//                           : "border-[#E7E2DC] bg-white text-[#78716C] hover:border-[#8B5E3C]/40"
+//                           : "border-[#E7E2DC] bg-white text-[#78716C] hover:border-[#E2D8E8]/40"
 //                       )}
 //                     >
 //                       {s}
@@ -628,7 +628,7 @@
 //             type="button"
 //             onClick={handleSave}
 //             disabled={saving || isLoading || isError}
-//             className="h-10 w-full cursor-pointer rounded-xl bg-[#8B5E3C] text-sm font-medium text-white transition-colors hover:bg-[#7A5235] disabled:cursor-not-allowed disabled:opacity-50"
+//             className="h-10 w-full cursor-pointer rounded-xl bg-[#E2D8E8] text-sm font-medium text-white transition-colors hover:bg-[#7A5235] disabled:cursor-not-allowed disabled:opacity-50"
 //           >
 //             {saving ? "Saving…" : "Save Changes"}
 //           </button>

@@ -19,6 +19,7 @@ import MeasurementPage from "./pages/admin/measurements/Index";
 import EditBlog from "./pages/admin/content-management/create/new-blog/Index";
 import ContentManagement from "./pages/admin/content-management/Index";
 import AnalyticsPage from "./pages/admin/analytics/Index";
+import AboutPage from "./pages/admin/about/Index";
 
 function App() {
 
@@ -43,6 +44,7 @@ function App() {
           <Route path="/settings" element={<SettingsPage />} />
           <Route path="/customization" element={<HomePage />} />
           <Route path="/gallery" element={<GalleryPage />} />
+          <Route path="/about" element={<AboutPage />} />
           <Route path="/custmomization" element={<HomePage />} />
           <Route path="/measurement" element={<MeasurementPage />} />
           <Route path="/content-management" element={<ContentManagement />} />

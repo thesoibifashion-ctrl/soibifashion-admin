@@ -99,7 +99,7 @@ const CustomizationOptionDrawer = ({
             onChange={(e) => setName(e.target.value)}
             disabled={saving}
             placeholder={`e.g. ${categoryName}`}
-            className="h-11 w-full rounded-xl border border-[#E7E2DC] bg-white px-3 text-sm text-[#1C1917] placeholder:text-[#A8A29E] focus:border-[#8B5E3C] focus:outline-none focus:ring-2 focus:ring-[#8B5E3C]/20 disabled:cursor-not-allowed disabled:opacity-60"
+            className="h-11 w-full rounded-xl border border-[#E7E2DC] bg-white px-3 text-sm text-[#1C1917] placeholder:text-[#A8A29E] focus:border-[#E2D8E8] focus:outline-none focus:ring-2 focus:ring-[#E2D8E8]/20 disabled:cursor-not-allowed disabled:opacity-60"
           />
         </div>
 
@@ -129,8 +129,8 @@ const CustomizationOptionDrawer = ({
                 onClick={() => setStatus(value)}
                 className={`h-10 cursor-pointer rounded-xl border text-sm font-medium capitalize transition-all disabled:cursor-not-allowed disabled:opacity-60 ${
                   status === value
-                    ? "border-[#8B5E3C] bg-[#8B5E3C] text-white"
-                    : "border-[#E7E2DC] bg-white text-[#78716C] hover:border-[#8B5E3C]/40"
+                    ? "border-[#E2D8E8] bg-[#E2D8E8] text-white"
+                    : "border-[#E7E2DC] bg-white text-[#78716C] hover:border-[#E2D8E8]/40"
                 }`}
               >
                 {value}
@@ -151,7 +151,7 @@ const CustomizationOptionDrawer = ({
             value={sortOrder}
             disabled={saving}
             onChange={(e) => setSortOrder(Number(e.target.value))}
-            className="h-11 w-full rounded-xl border border-[#E7E2DC] bg-white px-3 text-sm text-[#1C1917] focus:border-[#8B5E3C] focus:outline-none focus:ring-2 focus:ring-[#8B5E3C]/20 disabled:cursor-not-allowed disabled:opacity-60"
+            className="h-11 w-full rounded-xl border border-[#E7E2DC] bg-white px-3 text-sm text-[#1C1917] focus:border-[#E2D8E8] focus:outline-none focus:ring-2 focus:ring-[#E2D8E8]/20 disabled:cursor-not-allowed disabled:opacity-60"
           />
         </div>
 
@@ -161,7 +161,7 @@ const CustomizationOptionDrawer = ({
             type="button"
             disabled={saving || !name.trim()}
             onClick={handleSubmit}
-            className="flex h-11 w-full cursor-pointer items-center justify-center rounded-xl bg-[#8B5E3C] text-sm font-medium text-white transition-colors hover:bg-[#7A5235] disabled:cursor-not-allowed disabled:opacity-50"
+            className="flex h-11 w-full cursor-pointer items-center justify-center rounded-xl bg-[#E2D8E8] text-sm font-medium text-white transition-colors hover:bg-[#7A5235] disabled:cursor-not-allowed disabled:opacity-50"
           >
             {saving ? "Saving..." : option ? "Save Changes" : "Add Option"}
           </button>
