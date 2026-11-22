@@ -23,7 +23,43 @@ sizes?: number[];
     id?: string;
     name: string;
   }[];
+measurements:Measurement[]
+  colors: {
+    id: string;
+    name: string;
+    hex?: string;
+    hexCode?:string;
+  }[];
 
+  createdAt?: string;
+  updatedAt?: string;
+}
+export interface ProductCollection {
+  id: string;
+  name: string;
+  slug: string;
+  description?: string;
+  shortDescription?: string;
+  sortOrder?:number;
+  basePrice?: number;
+  salePrice?: number | null;
+isHero?: boolean;
+sizes?: number[];
+  isFeatured?: boolean;
+  isNewArrival?: boolean;
+  isBestSeller?: boolean;
+  isCustomizable?: boolean;
+  gender?: "male" | "female" | "unisex";
+  status?: "published" | "draft";
+  images?: ProductImage[];
+  collections: Collection[];
+  variants?: ProductVariant[];
+  category?:string;
+  materials?: {
+    id?: string;
+    name: string;
+  }[];
+measurements:Measurement[]
   colors: {
     id: string;
     name: string;

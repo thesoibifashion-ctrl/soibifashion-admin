@@ -128,7 +128,7 @@ const MeasurementsSection = ({
               </div>
 
               <div className="w-40">
-                <label className="mb-1 block text-xs font-medium text-gray-600">Value</label>
+                <label className="mb-1 block text-xs font-medium text-gray-600">Description</label>
                 <Input
                   value={pm.value}
                   onChange={(e) => onValueChange(index, e.target.value)}

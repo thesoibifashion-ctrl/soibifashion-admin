@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import logo from "@/assets/images/soibi.png";
 import { ArrowLeft, Loader2 } from "lucide-react";
 import { useMutation } from "@tanstack/react-query";
-import { authStorage } from "@/lib/auth-storage";
+import { authStorage, logout } from "@/lib/auth-storage";
 import { requestCode, verifyCode } from "@/api/requests/auth";
 import { toast, Toaster } from "sonner";
 
@@ -51,11 +51,12 @@ const LogIn = () => {
       const user = response.data.user;
 
       if (user.role !== "admin" && user.role !== "super_admin") {
+        void logout();
         setDigits(["", "", "", "", "", ""]);
         inputRefs.current[0]?.focus();
         return;
       }
-      authStorage.setToken(response.data.accessToken);
+      authStorage.setSession(response.data);
       window.location.href = "/home";
     },
 

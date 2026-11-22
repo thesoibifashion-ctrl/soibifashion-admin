@@ -1,4 +1,5 @@
+import { authStorage } from "@/lib/auth-storage";
+
 export function getAuthToken() {
-    if (typeof window === "undefined") return null;
-    return localStorage.getItem("accessToken");
-  }
+  return authStorage.getToken();
+}

@@ -7,7 +7,7 @@ import { getProducts } from "@/api/requests/products";
 import type { Product } from "@/types";
 
 const CATEGORIES = ["Clothes", "Bags", "Shoes", "Earrings"];
-const GENDERS = ["Skirts", "gowns", "palazzo","skort","kimono","blouses"];
+const GENDERS = ["Skirts", "gowns", "palazzo","skort","kimono","blouses", "Two Pieces"];
 
 
 interface Props {
@@ -94,8 +94,7 @@ const GeneralInfoSection = ({
     setProductSearch("");
   };
 
-  return (
-    <section className="rounded-2xl border bg-white p-6">
+  return ( <section className="rounded-2xl border bg-white p-6">
       <h2 className="mb-4 font-semibold text-near-brown">
         General Information
       </h2>

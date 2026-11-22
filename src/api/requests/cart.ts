@@ -30,3 +30,21 @@ export const updateAdminCartOrderFulfillment = (
 ) => {
   return apiPatch(`/api/admin/cart/history/${id}/fulfillment`, payload);
 };
+export type AdminPaymentStatus =
+  | "unpaid"
+  | "pending_approval"
+  | "paid"
+  | "rejected";
+
+export const updateAdminCartOrderPaymentStatus = (
+  id: string,
+  paymentStatus: AdminPaymentStatus
+) => {
+  return apiPatch(`/api/admin/cart/history/${id}/payment`, { paymentStatus });
+};
+
+export const approveAdminCartOrderPayment = (id: string) =>
+  updateAdminCartOrderPaymentStatus(id, "paid");
+
+export const rejectAdminCartOrderPayment = (id: string) =>
+  updateAdminCartOrderPaymentStatus(id, "rejected");

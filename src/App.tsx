@@ -20,6 +20,7 @@ import EditBlog from "./pages/admin/content-management/create/new-blog/Index";
 import ContentManagement from "./pages/admin/content-management/Index";
 import AnalyticsPage from "./pages/admin/analytics/Index";
 import AboutPage from "./pages/admin/about/Index";
+import { RequireAuth } from "./components/RequireAuth";
 
 function App() {
 
@@ -28,6 +29,7 @@ function App() {
     <Routes>
           <Route path="/" element={<LogIn />} />
 
+        <Route element={<RequireAuth />}>
         <Route element={<DashboardLayout />}>
           <Route path="/home" element={<AnalyticsPage />} />
           <Route path="/create" element={<CreateProductPage />} />
@@ -52,6 +54,7 @@ function App() {
             path="/content-management/edit-content/blog/:id"
             element={<EditBlog />}
           />
+      </Route>
       </Route>
     </Routes>
   );

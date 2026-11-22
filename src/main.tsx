@@ -2,6 +2,7 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "./App.css";
 import App from "./App.tsx";
+import { AuthProvider } from "./components/AuthProvider";
 import { BrowserRouter } from "react-router-dom";
 import {
   QueryClient,
@@ -14,7 +15,9 @@ createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
-        <App />
+        <AuthProvider>
+          <App />
+        </AuthProvider>
       </BrowserRouter>
     </QueryClientProvider>
   </StrictMode>

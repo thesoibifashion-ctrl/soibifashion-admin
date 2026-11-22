@@ -30,6 +30,7 @@ import activeIcon4 from "../../../assets/images/4.svg";
 
 import { useQuery } from "@tanstack/react-query";
 import { getAdminContacts } from "@/api/requests/contact";
+import { logout } from "@/lib/auth-storage";
 
 const navMain = [
   {
@@ -132,8 +133,7 @@ function useLogout() {
   const navigate = useNavigate();
 
   return () => {
-    localStorage.removeItem("accessToken");
-    navigate("/");
+    void logout().finally(() => navigate("/"));
   };
 }
 

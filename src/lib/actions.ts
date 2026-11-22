@@ -1,4 +1,5 @@
 import { validators } from "./validator";
+import { apiClient } from "@/lib/api-client";
 
 export async function actions( formData: FormData) {
   
@@ -16,34 +17,18 @@ export async function actions( formData: FormData) {
   }
 
   try {
-    const token = localStorage.getItem("accessToken");
-
-    const res = await fetch(`https://cephf.onrender.com/${path}`, {
+    const endpoint = String(path).startsWith("/") ? String(path) : `/${path}`;
+    const response = await apiClient(endpoint, {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        ...(token ? { Authorization: `Bearer ${token}` } : {}),
-      },
       body: JSON.stringify(payload),
     });
-
-    if (!res.ok) {
-      const errorData = await res.json();
-
-      return {
-        success: false,
-        message: `${errorData?.message}`,
-      };
-    }
-
-    const response = res.json();
 
     return {
       message: "successful",
       success: true,
       data: response,
     };
-  } catch (error) {
+  } catch {
     return {
       success: false,
       message: "an error occured",

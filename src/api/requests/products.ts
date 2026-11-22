@@ -1,4 +1,5 @@
 import type {
+  Collection,
   Currency,
   Measurement,
   Product,
@@ -45,7 +46,11 @@ export const deleteProduct = (id: string) => {
 };
 
 export const getAdminCollections = () => {
-  return apiGet<Product[]>("/api/admin/products");
+  return apiGet<Collection[]>("/api/admin/products");
+};
+
+export const getAdminCollection = () => {
+  return apiGet<Collection[]>("/api/admin/collections");
 };
 
 /* ----------------------------- IMAGES ----------------------------- */

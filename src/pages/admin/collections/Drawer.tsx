@@ -11,9 +11,10 @@ import { apiPatch } from "@/api/clients";
 
 const CollectionDrawer = ({ props }: any) => {
   const queryClient = useQueryClient();
-
+  const DEFAULT_COLLECTION_IMAGE =
+  "https://placehold.co/800x1000?text=Collection";
   const [showModal, setShowModal] = useState(false);
-  const [imageUrl, setImageUrl] = useState("");
+  const [imageUrl, setImageUrl] = useState(DEFAULT_COLLECTION_IMAGE);
   const [isUploading, setIsUploading] = useState(false);
 
   const fileInputRef = useRef<HTMLInputElement>(null);

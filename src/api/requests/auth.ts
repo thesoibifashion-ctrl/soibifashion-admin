@@ -1,8 +1,8 @@
 import { apiPost, apiRequest } from "../client";
+import type { AuthSession } from "@/lib/auth-storage";
 export interface VerifyCodeResponse {
   success: boolean;
   message: string;
-  accessToken: string;
   data: {
     accessToken: string;
     expiresIn: string;
@@ -35,7 +35,7 @@ export function authLogin(payload: { email: string; password: string }) {
     return apiPost("/api/auth/request-code", payload);
   };
   
-  export const verifyCode = (payload: { email: string; code: string }) => {
-    return apiPost("/api/auth/verify-code", payload);
+export const verifyCode = (payload: { email: string; code: string }) => {
+    return apiPost<{ success: boolean; message: string; data: AuthSession }>("/api/auth/verify-code", payload);
   };
   
