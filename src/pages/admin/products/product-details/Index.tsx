@@ -1575,7 +1575,7 @@ const ProductDetailsPages = () => {
             </div>
           ) : (
             <CollectionsPanel
-              collections={collectionsData}
+              collections={collectionsData ?? []}
               selectedCollections={selectedCollections}
               isLoading={collectionLoading}
               onToggle={handleToggleCollection}
